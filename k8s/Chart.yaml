@@ -1,0 +1,6 @@
+# This file contains the meta information about the chart for this application
+apiVersion: v1
+appVersion: '0.0.1'
+description: Microservices app that uses node, postgres, vue and k8s
+name: microservices
+version: 0.0.1

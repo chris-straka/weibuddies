@@ -1,0 +1,3 @@
+# THESE ARE SECRET KEYS THAT SHOULD NEVER BE COMITTED TO GITHUB
+k8s/auth/templates/postgres-secret.yaml 
+k8s/auth/templates/jsonwebtoken-secret.yaml

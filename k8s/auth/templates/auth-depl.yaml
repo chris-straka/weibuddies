@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth # select all pods with the auth label
+  template:
+    metadata:
+      labels:
+        app: auth # give all the pods an auth label
+    spec:
+      containers:
+        - name: auth # only used for logging purposes
+          image: cstudent/auth
+          env:
+            - name: PGHOST
+              value: auth-postgres-cluster-ip
+            - name: PGUSER
+              value: "jeff"
+            - name: PGDATABASE
+              value: "auth-database"
+            - name: PGPASSWORD
+              value: "jeff"
+            - name: JWT_KEY
+              value: "jeff"
