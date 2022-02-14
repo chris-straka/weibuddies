@@ -4,6 +4,7 @@ deploy:
   kubectl:
     manifests: # build components from these files
       - ./k8s/auth/templates/*
+      - ./k8s/client/templates/*
 build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
@@ -16,6 +17,16 @@ build:
         manual:
           - src: "src/**/*.ts" # please watch these files
             dest: . # sync these files to the current directory of the running container
+    - image: cstudent/client # build this image
+      context: ./app/client # from this directory
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        infer:
+        - '**/*.ts'
+        - '**/*.vue'
+        - '**/*.scss'
+        - '**/*.css'
 # deploy:
 #   helm:
 #     releases:
