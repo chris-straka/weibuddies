@@ -9,7 +9,8 @@
 </style>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue"
+export default defineComponent({
   data() {
     return {
       formIsValid: true
@@ -23,5 +24,5 @@ export default {
       this.validateForm()
     }
   }
-}
+})
 </script>
