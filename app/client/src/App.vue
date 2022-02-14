@@ -1,21 +1,27 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import Navigation from './components/layout/Navigation.vue'
+import Home from "./pages/Home/Home.vue"
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <Navigation />
+  <Home />
 </template>
 
 <style>
+:root {
+  --primary: hsl(89, 58%, 75%);
+  --primary-blob: hsl(89, 58%, 82%);
+  --secondary: hsl(207, 87%, 67%);
+  --secondary-blob: hsl(207, 87%, 82%);
+  --background-color: hsl(216, 20%, 95%);
+  --font: Avenir, Helvetica, Arial, sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

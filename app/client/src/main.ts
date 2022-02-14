@@ -1,4 +1,6 @@
 import { createApp } from 'vue'
+import Varlet from "@varlet/ui"
+import '@varlet/ui/es/style.js'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+createApp(App).use(Varlet).mount('#app')
