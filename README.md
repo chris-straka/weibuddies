@@ -14,7 +14,7 @@ You're going to need to install these tools
 
 - [Skaffold](https://skaffold.dev/docs/install/)
 
-- [Minikube](https://minikube.sigs.k8s.io/docs/)
+- [Minikube](https://minikube.sigs.k8s.io/docs/) (if using Linux and not docker for desktop)
 
 I used WSL2 to develop this application but I didn't use minikube, I used the kubernetes cluster that came with docker-desktop instead. You can see which commands you can run by visiting the Makefile at the root of this project.
 
