@@ -8,9 +8,10 @@
     "build/**/*"
   ],
   "scripts": {
-		"preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow pnpm",
     "clean": "del ./build/*",
-    "build": "npm run clean && ttsc"
+    "build": "npm run clean && tsc",
+    "publish:patch": "npm version patch && npm run build && npm publish --access public"
   },
   "keywords": [],
   "author": "",
@@ -33,9 +34,5 @@
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
     "node-nats-streaming": "^0.3.2"
-  },
-  "volta": {
-    "node": "14.16.0",
-    "npm": "7.6.0"
   }
 }
