@@ -1,4 +1,4 @@
-# Microservices app that uses [Vue](https://vuejs.org/)/[Vite](https://vitejs.dev/)/[Node](https://nodejs.org/en/)/[Express](https://expressjs.com/)/[Postgres](https://www.postgresql.org/)/[Docker](https://www.docker.com/products/docker-desktop)/[K8s](https://kubernetes.io/)/[Skaffold](https://skaffold.dev/)/[Helm](https://helm.sh/)/[NATS](https://nats.io/)
+# Microservices app that uses [Vue](https://vuejs.org/)/[Vuex](https://vuex.vuejs.org/)/[Vue Router](https://router.vuejs.org/)/[Vite](https://vitejs.dev/)/[Node](https://nodejs.org/en/)/[Express](https://expressjs.com/)/[Postgres](https://www.postgresql.org/)/[Docker](https://www.docker.com/products/docker-desktop)/[K8s](https://kubernetes.io/)/[Skaffold](https://skaffold.dev/)/[Helm](https://helm.sh/)/[NATS](https://nats.io/)
 
 You're going to need to install these tools
 

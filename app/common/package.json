@@ -1,13 +1,14 @@
 {
-  "name": "@webmak/microservices-common",
+  "name": "@weibuddies/common",
   "version": "1.0.6",
-  "description": "microservices-common",
+  "description": "Common repository for a microservices app",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
     "build/**/*"
   ],
   "scripts": {
+		"preinstall": "npx only-allow pnpm",
     "clean": "del ./build/*",
     "build": "npm run clean && ttsc"
   },

@@ -1,0 +1,3 @@
+interface Goofy {
+  buddy: string
+}
