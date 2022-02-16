@@ -4,10 +4,6 @@
 		"start": "ts-node-dev src/index.ts",
 		"docker:build": "docker build -t cstudent/auth ."
 	},
-	"engines": {
-		"pnpm": "6.30.1"
-	},
-	"engineStrict": true,
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
 		"express": "^4.17.2",

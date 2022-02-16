@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Navigation from './components/layout/Navigation.vue'
 import Home from "./pages/Home/Home.vue"
+import Product from "./pages/Product/Product.vue"
+import ProductCreate from "./pages/ProductCreate/ProductCreate.vue"
+import User from "./pages/User/User.vue"
 </script>
 
 <template>
-  <Navigation />
-  <Home />
+  <Product />
 </template>
 
 <style>

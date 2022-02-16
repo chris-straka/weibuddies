@@ -5,7 +5,7 @@ WORKDIR /opt/node_app
 
 RUN corepack enable 
 COPY --chown=node:node package.json pnpm-lock.yaml* ./
-RUN corepack prepare pnpm@6.30.1 --activate && pnpm install
+RUN corepack prepare pnpm@6.31.0 --activate && pnpm install
 COPY . .
 
 CMD [ "pnpm", "start" ]
