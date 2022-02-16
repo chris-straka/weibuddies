@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import Blob from "./Blob.vue"
+import BlobA from "./BlobA.vue"
+import BlobB from "./BlobB.vue"
 </script>
 
+<!-- https://blobs.app/ -->
 <template>
   <div class="blobs">
-    <Blob />
-    <Blob />
+    <BlobA />
+    <BlobB />
   </div>
 </template>
 
 <style scoped>
 .blobs {
   display: flex;
+  width: 100px;
 }
 </style>
