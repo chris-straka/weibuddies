@@ -15,13 +15,6 @@ spec:
   rules:
     - http:
         paths:
-          - path: /?(.*)
-            pathType: "Prefix"
-            backend:
-              service:
-                name: client-cluster-ip
-                port:
-                  number: 3000
           - path: /api/users/?(.*)
             pathType: "Prefix"
             backend:
@@ -29,6 +22,14 @@ spec:
                 name: auth-cluster-ip
                 port:
                   number: 3000
+          - path: /?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: client-cluster-ip
+                port:
+                  number: 3000
+
         # - path: /api/payments/?(.*)
         #   pathType: "Prefix"
         #   backend:
