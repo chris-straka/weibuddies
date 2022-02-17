@@ -1,6 +1,6 @@
 {
   "name": "@weibuddies/common",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Common repository for a microservices app",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -17,7 +17,7 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chris56974/Microservices-with-Vue-library.git"
+    "url": "git+https://github.com/Chris56974/wei-buddies"
   },
   "license": "ISC",
   "devDependencies": {

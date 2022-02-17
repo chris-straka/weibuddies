@@ -5,8 +5,6 @@ import { signInRouter } from "./routes/signin"
 import { signOutRouter } from "./routes/signout"
 import { signUpRouter } from "./routes/signup"
 
-const PORT = 3000
-
 const app = express()
 app.set('trust proxy', true)
 app.use(express.json())
@@ -18,5 +16,8 @@ app.use(
   })
 )
 app.use(currentUserRouter)
+app.use(signInRouter)
+app.use(signOutRouter)
+app.use(signUpRouter)
 
 export { app }

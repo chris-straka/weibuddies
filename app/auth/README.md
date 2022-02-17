@@ -1,6 +1,6 @@
 # Auth service 
 
-Handles authentication for the app
+Handles authentication for the app. I tried to do an MVC thing here (with no view), but I'm not sure it looks good. I liked it better when the controller logic was in the routes.
 
 ## TODO
 
