@@ -17,7 +17,7 @@ spec:
           image: cstudent/orders
           env:
             - name: NATS_CLUSTER_ID
-              value: "ticketing"
+              value: "products"
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:

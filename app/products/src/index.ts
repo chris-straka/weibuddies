@@ -5,13 +5,13 @@ import { natsWrapper } from './NatsWrapper';
 import pg from "postgres"
 
 const start = async () => {
-  if (!process.env.JWT_KEY) throw new Error('[Tickets] JWT_KEY must be defined')
+  if (!process.env.JWT_KEY) throw new Error('[Products] JWT_KEY must be defined')
 
   if (!process.env.PGHOST) throw new Error("[Auth] Can't find PGHOST")
 
-  if (!process.env.NATS_CLUSTER_ID) throw new Error('[Tickets] NATS_CLUSTER_ID must be defined')
-  if (!process.env.NATS_CLIENT_ID) throw new Error('[Tickets] NATS_CLIENT_ID must be defined')
-  if (!process.env.NATS_URL) throw new Error('[Tickets] NATS_URL must be defined')
+  if (!process.env.NATS_CLUSTER_ID) throw new Error('[Products] NATS_CLUSTER_ID must be defined')
+  if (!process.env.NATS_CLIENT_ID) throw new Error('[Products] NATS_CLIENT_ID must be defined')
+  if (!process.env.NATS_URL) throw new Error('[Products] NATS_URL must be defined')
 
   try {
     await natsWrapper.connect(
@@ -21,7 +21,7 @@ const start = async () => {
     );
 
     natsWrapper.client.on('close', () => {
-      console.log('[Tickets] NATS connection closed!');
+      console.log('[Products] NATS connection closed!');
       process.exit();
     });
 
@@ -37,14 +37,14 @@ const start = async () => {
       useCreateIndex: true,
     });
 
-    console.log('[Tickets] Connected to MongoDB');
+    console.log('[Products] Connected to MongoDB');
   } catch (err) {
     console.log(err);
   }
 };
 
 app.listen(3000, () => {
-  console.log('[Tickets] Listening on port 3000');
+  console.log('[Products] Listening on port 3000');
 });
 
 start();

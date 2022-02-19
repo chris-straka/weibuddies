@@ -37,11 +37,11 @@ spec:
         #       name: payments-cluster-ip
         #       port:
         #         number: 3000
-        # - path: /api/tickets/?(.*)
+        # - path: /api/products/?(.*)
         #   pathType: "Prefix"
         #   backend:
         #     service:
-        #       name: tickets-cluster-ip
+        #       name: products-cluster-ip
         #       port:
         #         number: 3000
         # - path: /api/orders/?(.*)
