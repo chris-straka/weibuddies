@@ -4,7 +4,7 @@ export interface User {
   password: string
 }
 
-export interface Database {
+export interface UserDatabase {
   getUser: (email: string) => User,  
   createUser: (email: string, password: string) => User
 }

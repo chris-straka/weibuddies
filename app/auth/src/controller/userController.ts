@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { BadRequestError } from "@weibuddies/common"
 import { Password } from "../services/password"
-import { user } from "../models/user"
+import { user } from "../models/User"
 import { sign } from "jsonwebtoken"
 
 export const getCurrentUser = (req: Request, res: Response) =>
