@@ -7,7 +7,7 @@ export const validateRequest = (
   res: Response,
   next: NextFunction
 ) => {
-  const errors = validationResult(req)
+  const errors = validationResult(req) // grabs the result of the validation (email, password checks)
   if (!errors.isEmpty()) throw new RequestValidationError(errors.array())
   next()
 }

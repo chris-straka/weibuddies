@@ -17,7 +17,7 @@ spec:
           image: postgres:14
           env:
             - name: POSTGRES_USER
-              value: "jeff"
+              value: "auth"
             - name: POSTGRES_DB
               value: "auth-database"
             - name: POSTGRES_PASSWORD

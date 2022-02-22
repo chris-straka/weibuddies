@@ -9,5 +9,8 @@ declare module "pg" {
 
 Pool.prototype.getProduct = (email: string): any => { }
 Pool.prototype.createProduct = (userId: string): any => { }
+Pool.prototype.removeProduct = (productId: string): any => { }
+Pool.prototype.setProduct = (title: string, price: string): any => { }
+
 
 export const postgres_db: ProductDatabase = new Pool()

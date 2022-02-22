@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orders-mongo-depl
+  name: payments-postgres-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orders-mongo
+      app: payments-postgres
   template:
     metadata:
       labels:
-        app: orders-mongo
+        app: payments-postgres
     spec:
       containers:
-        - name: orders-mongo
-          image: mongo:4.4.4-bionic
+        - name: payments-postgres
+          image: postgres:14

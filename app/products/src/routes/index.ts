@@ -1,12 +1,10 @@
 import express, { Request, Response } from 'express';
-import { Product } from '../models/Product';
+import { product_db } from '../models/Product';
 
 const router = express.Router();
 
 router.get('/api/products', async (req: Request, res: Response) => {
-  const products = await Product.find({
-    orderId: undefined,
-  });
+  const products = await product_db.getProduct("TODO");
   return res.send(products);
 });
 

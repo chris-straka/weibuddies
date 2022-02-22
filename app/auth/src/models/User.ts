@@ -12,4 +12,4 @@ const User = (db: UserDatabase) => ({
   }
 })
 
-export const user = User(postgres_db)
+export const user_db = User(postgres_db)

@@ -5,6 +5,11 @@ deploy:
     manifests: # build components from these files
       - ./k8s/auth/templates/*
       - ./k8s/client/templates/*
+      # - ./k8s/expiration/templates/*
+      # - ./k8s/nats/templates/*
+      # - ./k8s/orders/templates/*
+      # - ./k8s/payments/templates/*
+      # - ./k8s/products/templates/*
 build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
@@ -17,16 +22,24 @@ build:
         manual:
           - src: "src/**/*.ts" # please watch these files
             dest: . # sync these files to the current directory of the running container
-    - image: cstudent/client # build this image
-      context: ./app/client # from this directory
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        infer:
-        - '**/*.ts'
-        - '**/*.vue'
-        - '**/*.scss'
-        - '**/*.css'
+    # - image: cstudent/client # build this image
+    #   context: ./app/client # from this directory
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     infer:
+    #       - "**/*.ts"
+    #       - "**/*.vue"
+    #       - "**/*.scss"
+    #       - "**/*.css"
+    # - image: cstudent/expiration # build this image
+    #   context: ./app/expiration # from this directory
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.ts" # please watch these files
+    #         dest: . # sync these files to the current directory of the running container
 # deploy:
 #   helm:
 #     releases:

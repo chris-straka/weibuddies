@@ -1,9 +1,3 @@
-# In regex...
-# the ? means the same thing as .
-# the . means "match any character"
-# the * means "match zero or more of the preceding character"
-# the () means "capture the matched string as a group"
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -22,6 +16,27 @@ spec:
                 name: auth-cluster-ip
                 port:
                   number: 3000
+          # - path: /api/payments/?(.*)
+          #   pathType: "Prefix"
+          #   backend:
+          #   service:
+          #     name: payments-cluster-ip
+          #     port:
+          #       number: 3000
+          # - path: /api/products/?(.*)
+          #   pathType: "Prefix"
+          #   backend:
+          #   service:
+          #     name: products-cluster-ip
+          #     port:
+          #       number: 3000
+          # - path: /api/orders/?(.*)
+          #   pathType: "Prefix"
+          #   backend:
+          #   service:
+          #     name: orders-cluster-ip
+          #     port:
+          #       number: 3000
           - path: /?(.*)
             pathType: "Prefix"
             backend:
@@ -29,25 +44,8 @@ spec:
                 name: client-cluster-ip
                 port:
                   number: 3000
-
-        # - path: /api/payments/?(.*)
-        #   pathType: "Prefix"
-        #   backend:
-        #     service:
-        #       name: payments-cluster-ip
-        #       port:
-        #         number: 3000
-        # - path: /api/products/?(.*)
-        #   pathType: "Prefix"
-        #   backend:
-        #     service:
-        #       name: products-cluster-ip
-        #       port:
-        #         number: 3000
-        # - path: /api/orders/?(.*)
-        #   pathType: "Prefix"
-        #   backend:
-        #     service:
-        #       name: orders-cluster-ip
-        #       port:
-        #         number: 3000
+# In regex...
+# the ? means the same thing as .
+# the . means "match any character"
+# the * means "match zero or more of the preceding character"
+# the () means "capture the matched string as a group"

@@ -7,13 +7,14 @@ specifiers:
   '@types/jsonwebtoken': ^8.5.8
   '@types/node': ^17.0.18
   '@types/pg': ^8.6.4
-  '@weibuddies/common': ^1.0.8
+  '@weibuddies/common': ^1.0.9
   cookie-session: ^2.0.0
   express: ^4.17.3
   express-async-errors: ^3.1.1
   express-validator: ^6.14.0
   jest: ^27.5.1
   jsonwebtoken: ^8.5.1
+  node-nats-streaming: ^0.3.2
   pg: ^8.7.3
   supertest: ^6.2.2
   ts-jest: ^27.1.3
@@ -21,12 +22,13 @@ specifiers:
   typescript: ^4.5.5
 
 dependencies:
-  '@weibuddies/common': 1.0.8_typescript@4.5.5
+  '@weibuddies/common': 1.0.9
   cookie-session: 2.0.0
   express: 4.17.3
   express-async-errors: 3.1.1_express@4.17.3
   express-validator: 6.14.0
   jsonwebtoken: 8.5.1
+  node-nats-streaming: 0.3.2
   pg: 8.7.3
   ts-node-dev: 1.1.8_typescript@4.5.5
 
@@ -764,39 +766,18 @@ packages:
       '@types/yargs-parser': 20.2.1
     dev: true
 
-  /@weibuddies/common/1.0.8_typescript@4.5.5:
-    resolution: {integrity: sha512-z8g572nDipmfgM7PPBGqR0bx9oGZAKy/DiCi1xMyh+67jhDAmvy3lrofy9bnINLdKH++HmyG2HSrrmAmeBGqZg==}
+  /@weibuddies/common/1.0.9:
+    resolution: {integrity: sha512-V+3ZDW55K2IWj7IrsH7FdP+HYMHzVjGzYdGXDbbZ9U0vNvv4Lyeohwwb1HtZTCaMpTugyBC1wFT6l3spZo3KXw==}
     requiresBuild: true
     dependencies:
       '@types/cookie-session': 2.0.44
       '@types/express': 4.17.13
       '@types/jsonwebtoken': 8.5.8
-      '@zerollup/ts-transform-paths': 1.7.18_typescript@4.5.5
-      cookie-session: 1.4.0
+      cookie-session: 2.0.0
       express: 4.17.3
       express-validator: 6.14.0
       jsonwebtoken: 8.5.1
       node-nats-streaming: 0.3.2
-    transitivePeerDependencies:
-      - typescript
-    dev: false
-
-  /@zerollup/ts-helpers/1.7.18_typescript@4.5.5:
-    resolution: {integrity: sha512-S9zN+y+i5yN/evfWquzSO3lubqPXIsPQf6p9OiPMpRxDx/0totPLF39XoRw48Dav5dSvbIE8D2eAPpXXJxvKwg==}
-    peerDependencies:
-      typescript: '>=3.7.2'
-    dependencies:
-      resolve: 1.22.0
-      typescript: 4.5.5
-    dev: false
-
-  /@zerollup/ts-transform-paths/1.7.18_typescript@4.5.5:
-    resolution: {integrity: sha512-YPVUxvWQVzRx1OBN0Pmkd58+R9FcfUJuwTaPUSoi5rKxuXMtxevTXdfi0w5mEaIH8b0DfL+wg0wFDHiJE+S2zA==}
-    peerDependencies:
-      typescript: '>=3.7.2'
-    dependencies:
-      '@zerollup/ts-helpers': 1.7.18_typescript@4.5.5
-      typescript: 4.5.5
     dev: false
 
   /abab/2.0.5:
@@ -1199,14 +1180,6 @@ packages:
     dependencies:
       safe-buffer: 5.1.2
     dev: true
-
-  /cookie-session/1.4.0:
-    resolution: {integrity: sha512-0hhwD+BUIwMXQraiZP/J7VP2YFzqo6g4WqZlWHtEHQ22t0MeZZrNBSCxC1zcaLAs8ApT3BzAKizx9gW/AP9vNA==}
-    dependencies:
-      cookies: 0.8.0
-      debug: 2.6.9
-      on-headers: 1.0.2
-    dev: false
 
   /cookie-session/2.0.0:
     resolution: {integrity: sha512-hKvgoThbw00zQOleSlUr2qpvuNweoqBtxrmx0UFosx6AGi9lYtLoA+RbsvknrEX8Pr6MDbdWAb2j6SnMn+lPsg==}
