@@ -9,6 +9,13 @@ spec:
   rules:
     - http:
         paths:
+          - path: /api/payments/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: payments-cluster-ip
+                port:
+                  number: 3000
           - path: /api/users/?(.*)
             pathType: "Prefix"
             backend:
@@ -16,27 +23,20 @@ spec:
                 name: auth-cluster-ip
                 port:
                   number: 3000
-          # - path: /api/payments/?(.*)
-          #   pathType: "Prefix"
-          #   backend:
-          #   service:
-          #     name: payments-cluster-ip
-          #     port:
-          #       number: 3000
-          # - path: /api/products/?(.*)
-          #   pathType: "Prefix"
-          #   backend:
-          #   service:
-          #     name: products-cluster-ip
-          #     port:
-          #       number: 3000
-          # - path: /api/orders/?(.*)
-          #   pathType: "Prefix"
-          #   backend:
-          #   service:
-          #     name: orders-cluster-ip
-          #     port:
-          #       number: 3000
+          - path: /api/products/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: products-cluster-ip
+                port:
+                  number: 3000
+          - path: /api/orders/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: orders-cluster-ip
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: "Prefix"
             backend:

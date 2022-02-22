@@ -17,17 +17,20 @@ spec:
           image: cstudent/products
           env:
             - name: NATS_CLUSTER_ID
-              value: 'ticketing'
+              value: "products"
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
             - name: NATS_URL
-              value: 'http://nats-svc:4222'
+              value: "http://nats-cluster-ip:4222"
+            - name: PGDATABASE
+              value: "payments-database"
             - name: PGHOST
-              value: "payments-postgres-cluster-ip:5432/orders"
+              value: products-postgres-cluster-ip
+            - name: PGUSER
+              value: "products"
+            - name: PGPASSWORD
+              value: "jeff"
             - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+              value: "jeff"

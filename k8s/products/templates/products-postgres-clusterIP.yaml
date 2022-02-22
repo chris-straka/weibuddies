@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: products-postgres-svc
+  name: products-postgres-cluster-ip
 spec:
   selector:
     app: products-postgres

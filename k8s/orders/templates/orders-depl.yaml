@@ -17,7 +17,13 @@ spec:
           image: cstudent/orders
           env:
             - name: PGHOST
-              value: "orders-postgres-cluster-ip:5432/orders"
+              value: orders-postgres-cluster-ip
+            - name: PGUSER
+              value: "orders"
+            - name: PGDATABASE
+              value: "orders-database"
+            - name: PGPASSWORD
+              value: "jeff"
             - name: JWT_KEY
               value: "jeff"
             - name: NATS_CLUSTER_ID

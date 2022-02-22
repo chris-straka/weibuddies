@@ -17,7 +17,7 @@ spec:
           image: cstudent/expiration
           env:
             - name: NATS_CLUSTER_ID
-              value: "jeff"
+              value: "expiration"
             - name: NATS_CLIENT_ID
               valueFrom:
                 fieldRef:

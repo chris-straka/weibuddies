@@ -23,14 +23,17 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
             - name: NATS_URL
-              value: "http://nats-svc:4222"
+              value: "http://nats-cluster-ip:4222"
             - name: PGHOST
-              value: "orders-postgres-cluster-ip:5432/orders"
+              value: auth-postgres-cluster-ip
+            - name: PGUSER
+              value: "payments"
+            - name: PGDATABASE
+              value: "payments-database"
+            - name: PGPASSWORD
+              value: "jeff"
             - name: JWT_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+              value: "jeff"
             - name: STRIPE_KEY
               valueFrom:
                 secretKeyRef:

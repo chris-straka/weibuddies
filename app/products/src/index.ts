@@ -2,13 +2,10 @@ import { app } from './app';
 import { OrderCancelledListener } from './events/listeners/OrderCancelledListener';
 import { OrderCreatedListener } from './events/listeners/OrderCreatedListener';
 import { natsWrapper } from './NatsWrapper';
-import pg from "postgres"
 
 const start = async () => {
   if (!process.env.JWT_KEY) throw new Error('[Products] JWT_KEY must be defined')
-
   if (!process.env.PGHOST) throw new Error("[Auth] Can't find PGHOST")
-
   if (!process.env.NATS_CLUSTER_ID) throw new Error('[Products] NATS_CLUSTER_ID must be defined')
   if (!process.env.NATS_CLIENT_ID) throw new Error('[Products] NATS_CLIENT_ID must be defined')
   if (!process.env.NATS_URL) throw new Error('[Products] NATS_URL must be defined')
@@ -30,14 +27,6 @@ const start = async () => {
 
     new OrderCreatedListener(natsWrapper.client).listen();
     new OrderCancelledListener(natsWrapper.client).listen();
-
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
-
-    console.log('[Products] Connected to MongoDB');
   } catch (err) {
     console.log(err);
   }

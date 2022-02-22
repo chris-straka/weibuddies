@@ -16,9 +16,9 @@ spec:
         - name: orders-postgres
           image: postgres:14
           env:
-            - name: POSTGRES_USER
-              value: "jeff"
             - name: POSTGRES_DB
               value: "orders-database"
+            - name: POSTGRES_USER
+              value: "orders"
             - name: POSTGRES_PASSWORD
               value: "jeff"

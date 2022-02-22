@@ -14,12 +14,13 @@ const init = async () => {
     );
 
     natsWrapper.client.on('close', () => {
-      console.log('NATS connection closed!');
+      console.log('[Expiration] NATS connection closed!');
       process.exit();
     });
 
     process.on('SIGINT', () => natsWrapper.client.close());
     process.on('SIGTERM', () => natsWrapper.client.close());
+
     new OrderCreatedListener(natsWrapper.client).listen();
   } catch (err) {
     console.log(err);

@@ -1,15 +1,5 @@
 apiVersion: skaffold/v2beta26
 kind: Config
-deploy:
-  kubectl:
-    manifests: # build components from these files
-      - ./k8s/auth/templates/*
-      - ./k8s/client/templates/*
-      # - ./k8s/expiration/templates/*
-      # - ./k8s/nats/templates/*
-      # - ./k8s/orders/templates/*
-      # - ./k8s/payments/templates/*
-      # - ./k8s/products/templates/*
 build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
@@ -22,24 +12,58 @@ build:
         manual:
           - src: "src/**/*.ts" # please watch these files
             dest: . # sync these files to the current directory of the running container
-    # - image: cstudent/client # build this image
-    #   context: ./app/client # from this directory
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     infer:
-    #       - "**/*.ts"
-    #       - "**/*.vue"
-    #       - "**/*.scss"
-    #       - "**/*.css"
-    # - image: cstudent/expiration # build this image
-    #   context: ./app/expiration # from this directory
+    - image: cstudent/client
+      context: ./app/client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        infer: # I had to sync things differently for vite-reload to work properly
+          - "**/*.ts"
+          - "**/*.vue"
+          - "**/*.scss"
+          - "**/*.css"
+    - image: cstudent/products
+      context: ./app/products
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
+    # - image: cstudent/orders
+    #   context: ./app/orders
     #   docker:
     #     dockerfile: Dockerfile
     #   sync:
     #     manual:
-    #       - src: "src/**/*.ts" # please watch these files
-    #         dest: . # sync these files to the current directory of the running container
+    #       - src: "src/**/*.ts"
+    #         dest: .
+    - image: cstudent/expiration
+      context: ./app/expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts" 
+            dest: .
+    # - image: cstudent/payments
+    #   context: ./app/payments
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - src: "src/**/*.ts"
+    #         dest: .
+deploy:
+  kubectl:
+    manifests: # build components from these files
+      - ./k8s/auth/templates/*
+      - ./k8s/client/templates/*
+      - ./k8s/expiration/templates/*
+      - ./k8s/nats/templates/*
+      # - ./k8s/orders/templates/*
+      # - ./k8s/payments/templates/*
+      - ./k8s/products/templates/*
 # deploy:
 #   helm:
 #     releases:
