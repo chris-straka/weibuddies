@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { requireAuth } from '@weibuddies/common';
-import { Order } from '../models/Order';
+import { Order } from '../models/Order/Order';
 
 const router = Router();
 

@@ -1,6 +1,6 @@
 import { Subjects, AbstractListener, IPaymentCreated, OrderStatus } from '@weibuddies/common';
 import { queueGroupName } from './queueGroupName';
-import { Order } from '../../models/Order';
+import { Order } from '../../models/Order/interface';
 import { Message } from 'node-nats-streaming';
 
 export class PaymentCreatedListener extends AbstractListener<IPaymentCreated> {

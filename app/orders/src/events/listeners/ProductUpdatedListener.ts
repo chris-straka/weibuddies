@@ -1,7 +1,7 @@
 import { Subjects, AbstractListener, IProductUpdated } from '@weibuddies/common';
 import { Message } from 'node-nats-streaming';
 import { queueGroupName } from './queueGroupName';
-import { Product } from '../../models/Product';
+import { Product } from '../../models/Product/Product';
 
 export class ProductUpdatedListener extends AbstractListener<IProductUpdated> {
   subject: Subjects.ProductUpdated = Subjects.ProductUpdated;

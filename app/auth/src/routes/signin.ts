@@ -1,9 +1,9 @@
-import express from 'express';
+import { Router } from 'express';
 import { validateRequest } from '@weibuddies/common';
 import { signInUser } from '../controller/userController';
 import { body } from 'express-validator';
 
-const router = express.Router();
+const router = Router();
 
 router.post(
   '/api/users/signin',

@@ -17,9 +17,9 @@ spec:
           image: nats-streaming:0.20-alpine3.12
           args:
             [
-              "-p",
+              "-p",   # port
               "4222",
-              "-m",
+              "-m",   # monitor
               "8222",
               "-hbi",
               "5s",
@@ -28,7 +28,7 @@ spec:
               "-hbf",
               "2",
               "-SD",
-              "-cid",
+              "-cid",  # clusterID
               "products",
             ]
           env:

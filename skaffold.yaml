@@ -30,21 +30,21 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    # - image: cstudent/orders
-    #   context: ./app/orders
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "src/**/*.ts"
-    #         dest: .
+    - image: cstudent/orders
+      context: ./app/orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: cstudent/expiration
       context: ./app/expiration
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          - src: "src/**/*.ts" 
+          - src: "src/**/*.ts"
             dest: .
     # - image: cstudent/payments
     #   context: ./app/payments
@@ -61,7 +61,7 @@ deploy:
       - ./k8s/client/templates/*
       - ./k8s/expiration/templates/*
       - ./k8s/nats/templates/*
-      # - ./k8s/orders/templates/*
+      - ./k8s/orders/templates/*
       # - ./k8s/payments/templates/*
       - ./k8s/products/templates/*
 # deploy:

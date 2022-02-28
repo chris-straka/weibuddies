@@ -2,8 +2,8 @@ import { BadRequestError, OrderStatus, NotAuthorizedError, NotFoundError, requir
 import { PaymentCreatedPublisher } from 'events/publishers/PaymentCreatedPublisher';
 import { Router, Request, Response } from 'express';
 import { body } from 'express-validator';
-import { Order } from '../models/Order';
-import { Payment } from '../models/Payment';
+import { Order } from '../models/Order/Order';
+import { Payment } from '../models/Payment/Payment';
 import { natsWrapper } from 'NatsWrapper';
 import { stripe } from 'stripeApp';
 

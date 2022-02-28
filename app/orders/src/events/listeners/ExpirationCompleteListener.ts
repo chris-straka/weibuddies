@@ -1,6 +1,6 @@
 import { AbstractListener, IExpirationComplete, Subjects, OrderStatus } from '@weibuddies/common';
 import { queueGroupName } from './queueGroupName';
-import { Order } from '../../models/Order';
+import { order_db } from '../../models/Order/Order';
 import { OrderCancelledPublisher } from '../publishers/OrderCancelledPublisher';
 import { Message } from 'node-nats-streaming';
 
@@ -9,13 +9,11 @@ export class ExpirationCompleteListener extends AbstractListener<IExpirationComp
   subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;
 
   async onMessage(data: IExpirationComplete['data'], msg: Message) {
-    const order = await Order.findById(data.orderId).populate('ticket');
+    const order = await order_db.getOrder(data.orderId)
     if (!order) throw new Error('Order not found');
     if (order.status === OrderStatus.Complete) return msg.ack();
 
-    order.set({ status: OrderStatus.Cancelled });
-
-    await order.save();
+    order_db.set("id", "cancelled");
 
     await new OrderCancelledPublisher(this.client).publish({
       id: order.id,

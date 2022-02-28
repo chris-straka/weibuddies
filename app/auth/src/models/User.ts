@@ -1,8 +1,18 @@
-import { postgres_db } from "../database/postgres"
-import { UserDatabase } from "../database/interface";
+import { postgres_db } from "./postgres"
 import { Password } from "../services/password";
 
-const User = (db: UserDatabase) => ({
+export interface User {
+  id: number,
+  email: string,
+  password: string
+}
+
+export interface UserDatabase {
+  getUser: (email: string) => Promise<User>,
+  createUser: (email: string, password: string) => Promise<User>
+}
+
+const User = (db: UserDatabase): UserDatabase => ({
   async createUser(email: string, password: string) {
     const hashedPassword = await Password.toHash(password)
     return db.createUser(email, hashedPassword)

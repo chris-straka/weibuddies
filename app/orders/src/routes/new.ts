@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import { requireAuth, validateRequest, NotFoundError, OrderStatus, BadRequestError } from '@weibuddies/common';
 import { body } from 'express-validator';
-import { Product } from '../models/Product';
-import { Order } from '../models/Order';
+import { Product } from '../models/Product/Product';
+import { Order } from '../models/Order/Order';
 import { OrderCreatedPublisher } from '../events/publishers/OrderCreatedPublisher';
 import { natsWrapper } from '../NatsWrapper';
 

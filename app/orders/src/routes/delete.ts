@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { requireAuth, NotFoundError, NotAuthorizedError, OrderStatus } from '@weibuddies/common';
-import { Order } from '../models/Order';
+import { Order } from '../models/Order/interface';
 import { OrderCancelledPublisher } from '../events/publishers/OrderCancelledPublisher';
 import { natsWrapper } from '../NatsWrapper';
 
