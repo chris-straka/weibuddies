@@ -32,6 +32,7 @@
     "express": "^4.17.3",
     "express-validator": "^6.10.0",
     "jsonwebtoken": "^8.5.1",
+    "kafkajs": "^1.16.0",
     "node-nats-streaming": "^0.3.2"
   }
 }

@@ -3,12 +3,14 @@ lockfileVersion: 5.3
 specifiers:
   '@types/node': ^17.0.18
   '@weibuddies/common': ^1.0.9
+  kafkajs: ^1.16.0
   node-nats-streaming: ^0.3.2
   ts-node-dev: ^1.1.8
   typescript: ^4.5.5
 
 dependencies:
   '@weibuddies/common': 1.0.9
+  kafkajs: 1.16.0
   node-nats-streaming: 0.3.2
 
 devDependencies:
@@ -519,6 +521,11 @@ packages:
     dependencies:
       jwa: 1.4.1
       safe-buffer: 5.2.1
+    dev: false
+
+  /kafkajs/1.16.0:
+    resolution: {integrity: sha512-+Rcfu2hyQ/jv5skqRY8xA7Ra+mmRkDAzCaLDYbkGtgsNKpzxPWiLbk8ub0dgr4EbWrN1Zb4BCXHUkD6+zYfdWg==}
+    engines: {node: '>=10.13.0'}
     dev: false
 
   /keygrip/1.1.0:

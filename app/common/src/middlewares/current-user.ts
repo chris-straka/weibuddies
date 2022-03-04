@@ -20,7 +20,6 @@ export const currentUser = (
   next: NextFunction
 ) => {
   if (!req.session?.jwt) return next();
-
   try {
     const payload = verify(
       req.session.jwt,

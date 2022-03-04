@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow pnpm",
     "publish": "ts-node-dev --notify false src/publisher.ts",
     "listen": "ts-node-dev --notify false src/listener.ts"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@weibuddies/common": "^1.0.9",
+    "kafkajs": "^1.16.0",
     "node-nats-streaming": "^0.3.2"
   },
   "devDependencies": {

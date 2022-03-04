@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"preinstall": "npx only-allow pnpm",
+    "preinstall": "npx only-allow pnpm",
     "start": "ts-node-dev src/index.ts",
     "test": "jest --watchAll --no-cache"
   },
@@ -21,6 +21,7 @@
   "dependencies": {
     "@weibuddies/common": "^1.0.9",
     "bull": "^4.5.6",
+    "kafkajs": "^1.16.0",
     "node-nats-streaming": "^0.3.2"
   },
   "devDependencies": {
