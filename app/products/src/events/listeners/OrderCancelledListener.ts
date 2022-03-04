@@ -1,3 +1,4 @@
+import { Kafka } from 'kafkajs';
 import { AbstractListener, Subjects, IOrderCancelled, } from '@weibuddies/common';
 import { queueGroupName } from './queueGroupName';
 import { ProductUpdatedPublisher } from '../publishers/ProductUpdatedPublisher';
@@ -5,6 +6,11 @@ import { product_db } from '../../models/Product';
 import { Message } from 'node-nats-streaming';
 
 export class OrderCancelledListener extends AbstractListener<IOrderCancelled> {
+
+  constructor(instance: Kafka) {
+    super(instance)
+  }
+
   subject: Subjects.OrderCancelled = Subjects.OrderCancelled;
   queueGroupName = queueGroupName;
 

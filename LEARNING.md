@@ -1,9 +1,9 @@
 # Learning
 
-## Scrypt vs Bcryptjs vs Argon2
+## Working with Kafka as a StatefulSet is tricky sometimes
 
-I decided on scrypt (from the builtin node crypto module) because I like using native modules. I read that argon2 is newer and is more memory intensive for the dude trying to  it's memory intensive. After reading the official docs for scrypt it sounds like it's also memory intensive so that sounds good to me
+I ran into [this error](https://www.orchome.com/10529) and it was hard to figure out because the proposed solution didn't seem to work. After reading this [post on SO](https://stackoverflow.com/questions/65687515/delete-kubernetes-persistent-volume-from-statefulset-after-scale-down), I thought maybe I had to delete the persistent volume claim so that it also deletes the persistent volume but it didn't seem to work for me either. I think it was having problems deleting the pv after the pvc and I think I was running into [this github issue](https://github.com/kubernetes/kubernetes/issues/69697). I ended up going into the troubleshooting page for docker desktop's and resetting things there and everything seemed to work okay after that. 
 
-## Data persistence not managed by k8s 
+## Choice of hash function
 
-It looks like the persistent volume for a stateful set is not wiped out when the application is scaled down. After reading this [post on SO](https://stackoverflow.com/questions/65687515/delete-kubernetes-persistent-volume-from-statefulset-after-scale-down), it looks like I have to delete the PVC everytime I run into [this error](https://www.orchome.com/10529).
+I decided on scrypt (from the node crypto module) because I like using the core modules and I like to trim down on my dependencies. But I also read that argon2 is popping off in the [password hashing competition](https://en.wikipedia.org/wiki/Password_Hashing_Competition), so maybe that's the better choice.

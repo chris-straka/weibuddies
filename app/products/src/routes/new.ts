@@ -3,7 +3,7 @@ import { ProductCreatedPublisher } from '../events/publishers/ProductCreatedPubl
 import { Router, Request, Response } from "express"
 import { body } from "express-validator"
 import { product_db } from "../models/Product"
-import { natsWrapper } from "../NatsWrapper"
+import { natsWrapper } from "../KafkaWrapper"
 
 const router = Router()
 

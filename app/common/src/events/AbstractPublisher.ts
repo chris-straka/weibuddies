@@ -1,4 +1,4 @@
-import { Stan } from 'node-nats-streaming';
+import { Producer } from 'kafkajs';
 import { Subjects } from './Subjects';
 
 interface Event {
@@ -8,19 +8,9 @@ interface Event {
 
 export abstract class AbstractPublisher<T extends Event> {
   abstract subject: T['subject'];
-  protected client: Stan;
+  protected client: Producer;
 
-  constructor(client: Stan) {
+  constructor(client: Producer) {
     this.client = client;
-  }
-
-  publish(data: T['data']): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.client.publish(this.subject, JSON.stringify(data), (err) => {
-        if (err) return reject(err);
-        console.log('Event published to subject', this.subject);
-        resolve();
-      });
-    });
   }
 }

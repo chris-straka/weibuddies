@@ -1,3 +1,4 @@
+import { Kafka } from "kafkajs"
 import { AbstractListener, Subjects, IOrderCreated } from "@weibuddies/common"
 import { queueGroupName } from "../../events/listeners/queueGroupName"
 import { ProductUpdatedPublisher } from "../../events/publishers/ProductUpdatedPublisher"
@@ -5,13 +6,16 @@ import { product_db } from "../../models/Product"
 import { Message } from "node-nats-streaming"
 
 export class OrderCreatedListener extends AbstractListener<IOrderCreated> {
+  constructor(kafka: Kafka) {
+    super(kafka)
+  }
+
   subject: Subjects.OrderCreated = Subjects.OrderCreated
   queueGroupName = queueGroupName;
 
   async onMessage(data: IOrderCreated['data'], msg: Message) {
     const product = await product_db.getProduct(data.product.id)
     if (!product) throw new Error("[Products] Product not found")
-
 
     // product_db.set({ orderId: data.id })
     product_db.createProduct(data.id)

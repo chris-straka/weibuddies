@@ -1,32 +1,24 @@
+import { Kafka } from "kafkajs"
 import { app } from './app';
 import { OrderCancelledListener } from './events/listeners/OrderCancelledListener';
 import { OrderCreatedListener } from './events/listeners/OrderCreatedListener';
-import { natsWrapper } from './NatsWrapper';
 
-const start = async () => {
+const disconnect = (...listeners: any[]) => listeners.forEach(listener => listener.disconnect())
+
+const init = async () => {
   if (!process.env.JWT_KEY) throw new Error('[Products] JWT_KEY must be defined')
-  if (!process.env.PGHOST) throw new Error("[Auth] Can't find PGHOST")
-  if (!process.env.NATS_CLUSTER_ID) throw new Error('[Products] NATS_CLUSTER_ID must be defined')
-  if (!process.env.NATS_CLIENT_ID) throw new Error('[Products] NATS_CLIENT_ID must be defined')
-  if (!process.env.NATS_URL) throw new Error('[Products] NATS_URL must be defined')
+  if (!process.env.PGHOST) throw new Error("[Products] Can't find PGHOST")
+
 
   try {
-    await natsWrapper.connect(
-      process.env.NATS_CLUSTER_ID,
-      process.env.NATS_CLIENT_ID,
-      process.env.NATS_URL
-    );
+    const producer = kafka.producer()
+    const consumer = kafka.consumer({ groupId: "orders-group"})
 
-    natsWrapper.client.on('close', () => {
-      console.log('[Products] NATS connection closed!');
-      process.exit();
-    });
+    new OrderCreatedListener(consumer).listen();
+    new OrderCancelledListener(consumer).listen();
 
-    process.on('SIGINT', () => natsWrapper.client.close());
-    process.on('SIGTERM', () => natsWrapper.client.close());
-
-    new OrderCreatedListener(natsWrapper.client).listen();
-    new OrderCancelledListener(natsWrapper.client).listen();
+    process.on('SIGINT', () => {});
+    process.on('SIGTERM', () => { });
   } catch (err) {
     console.log(err);
   }
@@ -36,4 +28,4 @@ app.listen(3000, () => {
   console.log('[Products] Listening on port 3000');
 });
 
-start();
+init();
