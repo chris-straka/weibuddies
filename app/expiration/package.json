@@ -19,7 +19,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@weibuddies/common": "^1.0.9",
+    "@weibuddies/common": "^1.0.13",
     "bull": "^4.5.6",
     "kafkajs": "^1.16.0",
     "node-nats-streaming": "^0.3.2"

@@ -1,7 +1,7 @@
-import { currentUser, errorHandler, NotFoundError } from '@weibuddies/common';
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
+import { currentUser, errorHandler, NotFoundError } from '@weibuddies/common';
 import { indexProductRouter } from './routes/index';
 import { createProductRouter } from './routes/new';
 import { showProductRouter } from './routes/show';
@@ -23,9 +23,7 @@ app.use(showProductRouter);
 app.use(indexProductRouter);
 app.use(updateProductRouter);
 
-app.all('*', async (req, res) => {
-  throw new NotFoundError();
-});
+app.all('*', async (req, res) => { throw new NotFoundError(); });
 
 app.use(errorHandler);
 

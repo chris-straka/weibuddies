@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express';
+import { Request, Response, Router } from 'express';
 import { product_db } from '../models/Product';
 
-const router = express.Router();
+const router = Router();
 
 router.get('/api/products', async (req: Request, res: Response) => {
   const products = await product_db.getProduct("TODO");

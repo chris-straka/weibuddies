@@ -11,15 +11,21 @@ export interface Order {
 }
 
 export interface OrderDatabase {
-  getOrder: (email: string) => Order,
-  createOrder: (email: string, password: string) => Order
-  setOrder: (id: string, setStatus: string) => any
+  getOrder: (orderId: number) => Promise<Order>,
+  createOrder: (userId: string, status: OrderStatus, expires_at: Date, product_id: number) => Promise<Order>
+  removeOrder: (id: string, setStatus: string) => Promise<Order>
 }
 
 const Order = (db: OrderDatabase): OrderDatabase => ({
-  createOrder(email: string, password: string): any { },
-  getOrder(email: string): any { },
-  setOrder(id: string, setStatus: string): any { }
+  async getOrder(id: number) {
+    return await db.getOrder(id)
+  },
+  async createOrder(userId: string, status: OrderStatus, expires_at: Date, product_id: number) {
+    return await db.createOrder(userId, status, expires_at, product_id)
+  },
+  async removeOrder(id: string, setStatus: string): any {
+    return await db.removeOrder()
+  }
 })
 
 export const order_db = Order(postgres_db)

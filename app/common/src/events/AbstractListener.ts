@@ -1,4 +1,3 @@
-import { Consumer, KafkaMessage } from "kafkajs"
 import { Subjects } from './Subjects';
 
 interface Event {
@@ -6,13 +5,12 @@ interface Event {
   data: any;
 }
 
-export abstract class AbstractListener<T extends Event> {
+export abstract class AbstractListener<T extends Event, U> {
   abstract subject: T['subject'];
-  abstract onMessage(data: T['data'], msg: KafkaMessage): void;
-  protected client: Consumer;
-  protected ackWait = 5 * 1000;
+  abstract onMessage(data: T['data'], msg: string): void;
+  protected client: U;
 
-  constructor(client: Consumer) {
+  constructor(client: U) {
     this.client = client;
   }
 }

@@ -1,19 +1,13 @@
-import { Router, Request, Response } from 'express';
-import { requireAuth, NotFoundError, NotAuthorizedError } from '@weibuddies/common';
-import { Order } from '../models/Order/interface';
+import { Router } from 'express';
+import { requireAuth } from '@weibuddies/common';
+import { getOrder } from '../controller/orderController';
 
 const router = Router();
 
 router.get(
   '/api/orders/:orderId',
   requireAuth,
-  async (req: Request, res: Response) => {
-    const order = await Order.findById(req.params.orderId).populate('ticket');
-    if (!order) throw new NotFoundError();
-    if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
-
-    return res.send(order);
-  }
+  getOrder
 );
 
 export { router as showOrderRouter };

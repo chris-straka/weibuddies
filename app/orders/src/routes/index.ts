@@ -1,15 +1,8 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import { requireAuth } from '@weibuddies/common';
-import { Order } from '../models/Order/Order';
+import { getOrders } from '../controller/orderController';
 
 const router = Router();
 
-router.get('/api/orders', requireAuth, async (req: Request, res: Response) => {
-  const orders = await Order.find({
-    userId: req.currentUser!.id,
-  }).populate('ticket');
-
-  return res.send(orders);
-});
-
+router.get('/api/orders', requireAuth, getOrders)
 export { router as indexOrderRouter };

@@ -6,7 +6,9 @@ You're going to need to install these tools
 
 - [Node](https://nodejs.org/en/)
 
-- [Docker & Kubernetes](https://www.docker.com/products/docker-desktop)
+- [Pnpm](https://pnpm.io/)
+
+- [Docker & Kubernetes](https://www.docker.com/products/docker-desktop) (or minikube if you're on linux)
 
 - [ingress-nginx](https://kubernetes.github.io/ingress-nginx/deploy/)
 
@@ -14,9 +16,7 @@ You're going to need to install these tools
 
 - [Skaffold](https://skaffold.dev/docs/install/)
 
-- [Minikube](https://minikube.sigs.k8s.io/docs/) (if you're using Linux and not docker for desktop)
-
-I used WSL2 to develop this application, but instead of using minikube I used the kubernetes cluster that came with docker-desktop. I don't have any minikube setup instructions so you're going to have to figure that stuff out if you use minikube. You can see which commands are available by visiting the Makefile at the root of this project. Here are some other helpful commands for rerference
+I used WSL2 to develop this application, but instead of using minikube I used the kubernetes cluster that came with docker-desktop. I don't have any minikube setup instructions so if you use that you're going to have to figure it out for yourself. You can see which commands are available by visiting the Makefile at the root of this project. Here are some other helpful commands for rerference
 
 ```bash
 kubectl config current-context # see which k8s cluster the skaffold command is going to use

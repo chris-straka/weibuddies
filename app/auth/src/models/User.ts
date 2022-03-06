@@ -17,7 +17,7 @@ const User = (db: UserDatabase): UserDatabase => ({
     const hashedPassword = await Password.toHash(password)
     return db.createUser(email, hashedPassword)
   },
-  getUser(email: string) {
+  async getUser(email: string) {
     return db.getUser(email)
   }
 })

@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/bull': ^3.15.8
-  '@weibuddies/common': ^1.0.9
+  '@weibuddies/common': ^1.0.13
   bull: ^4.5.6
   kafkajs: ^1.16.0
   node-nats-streaming: ^0.3.2
@@ -10,7 +10,7 @@ specifiers:
   typescript: ^4.5.5
 
 dependencies:
-  '@weibuddies/common': 1.0.9
+  '@weibuddies/common': 1.0.13
   bull: 4.5.6
   kafkajs: 1.16.0
   node-nats-streaming: 0.3.2
@@ -118,8 +118,8 @@ packages:
     resolution: {integrity: sha512-7NQmHra/JILCd1QqpSzl8+mJRc8ZHz3uDm8YV1Ks9IhK0epEiTw8aIErbvH9PI+6XbqhyIQy3462nEsn7UVzjQ==}
     dev: true
 
-  /@weibuddies/common/1.0.9:
-    resolution: {integrity: sha512-V+3ZDW55K2IWj7IrsH7FdP+HYMHzVjGzYdGXDbbZ9U0vNvv4Lyeohwwb1HtZTCaMpTugyBC1wFT6l3spZo3KXw==}
+  /@weibuddies/common/1.0.13:
+    resolution: {integrity: sha512-8vOYM/AiridnnsANCI6zusj+NXl6hA8J2Z9bvglSNLBAEzoNYe5ZofcD3/EdsS3wMKJbVlwXiASYu6LScW1zkA==}
     requiresBuild: true
     dependencies:
       '@types/cookie-session': 2.0.44
@@ -129,6 +129,7 @@ packages:
       express: 4.17.3
       express-validator: 6.14.0
       jsonwebtoken: 8.5.1
+      kafkajs: 1.16.0
       node-nats-streaming: 0.3.2
     dev: false
 

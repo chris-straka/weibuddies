@@ -16,12 +16,12 @@ export interface ProductDatabase {
   setProduct: (title: string, price: string) => any
 }
 
-const Product = (db: ProductDatabase) => ({
-  createProduct(orderId: string) {
-    return db.createProduct(orderId)
-  },
+const Product = (db: ProductDatabase): ProductDatabase => ({
   getProduct(email: string) {
     return db.getProduct(email)
+  },
+  createProduct(orderId: string) {
+    return db.createProduct(orderId)
   },
   removeProduct(productId: string) {
     console.log(productId)

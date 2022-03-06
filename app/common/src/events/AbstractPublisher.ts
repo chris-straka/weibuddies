@@ -1,4 +1,3 @@
-import { Producer } from 'kafkajs';
 import { Subjects } from './Subjects';
 
 interface Event {
@@ -6,11 +5,11 @@ interface Event {
   data: any;
 }
 
-export abstract class AbstractPublisher<T extends Event> {
+export abstract class AbstractPublisher<T extends Event, U> {
   abstract subject: T['subject'];
-  protected client: Producer;
+  protected client: U;
 
-  constructor(client: Producer) {
+  constructor(client: U) {
     this.client = client;
   }
 }
