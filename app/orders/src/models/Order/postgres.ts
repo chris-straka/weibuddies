@@ -17,7 +17,7 @@ export const postgres_db: OrderDatabase = {
       throw new Error(error as string)
     }
   },
-  async createOrder(userId: string, status: OrderStatus, expires_at: Date, product_id: number) {
+  async createOrder(userId: number, status: OrderStatus, expires_at: Date, product_id: number) {
     const query = {
       name: 'create-order',
       text: 'INSERT INTO orders VALUES ($1, $2, $3, $4)',
@@ -29,10 +29,10 @@ export const postgres_db: OrderDatabase = {
       throw new Error(error as string)
     }
   },
-  async removeOrder(order_id: string): Promise<Order> {
+  async removeOrder(order_id: number): Promise<Order> {
     const query = {
       name: 'create-order',
-      text: 'UPDATE orders SET order_status WHERE id = $1',
+      text: 'UPDATE orders SET order_status = "cancelled" WHERE id = $1',
       values: [order_id],
     }
     try {

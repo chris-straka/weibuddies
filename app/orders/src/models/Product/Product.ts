@@ -2,22 +2,22 @@ import { postgres_db } from "./postgres"
 
 export interface Product {
   id: number,
-  email: string,
-  password: string
+  title: string,
+  price: number
 }
 
 export interface ProductDatabase {
-  getProduct: (email: string) => Product,
-  createProduct: (email: string, password: string) => Product
+  getProduct: (id: number) => Promise<Product>,
+  createProduct: (title: string, price: number) => Promise<Product>
 }
 
-const Product = (db: ProductDatabase): ProductDatabase => ({
-  getProduct(email: string) {
-    return db.getProduct(email)
+const ProductDatabase = (db: ProductDatabase): ProductDatabase => ({
+  async getProduct(id: number) {
+    return db.getProduct(id)
   },
-  createProduct(email: string, password: string) {
-    return db.createProduct(email, password)
+  async createProduct(title: string, price: number) {
+    return db.createProduct(title, price)
   }
 })
 
-export const product_db = Product(postgres_db)
+export const product_db = ProductDatabase(postgres_db)

@@ -1,4 +1,4 @@
-CREATE DATABASE orders_api;
+CREATE DATABASE payments_api;
 
 CREATE TABLE orders(
   id SERIAL PRIMARY KEY,
@@ -8,7 +8,7 @@ CREATE TABLE orders(
   product_id REFERENCES products(id)
 );
 
-CREATE TABLE products(
+CREATE TABLE payments(
   id SERIAL PRIMARY KEY,
   title VARCHAR(40),
   price smallint
