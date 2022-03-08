@@ -8,14 +8,14 @@ metadata:
 spec:
   rules:
     - http:
-        paths:
+        paths: # these are all the external paths that you visit in the browser
           - path: /api/payments/?(.*)
             pathType: "Prefix"
             backend:
               service:
-                name: payments-cluster-ip
+                name: payments-cluster-ip # grab this service and it's internal port
                 port:
-                  number: 3000
+                  number: 3000 # and map it to this 
           - path: /api/users/?(.*)
             pathType: "Prefix"
             backend:
