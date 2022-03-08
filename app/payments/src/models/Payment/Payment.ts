@@ -10,13 +10,13 @@ export interface Payment {
 }
 
 export interface PaymentDatabase {
-  getPayment: (email: string) => Promise<Payment>,
-  createPayment: (email: string, password: string) => Promise<Payment>
+  createPayment: (currency: string, amount: number, source: string) => Promise<Payment>
 }
 
 const Payment = (db: PaymentDatabase): PaymentDatabase => ({
-  getPayment(email: string) { },
-  createPayment(email: string) { },
+  async createPayment(currency: string, amount: number, source: string) {
+    return await db.createPayment(currency, amount, source)
+  },
 })
 
 export const payment_db = Payment(postgres_db)

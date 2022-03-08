@@ -2,7 +2,7 @@ import { currentUser, errorHandler, NotFoundError, } from '@weibuddies/common';
 import cookieSession from 'cookie-session';
 import express from 'express';
 import 'express-async-errors';
-import { createChargeRouter } from 'routes/new';
+import { createChargeRouter } from './routes/new';
 
 const app = express();
 app.set('trust proxy', true);

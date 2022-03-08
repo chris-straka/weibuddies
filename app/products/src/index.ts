@@ -1,14 +1,7 @@
 import { app } from './app';
 
 const init = async () => {
-  if (!process.env.JWT_KEY) throw new Error('[Products] JWT_KEY must be defined')
-
-  try {
-    process.on('SIGINT', () => { });
-    process.on('SIGTERM', () => { });
-  } catch (err) {
-    console.log(err);
-  }
+  // if (!process.env.JWT_KEY) throw new Error('[Products] JWT_KEY must be defined')
 };
 
 app.listen(3000, () => {

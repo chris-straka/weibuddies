@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "NODE_PATH=./src ts-node-dev src/index.ts",
-    "test": "NODE_PATH=./src jest --watchAll --no-cache",
-    "test:ci": "NODE_PATH=./src jest"
+    "start": "ts-node-dev src/index.ts",
+    "test": "jest --watchAll --no-cache",
+    "test:ci": "jest"
   },
   "jest": {
     "preset": "ts-jest",

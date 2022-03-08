@@ -1,7 +1,7 @@
 import { requireAuth, validateRequest } from '@weibuddies/common';
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { createPayment } from 'controller/paymentController';
+import { createPayment } from '../controller/paymentController';
 
 const router = Router();
 

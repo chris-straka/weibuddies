@@ -3,15 +3,15 @@ import { Request, Response } from "express"
 import { order_db } from "../models/Order/Order";
 
 export const deleteOrder = async (req: Request, res: Response) => {
-  const order = await order_db.getOrder("TODO")
+  // const order = await order_db.getOrder("TODO")
 
-  if (!order) throw new NotFoundError();
-  if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+  // if (!order) throw new NotFoundError();
+  // if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
 
-  order.status = OrderStatus.Cancelled;
+  // order.status = OrderStatus.Cancelled;
 
   // Publish an event saying the order is cancelled
-  return res.status(204).send(order);
+  // return res.status(204).send(order);
 }
 
 export const getOrders = async (req: Request, res: Response) => {
