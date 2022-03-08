@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: '0.0.1'
-description: Orders Service for Microservices with Node JS and React
-name: orders
-version: 0.0.1

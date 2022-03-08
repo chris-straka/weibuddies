@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: '0.0.1'
-description: Kafka Service for weibuddies microservices app
-name: nats
-version: 0.0.1

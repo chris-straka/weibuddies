@@ -8,5 +8,5 @@ spec:
   ports:
     - name: products
       protocol: TCP
-      port: 3000
-      targetPort: 3000
+      port: 3000       # the port other pods use to talk to this service
+      targetPort: 3000 # the port that this service uses to talk to its pods

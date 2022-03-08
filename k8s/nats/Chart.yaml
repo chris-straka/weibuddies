@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: '0.0.1'
-description: Nats Service for Microservices 
-name: nats
-version: 0.0.1

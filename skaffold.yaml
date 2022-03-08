@@ -4,14 +4,6 @@ build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
   artifacts:
-    - image: cstudent/auth # build this image
-      context: ./app/auth # from this directory
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - src: "src/**/*.ts" # please watch these files
-            dest: . # sync these files to the current directory of the running container
     - image: cstudent/client
       context: ./app/client
       docker:
@@ -22,6 +14,14 @@ build:
           - "**/*.vue"
           - "**/*.scss"
           - "**/*.css"
+    - image: cstudent/auth # build this image
+      context: ./app/auth # from this directory
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts" # please watch these files
+            dest: . # sync these files to the current directory of the running container
     - image: cstudent/products
       context: ./app/products
       docker:
@@ -31,7 +31,7 @@ build:
           - src: "src/**/*.ts"
             dest: .
     - image: cstudent/kafka-kraft
-      context: ./k8s/kafka/docker
+      context: ./k8s/kafka/
       docker:
         dockerfile: Dockerfile
     - image: cstudent/orders
@@ -50,22 +50,21 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    # - image: cstudent/payments
-    #   context: ./app/payments
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - src: "src/**/*.ts"
-    #         dest: .
+    - image: cstudent/payments
+      context: ./app/payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
 deploy:
   kubectl:
     manifests: # build components from these files
-      - ./k8s/auth/templates/*
-      - ./k8s/client/templates/*
-      - ./k8s/expiration/templates/*
-      - ./k8s/nats/templates/*
-      - ./k8s/kafka/templates/*
-      - ./k8s/orders/templates/*
-      - ./k8s/products/templates/*
-      # - ./k8s/payments/templates/*
+      - ./k8s/client/*
+      - ./k8s/auth/*
+      - ./k8s/expiration/*
+      - ./k8s/kafka/*
+      - ./k8s/orders/*
+      - ./k8s/products/*
+      - ./k8s/payments/*
