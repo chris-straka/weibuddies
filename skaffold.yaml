@@ -42,16 +42,16 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: cstudent/expiration
-      context: ./app/expiration
+    - image: cstudent/payments
+      context: ./app/payments
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: cstudent/payments
-      context: ./app/payments
+    - image: cstudent/expiration
+      context: ./app/expiration
       docker:
         dockerfile: Dockerfile
       sync:
@@ -63,8 +63,9 @@ deploy:
     manifests: # build components from these files
       - ./k8s/client/*
       - ./k8s/auth/*
-      - ./k8s/expiration/*
       - ./k8s/kafka/*
       - ./k8s/orders/*
       - ./k8s/products/*
       - ./k8s/payments/*
+      - ./k8s/ingress-config.yaml
+      - ./k8s/expiration/*

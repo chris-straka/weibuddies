@@ -1,4 +1,6 @@
-# I got this from the kafka/config/kraft/README and edited it to my liking
+# kafka
+
+This readme document is a copy paste of the official kafka/config/krarft/readme.md (with my own personal edits).
 
 To bring up a kraft cluster...
 
@@ -15,16 +17,16 @@ To bring up a kraft cluster...
 
 ## Overview
 
-("set this property" === server.properties file)
+In kraft mode, you have two types of nodes - brokers & controllers. You usually have 3-5 controllers for availability purposes. You designate whether a node is a controller or a broker by setting its `process.roles` property to broker, controller or broker,controller (broker,controller means the node operates as both, aka a combined node). You set this setting in the kafka/config/kraft/server.properties file. Combined nodes are convenient but if they crash as a broker then it can no longer work as a controller.
 
-In kraft mode, you have two types of nodes - brokers & controllers. You usually pick 3-5 controller nodes for availability. You designate whether a node is a controller or a broker by setting the `process.roles` property to broker, controller or broker,controller (aka a combined node). Combined nodes are convenient but they can crash as a broker then no longer work as a controller. 
-
-Every node (brokers & controllers) has to know who all the controllers are. You do that by enumerating the controllers in the `controller.quorum.voters` key. The "quorum" part refers to how controllers have to agree on what the cluster metadata is. An example config for 1 controller (out of 3) looks like this...
+Every node (broker or controller) has to know who all the controllers are. You do that by enumerating the controllers in the `controller.quorum.voters` key in the same kafka/config/kraft/server.properties file. The "quorum" part refers to how controllers agree with each other ow what the cluster metadata is. An example config for a controller looks like this...
 
 ```bash
-process.roles=controller
-node.id=1
-listeners=CONTROLLER://controller1.example.com:9093
+process.roles=controller # this is a controller
+node.id=1                # this is the 1st controller
+listeners=CONTROLLER://controller1.example.com:9093 # other controllers can reach me here
+
+# You list a controller like this -> id@host:port
+# So in a cluster with three controllers, you list all of them like this
 controller.quorum.voters=1@controller1.example.com:9093,2@controller2.example.com:9093,3@controller3.example.com:9093
-# id@host:port,id@host:port, etc
 ```

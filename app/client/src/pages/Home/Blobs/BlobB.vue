@@ -28,11 +28,11 @@
 }
 
 #stop_one {
-  stop-color: var(--primary);
+  stop-color: var(--secondary);
 }
 
 #stop_two {
-  stop-color: var(--secondary);
+  stop-color: var(--primary);
 }
 
 /* 

@@ -14,6 +14,6 @@ import BlobB from "./BlobB.vue"
 <style scoped>
 .blobs {
   display: flex;
-  width: 100px;
+  justify-content: space-around;
 }
 </style>

@@ -8,4 +8,4 @@ COPY --chown=node:node package.json pnpm-lock.yaml* ./
 RUN corepack prepare pnpm@6.32.3 --activate && pnpm install
 COPY . .
 
-CMD [ "pnpm", "dev" ]
+CMD [ "pnpm", "dev:k8s" ]

@@ -1,7 +1,12 @@
 SHELL := /bin/bash
 
+# http://localhost:80
 dev: 
 	skaffold dev
+
+# http://localhost:3000
+devfront:
+	pushd ./app/client && pnpm dev:local && popd
 
 # Install all the dependencies for the services locally
 install:

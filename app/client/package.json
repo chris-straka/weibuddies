@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-		"preinstall": "npx only-allow pnpm",
-    "dev": "vite --host",
+    "preinstall": "npx only-allow pnpm",
+    "dev": "vite",
+    "dev:k8s": "vite --host --config ./vite.config.k8s.ts",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
@@ -12,12 +13,12 @@
     "@element-plus/icons-vue": "^0.2.7",
     "element-plus": "^2.0.2",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.12",
-    "vuex": "^4.0.2"
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.6",
     "@vitejs/plugin-vue": "^2.2.0",
+    "sass": "^1.49.9",
     "typescript": "^4.5.5",
     "unplugin-auto-import": "^0.5.11",
     "unplugin-vue-components": "^0.17.18",
