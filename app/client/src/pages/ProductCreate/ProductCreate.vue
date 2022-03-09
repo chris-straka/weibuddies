@@ -1,7 +1,7 @@
 <script lang="ts">
-import Upload from "./Upload.vue"
+import Upload from './Upload.vue'
 </script>
 
 <template>
-  <Upload />
+    <Upload />
 </template>
