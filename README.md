@@ -7,9 +7,10 @@ This [app](https://github.com/Chris56974/wei-buddies) is basically [kijiji](http
 
 ## Attribution
 
-- [For help with k8s and microservices](https://github.com/webmakaka/Microservices-with-Node-JS-and-React)
-- [Joshua Purcell & Steve Martinelli for their kafka setup](https://github.com/IBM/kraft-mode-kafka-on-kubernetes)
-- [This is their tutorial on IBM](https://developer.ibm.com/tutorials/kafka-in-kubernetes/)
+- [Webmakaka's project for guidance on k8s and microservices](https://github.com/webmakaka/Microservices-with-Node-JS-and-React)
+- [Joshua Purcell & Steve Martinelli for their kraft kafka tutorial](https://github.com/IBM/kraft-mode-kafka-on-kubernetes)
+- [ibid](https://developer.ibm.com/tutorials/kafka-in-kubernetes/)
 - [For design inspiration](https://app.haikei.app/)
 - [Blobs](https://blobs.app/)
 - [Coinbase API](https://developers.coinbase.com/)
+- [Abdelrahman Awad's composable functions](https://logaretm.com/blog/my-favorite-5-vuejs-composables)

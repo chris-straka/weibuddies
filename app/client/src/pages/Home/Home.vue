@@ -1,11 +1,12 @@
 <script setup lang="ts">
-import Blobs from "@/components/Blobs/Blobs.vue"
-import UserAccess from "./UserAccess/UserAccess.vue";
+import HomeAccess from "./HomeAccess/HomeAccess.vue";
+import HomeGreeting from "./HomeGreeting/HomeGreeting.vue";
 </script>
 
 <template>
   <div class="home">
-    <UserAccess class="login" />
+    <HomeGreeting />
+    <HomeAccess class="login" />
   </div>
 </template>
 
@@ -23,5 +24,6 @@ import UserAccess from "./UserAccess/UserAccess.vue";
 }
 .login {
   margin-right: 15%;
+  width: 300px;
 }
 </style>

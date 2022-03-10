@@ -9,5 +9,4 @@ import BlobsVue from '@/components/Blobs/Blobs.vue';
   </div>
 </template>
 
-<style>
-</style>
+<style scoped lang="scss"></style>

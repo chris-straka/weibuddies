@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import Home from "@/pages/Home/Home.vue";
+import HomeVue from "./pages/Home/Home.vue";
+import { darkTheme, NConfigProvider } from "naive-ui";
+let colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : null
 </script>
 
 <template>
-  <Home />
+  <n-config-provider :theme="colorScheme">
+    <HomeVue />
+  </n-config-provider>
 </template>
 
 <style lang="scss">
