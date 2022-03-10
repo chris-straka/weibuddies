@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import HomeVue from "./pages/Home/Home.vue";
-import { darkTheme, NConfigProvider } from "naive-ui";
+import { darkTheme, NConfigProvider, NLoadingBarProvider } from "naive-ui";
 let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
   ? darkTheme
   : null;
@@ -8,7 +8,9 @@ let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 
 <template>
   <n-config-provider :theme="colorScheme">
-    <HomeVue />
+    <n-loading-bar-provider>
+      <HomeVue />
+    </n-loading-bar-provider>
   </n-config-provider>
 </template>
 

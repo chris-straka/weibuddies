@@ -17,8 +17,8 @@ import BlobsVue from "@/components/Blobs/Blobs.vue";
   width: 100vw;
   display: grid;
   grid:
-    ". WeiBuddies Login"
-    ". Blobs Login";
+    ". . WeiBuddies Login ."
+    ". . Blobs Login .";
 }
 .title {
   grid-area: WeiBuddies;
@@ -33,7 +33,7 @@ import BlobsVue from "@/components/Blobs/Blobs.vue";
 }
 .loginForm {
   grid-area: Login;
-  width: 300px;
+  width: 340px;
   height: fit-content;
   align-self: center;
 }
