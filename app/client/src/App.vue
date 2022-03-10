@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import HomeVue from "./pages/Home/Home.vue";
 import { darkTheme, NConfigProvider } from "naive-ui";
-let colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? darkTheme : null
+let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+  ? darkTheme
+  : null;
 </script>
 
 <template>
@@ -36,7 +38,6 @@ body {
   min-height: 100%;
   box-sizing: border-box;
   font-family: var(--font);
-  text-align: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box; // sets the padding/margin to what we expect

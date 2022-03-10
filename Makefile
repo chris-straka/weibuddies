@@ -6,7 +6,7 @@ dev:
 
 # http://localhost:3000
 devfront:
-	pushd ./app/client && pnpm dev:local && popd
+	pushd ./app/client && pnpm dev && popd
 
 # Install all the dependencies for the services locally
 install:
