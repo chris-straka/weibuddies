@@ -54,7 +54,10 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
     password: formValue.user.password,
   };
 
-  newUser ? user.signup(payload) : user.login(payload);
+  let { data, error } = newUser ? user.signup(payload) : user.login(payload);
+
+  if (error) throw new Error(error.value);
+
 };
 </script>
 
@@ -71,24 +74,14 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
         <n-form-item label="Email" path="user.email" :show-require-mark="false">
           <n-input placeholder="Email" v-model:value="formValue.user.email" />
         </n-form-item>
-        <n-form-item
-          label="Password"
-          path="user.password"
-          :show-require-mark="false"
-        >
-          <n-input
-            type="password"
-            placeholder="Password"
-            v-model:value="formValue.user.password"
-          />
+        <n-form-item label="Password" path="user.password" :show-require-mark="false">
+          <n-input type="password" placeholder="Password" v-model:value="formValue.user.password" />
         </n-form-item>
       </n-form>
       <template #footer>
         <n-space justify="space-around">
           <n-button @click.prevent="submit({ newUser: false })">Login</n-button>
-          <n-button @click.prevent="submit({ newUser: true })"
-            >Create new account</n-button
-          >
+          <n-button @click.prevent="submit({ newUser: true })">Create new account</n-button>
         </n-space>
       </template>
     </n-card>

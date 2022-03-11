@@ -17,14 +17,13 @@ export const authStore = defineStore("auth", {
   },
   actions: {
     login(userCredentials: User) {
-      const { data, error } = usePostFetch("/api/users/login", userCredentials);
-      if (data) this.token = data.value
+      return usePostFetch("/api/users/login", userCredentials);
     },
     signup(userCredentials: User) {
-      const { data, error } = usePostFetch("/api/users/signup", userCredentials);
+      return usePostFetch("/api/users/signup", userCredentials);
     },
-    async logout() {
-      fetch("/api/users/logout");
+    logout() {
+      return fetch("/api/users/logout");
     },
   },
   getters: {
