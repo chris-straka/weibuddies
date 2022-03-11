@@ -1,7 +1,8 @@
 {
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
-		"start": "ts-node-dev src/index.ts",
+		"dev": "ts-node-dev src/index.ts",
+		"build": "tsc -b",
 		"docker:build": "docker build -t cstudent/auth .",
 		"test": "jest"
 	},

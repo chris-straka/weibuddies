@@ -69,3 +69,6 @@ deploy:
       - ./k8s/payments/*
       - ./k8s/ingress-config.yaml
       - ./k8s/expiration/*
+profiles:
+  - name: dev
+  - name: prod

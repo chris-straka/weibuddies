@@ -1,5 +1,7 @@
 {
   "recommendations": [
-    "johnsoncodehk.volar"
+    "johnsoncodehk.volar",
+    "humao.rest-client",
+    "johnsoncodehk.vscode-typescript-vue-plugin"
   ]
 }
