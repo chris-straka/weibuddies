@@ -1,4 +1,10 @@
 import { defineStore } from "pinia";
+import { usePostFetch } from "@/composables/usePostFetch";
+
+interface User {
+  email: string;
+  password: string;
+}
 
 export const authStore = defineStore("auth", {
   state: () => {
@@ -6,26 +12,33 @@ export const authStore = defineStore("auth", {
       userId: null,
       userEmail: null,
       token: null,
-      didAutoLogout: false
-    }
+      didAutoLogout: false,
+    };
   },
   actions: {
-    async login() {},
-    async signup() {},
-    logout() {},
+    login(userCredentials: User) {
+      const { data, error } = usePostFetch("/api/users/login", userCredentials);
+      if (data) this.token = data.value
+    },
+    signup(userCredentials: User) {
+      const { data, error } = usePostFetch("/api/users/signup", userCredentials);
+    },
+    async logout() {
+      fetch("/api/users/logout");
+    },
   },
   getters: {
     userId(state) {
-      return state.userId
+      return state.userId;
     },
     token(state) {
-      return state.token
+      return state.token;
     },
     isAuthenticated(state) {
-      return !!state.token
+      return !!state.token;
     },
     didAutoLogout(state) {
-      return state.didAutoLogout
-    }
-  }
+      return state.didAutoLogout;
+    },
+  },
 });

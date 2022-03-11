@@ -8,6 +8,9 @@ dev:
 devfront:
 	pushd ./app/client && pnpm dev && popd
 
+lintfront:
+	pushd ./app/client && pnpm lint && popd
+
 # Install all the dependencies for the services locally
 install:
 	pushd ./app/auth && pnpm i && popd && \

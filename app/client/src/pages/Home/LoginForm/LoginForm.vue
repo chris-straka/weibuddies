@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import type { FormRules, FormInst, FormValidationError } from "naive-ui";
-import { NCard, NForm, NFormItem, NInput, NButton, useLoadingBar, NA, NSpace } from "naive-ui";
+import {
+  NCard,
+  NForm,
+  NFormItem,
+  NInput,
+  NButton,
+  useLoadingBar,
+  NA,
+  NSpace,
+} from "naive-ui";
 import { authStore } from "@/store";
 
-const user = authStore()
-const loadingBar = useLoadingBar()
+const user = authStore();
+const loadingBar = useLoadingBar();
 
 const formRef = ref<FormInst | null>(null);
 const formValue = reactive({
@@ -20,29 +29,32 @@ const rules: FormRules = {
     email: {
       required: true,
       message: "Email is required",
-      trigger: 'input'
+      trigger: "input",
     },
     password: {
       required: true,
       message: "Password is required",
-      trigger: 'input'
+      trigger: "input",
     },
-  }
+  },
 };
 
 const submit = ({ newUser }: { [newUser: string]: boolean }) => {
   formRef.value?.validate((errors: Array<FormValidationError> | undefined) => {
     if (errors) {
-      loadingBar.error()
-      return
+      loadingBar.error();
+      return;
     } else {
-      loadingBar.start()
+      loadingBar.start();
     }
   });
 
-  newUser ?
-    user.signup() :
-    user.login()
+  const payload = {
+    email: formValue.user.email,
+    password: formValue.user.password,
+  };
+
+  newUser ? user.signup(payload) : user.login(payload);
 };
 </script>
 
@@ -59,14 +71,24 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
         <n-form-item label="Email" path="user.email" :show-require-mark="false">
           <n-input placeholder="Email" v-model:value="formValue.user.email" />
         </n-form-item>
-        <n-form-item label="Password" path="user.password" :show-require-mark="false">
-          <n-input type="password" placeholder="Password" v-model:value="formValue.user.password" />
+        <n-form-item
+          label="Password"
+          path="user.password"
+          :show-require-mark="false"
+        >
+          <n-input
+            type="password"
+            placeholder="Password"
+            v-model:value="formValue.user.password"
+          />
         </n-form-item>
       </n-form>
       <template #footer>
         <n-space justify="space-around">
           <n-button @click.prevent="submit({ newUser: false })">Login</n-button>
-          <n-button @click.prevent="submit({ newUser: true })">Create new account</n-button>
+          <n-button @click.prevent="submit({ newUser: true })"
+            >Create new account</n-button
+          >
         </n-space>
       </template>
     </n-card>
