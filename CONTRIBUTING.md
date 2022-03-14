@@ -23,6 +23,11 @@ I used [WSL2](https://docs.microsoft.com/en-us/windows/wsl/compare-versions) to 
 ```bash
 kubectl config current-context # see which k8s cluster you're using (i.e. the one skaffold is going to use)
 kubectl -n ingress-nginx get services -o wide -w ingress-nginx-controller # find the loadBalancer IP 
+
+# If you need to install ingress-nginx
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 ```
 
 ## Kafka

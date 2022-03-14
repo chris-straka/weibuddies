@@ -20,7 +20,7 @@ export const postgres_db: ProductDatabase = ({
   },
   async createProduct(title: string, price: number, userId: number) {
     const query = {
-      name: 'get-product',
+      name: 'create-product',
       text: 'INSERT INTO products VALUES ($1, $2, $3);',
       values: [title, price, userId],
     }

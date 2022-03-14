@@ -15,3 +15,7 @@ It somehow slipped my mind, but I just realized that the google search crawler c
 ## Skaffold stuff 
 
 My skaffold file is massive because I repeat myself for both profiles (dev and production). I think I need to check out how to pas environment variables to different profiles and share the majority of it. I'm not sure how I want to tackle this yet.
+
+## Jest & supertest over postman 
+
+I like using this [rest client vscode extension](https://marketplace.visualstudio.com/items?itemName=humao.rest-client), but I think testing with it is a lot slower than just using jest with supertest.

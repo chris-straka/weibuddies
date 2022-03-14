@@ -3,8 +3,15 @@
 Handles authentication for the app. I tried to do an MVC thing here (with no view), but I'm not sure I like having the route logic in a controller. I almost liked it better when the controller logic was on the route handlers.
 
 ```bash
+# To get a psql shell in the running postgres container 
 docker exec -it postgres_container psql -U postgres # https://stackoverflow.com/questions/60193781
+
+# To get rid of docker volumes in case you screw up a prepared statement
+docker-compose down --volumes
+docker-compose down --rmi all --volumes # or this
 ```
+
+The hash is 145 characters long with the salt and 128 without the salt (which is 17 long)
 
 ## TODO
 

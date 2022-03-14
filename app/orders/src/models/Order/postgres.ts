@@ -31,7 +31,7 @@ export const postgres_db: OrderDatabase = {
   },
   async removeOrder(order_id: number): Promise<Order> {
     const query = {
-      name: 'create-order',
+      name: 'remove-order',
       text: 'UPDATE orders SET order_status = "cancelled" WHERE id = $1;',
       values: [order_id],
     }

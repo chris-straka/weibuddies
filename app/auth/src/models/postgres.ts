@@ -18,8 +18,8 @@ export const postgres_db: UserDatabase = {
   },
   async createUser(email: string, password: string): Promise<User> {
     const query = {
-      name: 'get-user',
-      text: 'INSERT INTO users(email, password) WHERE VALUES ($1, $2);',
+      name: 'create-user',
+      text: 'INSERT INTO users(email, password) VALUES ($1, $2);',
       values: [email, password],
     }
     try {

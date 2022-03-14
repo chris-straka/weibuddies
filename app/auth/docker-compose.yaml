@@ -6,7 +6,8 @@ services:
       target: dev
     environment:
       - PGUSER=postgres
-      - PGHOST=postgres
+      - PGHOST=postgres_container
+      - PGDATABASE=postgres
       - PGPORT=5432 # node pg uses the same env vars as libpq to connect to postgres
       - PGPASSWORD=fortestingpurposesonly
       - JWT_KEY=fortestingpurposesonly
@@ -16,7 +17,9 @@ services:
     image: postgres:14
     container_name: postgres_container
     environment:
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=fortestingpurposesonly
+      - POSTGRES_DB=postgres
     ports:
       - "5432:5432" # host:container
     volumes: # use this file to initialize the database
