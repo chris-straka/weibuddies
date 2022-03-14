@@ -1,7 +1,7 @@
-CREATE DATABASE auth_api;
+-- CREATE DATABASE auth_api;
 
 CREATE TABLE users(
   id SERIAL PRIMARY KEY,
-  email VARCHAR(40),
-  password CHAR(62)
+  email VARCHAR(150) UNIQUE NOT NULL,
+  password CHAR(62) NOT NULL
 );

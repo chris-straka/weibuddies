@@ -1,31 +1,31 @@
 import { UserDatabase, User } from "./User"
-import { Pool } from "pg"
+import { Pool, DatabaseError } from "pg"
 
-let pg = new Pool()
+let pool = new Pool()
 
 export const postgres_db: UserDatabase = {
-  async getUser(email: string): Promise<User> {
+  async getUser(email: string, password: string): Promise<User> {
     const query = {
       name: 'get-user',
-      text: 'SELECT * FROM users WHERE email = $1',
-      values: [email],
+      text: 'SELECT * FROM users WHERE email = $1 AND password = $2;',
+      values: [email, password],
     }
     try {
-      return await pg.query(query).then(data => data.rows[0])
+      return await pool.query(query).then(data => data.rows[0])
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error((error as DatabaseError).stack as string)
     }
   },
   async createUser(email: string, password: string): Promise<User> {
     const query = {
       name: 'get-user',
-      text: 'INSERT INTO users(email, password) WHERE VALUES ($1, $2)',
+      text: 'INSERT INTO users(email, password) WHERE VALUES ($1, $2);',
       values: [email, password],
     }
     try {
-      return await pg.query(query).then(response => response.rows[0])
+      return await pool.query(query).then(response => response.rows[0])
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error((error as DatabaseError).stack as string)
     }
   }
 }

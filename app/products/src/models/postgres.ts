@@ -9,7 +9,7 @@ export const postgres_db: ProductDatabase = ({
   async getProduct(id: number) {
     const query = {
       name: 'get-product',
-      text: 'SELECT * FROM orders WHERE id = $1',
+      text: 'SELECT * FROM orders WHERE id = $1;',
       values: [id],
     }
     try {
@@ -21,7 +21,7 @@ export const postgres_db: ProductDatabase = ({
   async createProduct(title: string, price: number, userId: number) {
     const query = {
       name: 'get-product',
-      text: 'INSERT INTO products VALUES ($1, $2, $3)',
+      text: 'INSERT INTO products VALUES ($1, $2, $3);',
       values: [title, price, userId],
     }
     try {
@@ -29,5 +29,5 @@ export const postgres_db: ProductDatabase = ({
     } catch (error) {
       throw new Error(error as string)
     }
-  }
+  }, 
 })

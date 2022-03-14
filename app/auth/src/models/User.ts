@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface UserDatabase {
-  getUser: (email: string) => Promise<User>,
+  getUser: (email: string, password: string) => Promise<User>,
   createUser: (email: string, password: string) => Promise<User>
 }
 
@@ -17,8 +17,9 @@ const User = (db: UserDatabase): UserDatabase => ({
     const hashedPassword = await Password.toHash(password)
     return db.createUser(email, hashedPassword)
   },
-  async getUser(email: string) {
-    return db.getUser(email)
+  async getUser(email: string, password: string) {
+    const hashedPassword = await Password.toHash(password)
+    return db.getUser(email, hashedPassword)
   }
 })
 

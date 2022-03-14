@@ -56,7 +56,7 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
 
   let { data, error } = newUser ? user.signup(payload) : user.login(payload);
 
-  if (error) throw new Error(error.value);
+  if (error) throw new Error(error.value!);
 
 };
 </script>

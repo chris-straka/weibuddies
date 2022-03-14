@@ -1,17 +1,7 @@
 SHELL := /bin/bash
 
-# http://localhost:80
-dev: 
-	skaffold dev
-
-# http://localhost:3000
-devfront:
-	pushd ./app/client && pnpm dev && popd
-
-lintfront:
-	pushd ./app/client && pnpm lint && popd
-
-# Install all the dependencies for the services locally
+# Install all the dependencies for each service locally
+# So you don't get the typescript errors everywhere
 install:
 	pushd ./app/auth && pnpm i && popd && \
 	pushd ./app/client && pnpm i && popd && \
@@ -21,9 +11,29 @@ install:
 	pushd ./app/payments && pnpm i && popd && \
 	pushd ./app/products && pnpm i && popd \
 
-# The npm login user is student-4911
-# this command publishes the /app/common folder to npm
-# and then installs the new dependency
+# Boot up all the microservices using k8s
+# http://localhost:80
+dev: 
+	skaffold dev -p dev
+
+# Deploy to production
+deploy: 
+	skaffold dev -p prod
+
+# Boot up just a single microservice using docker compose
+# http://localhost:3000
+devauth:
+	pushd ./app/auth && pnpm dev:local && popd
+
+devclient:
+	pushd ./app/client && pnpm dev && popd
+
+lintfront:
+	pushd ./app/client && pnpm lint && popd
+
+# Publish the common package (/app/common) to the npm registry so 
+# that my microservices can use the updated code and then download
+# the new version to all my microservices
 publish:
 	pushd ./app/common && pnpm publish:patch && popd && \
 	pushd ./app/auth && pnpm install @weibuddies/common@latest && popd && \

@@ -1,1 +1,36 @@
 # You need this vscode extension https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# You also need to run pnpm dev:local in the auth folder 
+# OR you can run devauth from the root of the weibuddies project folder
+
+### fetch current user
+GET http://localhost:3000/api/users/currentuser HTTP/1.1
+
+### sign into an existing user
+POST http://localhost:3000/api/users/signin HTTP/1.1
+content-type: application/json
+
+{
+    "email": "foo@outlook.com",
+    "password": "fortestingpurposesonly"
+}
+
+### Sign out an exising user
+POST http://localhost:3000/api/users/signout HTTP/1.1
+
+### create a new user
+POST http://localhost:3000/api/users/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "chris56974@outlook.com",
+    "password": "aaaa"
+}
+
+### should fail
+POST http://localhost:3000/api/users/signup HTTP/1.1
+content-type: application/json
+
+{
+    "email": "",
+    "password": ""
+}

@@ -12,8 +12,8 @@ export interface Product {
 export interface ProductDatabase {
   getProduct: (id: number) => Promise<Product>,
   createProduct: (title: string, price: number, userId: number) => Promise<Product>,
-  removeProduct: (productId: string) => Promise<Product>,
-  setProduct: (title: string, price: string) => Promise<Product>
+  // removeProduct: (productId: string) => Promise<Product>,
+  // setProduct: (title: string, price: string) => Promise<Product>
 }
 
 const Product = (db: ProductDatabase): ProductDatabase => ({
@@ -23,12 +23,12 @@ const Product = (db: ProductDatabase): ProductDatabase => ({
   async createProduct(title: string, price: number, userId: number) {
     return await db.createProduct(title, price, userId)
   },
-  async removeProduct(productId: string) {
-    return await db.removeProduct(productId)
-  },
-  async setProduct(title: string, price: string) {
-    return await db.setProduct(title, price)
-  }
+  // async removeProduct(productId: string) {
+  //   return await db.removeProduct(productId)
+  // },
+  // async setProduct(title: string, price: string) {
+  //   return await db.setProduct(title, price)
+  // }
 })
 
 export const product_db = Product(postgres_db)

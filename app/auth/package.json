@@ -2,6 +2,8 @@
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
 		"dev": "ts-node-dev src/index.ts",
+		"dev:local": "docker-compose up",
+		"dev:k8s": "ts-node-dev src/index.ts",
 		"build": "tsc -b",
 		"docker:build": "docker build -t cstudent/auth .",
 		"test": "jest"

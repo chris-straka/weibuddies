@@ -1,5 +1,23 @@
-version: '3.9'
-services: 
-  api: 
-    build: 
+version: '3.8'
+services:
+  api:
+    build:
       context: ./
+      target: dev
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGPORT=5432 # node pg uses the same env vars as libpq to connect to postgres
+      - PGPASSWORD=fortestingpurposesonly
+      - JWT_KEY=fortestingpurposesonly
+    ports:
+      - "3000:3000"
+  db:
+    image: postgres:14
+    container_name: postgres_container
+    environment:
+      - POSTGRES_PASSWORD=fortestingpurposesonly
+    ports:
+      - "5432:5432" # host:container
+    volumes: # use this file to initialize the database
+      - ./src/database/database.sql:/docker-entrypoint-initdb.d/init.sql

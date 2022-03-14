@@ -7,7 +7,7 @@ export const postgres_db: PaymentDatabase = {
   async createPayment(currency: string, amount: number, source: string) {
     const query = {
       name: 'create-payment',
-      text: 'INSERT INTO payments VALUES ($1, $2, $3, $4)',
+      text: 'INSERT INTO payments VALUES ($1, $2, $3, $4);',
       values: [currency, amount, source],
     }
     try {

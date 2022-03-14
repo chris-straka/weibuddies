@@ -1,20 +1,14 @@
 import { Request, Response } from "express"
 import { BadRequestError } from "@weibuddies/common"
-import { Password } from "../services/password"
 import { user_db } from "../models/User"
 import { sign } from "jsonwebtoken"
 
-export const getCurrentUser = (req: Request, res: Response) =>
-  res.send({ currentUser: req.currentUser || null })
+export const getCurrentUser = (req: Request, res: Response) => res.send({ currentUser: req.currentUser || null })
 
 export const signInUser = async (req: Request, res: Response) => {
   const { email, password } = req.body
-  const existingUser = await user_db.getUser(email)
+  const existingUser = await user_db.getUser(email, password)
   if (!existingUser) throw new BadRequestError('Invalid credentials')
-
-  // The existing password will already be hashed so this function will hash the supplied password
-  const passwordsMatch = await Password.compare(existingUser.password, password)
-  if (!passwordsMatch) throw new BadRequestError('Invalid credentials')
 
   const userJwt = sign({ id: existingUser.id, email: existingUser.email }, process.env.JWT_KEY!);
 
@@ -29,7 +23,8 @@ export const signOutUser = (req: Request, res: Response) => {
 
 export const signUpUser = async (req: Request, res: Response) => {
   const { email, password } = req.body
-  const existingUser = await user_db.getUser(email)
+  console.log(email, password)
+  const existingUser = await user_db.getUser(email, password)
   if (existingUser) throw new BadRequestError('[Auth] Email in use')
 
   const newUser = await user_db.createUser(email, password)
