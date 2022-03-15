@@ -13,6 +13,9 @@ services:
       - JWT_KEY=fortestingpurposesonly
     ports:
       - "3000:3000"
+    command: ${STARTUP_COMMAND:-}
+    volumes:
+      - "./src:/app/src"
   db:
     image: postgres:14
     container_name: postgres_container
@@ -22,5 +25,6 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - "5432:5432" # host:container
-    volumes: # use this file to initialize the database
+    # initialize the database with this file
+    volumes:
       - ./src/database/database.sql:/docker-entrypoint-initdb.d/init.sql

@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@weibuddies/common": "^1.0.13",
+    "@weibuddies/common": "^1.0.15",
     "cookie-session": "^2.0.0",
     "express": "^4.17.3",
     "express-async-errors": "^3.1.1",

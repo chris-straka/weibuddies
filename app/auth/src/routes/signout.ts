@@ -1,7 +1,7 @@
-import express from 'express';
+import { Router } from 'express';
 import { signOutUser } from '../controller/userController';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/api/users/signout', signOutUser)
 

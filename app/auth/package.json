@@ -1,15 +1,16 @@
 {
 	"scripts": {
 		"preinstall": "npx only-allow pnpm",
-		"dev": "ts-node-dev src/index.ts",
+		"dev": "tsnd src/index.ts",
 		"dev:local": "docker-compose up",
-		"dev:k8s": "ts-node-dev src/index.ts",
+		"dev:test": "STARTUP_COMMAND='pnpm test' docker-compose up --abort-on-container-exit",
+		"dev:k8s": "tsnd src/index.ts",
 		"build": "tsc -b",
 		"docker:build": "docker build -t cstudent/auth .",
 		"test": "jest"
 	},
 	"dependencies": {
-		"@weibuddies/common": "^1.0.13",
+		"@weibuddies/common": "^1.0.15",
 		"cookie-session": "^2.0.0",
 		"express": "^4.17.2",
 		"express-validator": "^6.14.0",
@@ -23,6 +24,7 @@
 		"@types/jsonwebtoken": "^8.5.8",
 		"@types/node": "^17.0.17",
 		"@types/pg": "^8.6.4",
+		"@types/supertest": "^2.0.11",
 		"jest": "^27.5.1",
 		"supertest": "^6.2.2",
 		"ts-jest": "^27.1.3",

@@ -10,8 +10,8 @@ POST http://localhost:3000/api/users/signin HTTP/1.1
 content-type: application/json
 
 {
-    "email": "foo@outlook.com",
-    "password": "fortestingpurposesonly"
+    "email": "foao@bar.com",
+    "password": "testonly"
 }
 
 ### Sign out an exising user
@@ -22,8 +22,8 @@ POST http://localhost:3000/api/users/signup HTTP/1.1
 content-type: application/json
 
 {
-    "email": "chris56974@outlook.com",
-    "password": "aaaa"
+    "email": "foao@bar.com",
+    "password": "testonly"
 }
 
 ### should fail

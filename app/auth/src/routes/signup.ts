@@ -1,9 +1,9 @@
 import { validateRequest } from "@weibuddies/common"
-import express from 'express';
-import { body } from "express-validator"
 import { signUpUser } from "../controller/userController";
+import { Router } from 'express';
+import { body } from "express-validator"
 
-const router = express.Router();
+const router = Router();
 
 router.post('/api/users/signup',
   [

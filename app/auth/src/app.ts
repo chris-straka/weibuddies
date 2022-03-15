@@ -1,4 +1,5 @@
-import express from "express"
+import express, { Request, Response, NextFunction } from "express"
+import { errorHandler, NotFoundError } from "@weibuddies/common"
 import cookieSession from "cookie-session"
 import { currentUserRouter } from "./routes/currentuser"
 import { signInRouter } from "./routes/signin"
@@ -19,5 +20,11 @@ app.use(currentUserRouter)
 app.use(signInRouter)
 app.use(signOutRouter)
 app.use(signUpRouter)
+
+app.all('*', async (req: Request, res: Response, next: NextFunction) => {
+  next(new NotFoundError())
+})
+
+app.use(errorHandler);
 
 export { app }

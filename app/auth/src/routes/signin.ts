@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { validateRequest } from '@weibuddies/common';
+import { validateRequest } from "@weibuddies/common"
 import { signInUser } from '../controller/userController';
 import { body } from 'express-validator';
 
