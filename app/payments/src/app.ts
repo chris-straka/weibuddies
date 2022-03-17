@@ -1,8 +1,7 @@
-import { currentUser, errorHandler, NotFoundError, } from '@weibuddies/common';
-import cookieSession from 'cookie-session';
 import express from 'express';
-import 'express-async-errors';
-import { createChargeRouter } from './routes/new';
+import cookieSession from 'cookie-session';
+import { currentUser, errorHandler, NotFoundError, } from '@weibuddies/common';
+import { createPaymentRouter } from './routes/new';
 
 const app = express();
 app.set('trust proxy', true);
@@ -14,7 +13,7 @@ app.use(
   })
 );
 app.use(currentUser);
-app.use(createChargeRouter);
+app.use(createPaymentRouter);
 app.all('*', async (_req, _res) => { throw new NotFoundError(); });
 app.use(errorHandler);
 

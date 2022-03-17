@@ -1,10 +1,9 @@
 import cookieSession from 'cookie-session';
 import express from 'express';
-import 'express-async-errors';
 import { currentUser, errorHandler, NotFoundError } from '@weibuddies/common';
-import { indexProductRouter } from './routes/index';
+import { indexProductRouter } from './routes/getProducts';
 import { createProductRouter } from './routes/new';
-import { showProductRouter } from './routes/show';
+import { showProductRouter } from './routes/getProduct';
 import { updateProductRouter } from './routes/update';
 
 const app = express();

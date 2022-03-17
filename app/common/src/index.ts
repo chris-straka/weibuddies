@@ -14,8 +14,8 @@ export * from './events/IPaymentCreated';
 export * from './events/IProductCreated';
 export * from './events/IProductUpdated';
 export * from './events/types/OrderStatus';
-export * from './middlewares/async-handler';
 export * from './middlewares/current-user';
-export * from './middlewares/error-handler';
 export * from './middlewares/require-auth';
 export * from './middlewares/validate-request';
+export * from './utility/async-handler'
+export * from './utility/error-handler'

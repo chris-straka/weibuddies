@@ -13,4 +13,4 @@ router.post(
   createPayment
 );
 
-export { router as createChargeRouter };
+export { router as createPaymentRouter };

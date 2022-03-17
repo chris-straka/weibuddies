@@ -13,7 +13,6 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
   cookieSession({
     signed: false,
-    secure: true
   })
 )
 app.use(currentUserRouter)

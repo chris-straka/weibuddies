@@ -3,14 +3,14 @@
 		"preinstall": "npx only-allow pnpm",
 		"dev": "tsnd src/index.ts",
 		"dev:local": "docker-compose up",
-		"dev:test": "STARTUP_COMMAND='pnpm test' docker-compose up --abort-on-container-exit",
 		"dev:k8s": "tsnd src/index.ts",
 		"build": "tsc -b",
 		"docker:build": "docker build -t cstudent/auth .",
+		"test:docker": "STARTUP_COMMAND='pnpm test' docker-compose up --abort-on-container-exit",
 		"test": "jest"
 	},
 	"dependencies": {
-		"@weibuddies/common": "^1.0.15",
+		"@weibuddies/common": "^1.0.16",
 		"cookie-session": "^2.0.0",
 		"express": "^4.17.2",
 		"express-validator": "^6.14.0",

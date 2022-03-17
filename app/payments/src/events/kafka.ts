@@ -12,7 +12,7 @@ const kafka_init = async () => {
   })
 
   const producer = kafka.producer()
-  const consumer = kafka.consumer({ groupId: "orders-group" })
+  const consumer = kafka.consumer({ groupId: "payments-group" })
 
   try {
     await producer.connect()

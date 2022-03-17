@@ -2,16 +2,17 @@ import { postgres_db } from "./postgres"
 import { OrderStatus } from "@weibuddies/common"
 
 export interface Order {
-  userId: string,
-  status: OrderStatus,
-  expiresAt: Date,
+  id: string
+  userId: string
+  status: OrderStatus
+  expiresAt: Date
   product: Product
   version: number
 }
 
 export interface Product {
-  id: number,
-  title: string,
+  id: number
+  title: string
   price: number
 }
 
