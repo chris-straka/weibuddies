@@ -1,5 +1,3 @@
 import { authStore } from "./auth";
 
-export {
-  authStore
-}
+export { authStore };

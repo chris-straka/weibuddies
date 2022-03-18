@@ -4,5 +4,6 @@ import { getOrders } from '../controller/orderController';
 
 const router = Router();
 
-router.get('/api/orders', requireAuth, getOrders)
+router.get('/api/orders', requireAuth, getOrders);
+
 export { router as indexOrderRouter };

@@ -1,31 +1,31 @@
-import { ProductDatabase, Product } from "./Product"
-import { Pool } from "pg"
+import { Pool } from 'pg';
+import { IProductDatabase, Product } from './interface';
 
-const pg = new Pool()
+const pg = new Pool();
 
-export const postgres_db: ProductDatabase = {
+export const postgresDb: IProductDatabase = {
   async getProduct(productId: string): Promise<Product> {
     const query = {
       name: 'getProduct',
       text: 'SELECT * FROM orders WHERE id = $1;',
       values: [productId],
-    }
+    };
     try {
-      return await pg.query(query).then(data => data.rows[0])
+      return await pg.query(query).then((data) => data.rows[0]);
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
   },
   async getProductsFromLowerToUpper(lowerBound: string, upperBound: string): Promise<Product[]> {
     const query = {
       name: 'getProductsFromPage',
       text: 'SELECT * FROM orders ORDER BY date_created DESC OFFSET $1 LIMIT $2;',
-      values: [lowerBound, upperBound]
-    }
+      values: [lowerBound, upperBound],
+    };
     try {
-      return await pg.query(query).then(data => data.rows)
+      return await pg.query(query).then((data) => data.rows);
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
   },
   async createProduct(title: string, price: string, userId: string) {
@@ -33,11 +33,11 @@ export const postgres_db: ProductDatabase = {
       name: 'createProduct',
       text: 'INSERT INTO products(title, price, userId) VALUES ($1, $2, $3) RETURNING *;',
       values: [title, price, userId],
-    }
+    };
     try {
-      return await pg.query(query).then(data => data.rows[0])
+      return await pg.query(query).then((data) => data.rows[0]);
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
   },
   async updateProduct(title: string, price: string) {
@@ -45,11 +45,11 @@ export const postgres_db: ProductDatabase = {
       name: 'updateProduct',
       text: 'UPDATE products SET title = $1 AND price = $2 RETURNING *;',
       values: [title, price],
-    }
+    };
     try {
-      return await pg.query(query).then(data => data.rows[0])
+      return await pg.query(query).then((data) => data.rows[0]);
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
   },
   async removeProduct(productId: string) {
@@ -57,11 +57,11 @@ export const postgres_db: ProductDatabase = {
       name: 'removeProduct',
       text: 'DELETE FROM products WHERE id = $1 RETURNING *;',
       values: [productId],
-    }
+    };
     try {
-      return await pg.query(query).then(data => data.rows[0])
+      return await pg.query(query).then((data) => data.rows[0]);
     } catch (error) {
-      throw new Error(error as string)
+      throw new Error(error as string);
     }
-  }
-}
+  },
+};

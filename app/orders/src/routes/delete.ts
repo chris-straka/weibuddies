@@ -7,7 +7,7 @@ const router = Router();
 router.delete(
   '/api/orders/:orderId',
   requireAuth,
-  deleteOrder
+  deleteOrder,
 );
 
 export { router as deleteOrderRouter };

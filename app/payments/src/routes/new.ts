@@ -10,7 +10,7 @@ router.post(
   requireAuth,
   [body('token').not().isEmpty(), body('orderId').not().isEmpty()],
   validateRequest,
-  createPayment
+  createPayment,
 );
 
 export { router as createPaymentRouter };

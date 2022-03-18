@@ -1,22 +1,10 @@
-import { OrderStatus } from "@weibuddies/common"
-import { postgres_db } from "./postgres"
+import { IPaymentDatabase } from './interface';
+import { postgresDb } from './postgres';
 
-export interface Payment {
-  id: string;
-  version: number;
-  userId: string,
-  price: number,
-  status: OrderStatus,
-}
-
-export interface PaymentDatabase {
-  createPayment: (currency: string, amount: number, source: string) => Promise<Payment>
-}
-
-const Payment = (db: PaymentDatabase): PaymentDatabase => ({
-  async createPayment(currency: string, amount: number, source: string) {
-    return await db.createPayment(currency, amount, source)
+const PaymentDatabase = (db: IPaymentDatabase): IPaymentDatabase => ({
+  async createPayment(orderId: string, paymentId: string) {
+    return db.createPayment(orderId, paymentId);
   },
-})
+});
 
-export const payment_db = Payment(postgres_db)
+export const paymentDb = PaymentDatabase(postgresDb);

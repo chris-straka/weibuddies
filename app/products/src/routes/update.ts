@@ -15,7 +15,7 @@ router.put(
       .withMessage('Price must be provided and must be greater than 0'),
   ],
   validateRequest,
-  updateProduct
+  updateProduct,
 );
 
 export { router as updateProductRouter };

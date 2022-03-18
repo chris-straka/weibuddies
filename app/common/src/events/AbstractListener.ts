@@ -7,6 +7,7 @@ interface Event {
 
 export abstract class AbstractListener<T extends Event, U> {
   abstract subject: T['subject'];
+
   abstract onMessage(data: T['data'], msg: string): void;
   protected client: U;
 

@@ -1,65 +1,72 @@
-import { NotFoundError, NotAuthorizedError, OrderStatus } from "@weibuddies/common";
-import { Request, Response } from "express"
-import { order_db } from "../models/Order/Order";
+import {
+  NotFoundError, NotAuthorizedError, OrderStatus, BadRequestError,
+} from '@weibuddies/common';
+import { Request, Response, NextFunction } from 'express';
+import { orderDb } from '../models/Order/Order';
+import { productDb } from '../models/Product/Product';
+import { producer } from '../events/kafka';
 
-export const deleteOrder = async (req: Request, res: Response) => {
-  // const order = await order_db.getOrder("TODO")
+const EXPIRATION_WINDOW_SECONDS = 60 * 15;
 
-  // if (!order) throw new NotFoundError();
-  // if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
-
-  // order.status = OrderStatus.Cancelled;
-
-  // Publish an event saying the order is cancelled
-  // return res.status(204).send(order);
-}
+export const getOrder = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    // I have to join this with the product
+    const order = await orderDb.getOrder(req.params.orderId);
+    if (!order) throw new NotFoundError();
+    if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+    return res.status(200).send(order);
+  } catch (error) {
+    return next(error);
+  }
+};
 
 export const getOrders = async (req: Request, res: Response) => {
-  // const orders = await Order.find({
-  //   userId: req.currentUser!.id,
-  // }).populate('ticket');
+  if (!req.currentUser) throw new Error('Not logged in');
 
-  // return res.send(orders);
-}
+  // I have to join this with the products
+  const orders = await orderDb.getAllOrders(req.currentUser.id);
+
+  return res.send(orders);
+};
 
 export const newOrder = async (req: Request, res: Response) => {
-  // const { productId } = req.body;
-  // const product = await product_db.getProduct(productId)
-  // if (!product) throw new NotFoundError();
+  if (!req.currentUser) throw new Error('User not logged in');
+  const { productId } = req.body;
+  const { id: userId } = req.currentUser;
+  const product = await productDb.getProduct(productId);
+  if (!product) throw new NotFoundError();
 
-  // const isReserved = await product.isReserved();
-  // if (isReserved) throw new BadRequestError('Ticket is already reserved');
+  const isReserved = await product.isReserved();
+  if (isReserved) throw new BadRequestError('Ticket is already reserved');
 
-  // const expiration = new Date();
-  // expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
+  const expiration = new Date();
+  expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
-  // const order = Order.build({
-  //   userId: req.currentUser!.id,
-  //   status: OrderStatus.Created,
-  //   expiresAt: expiration,
-  //   product,
-  // });
+  const order = await orderDb.createOrder(userId, OrderStatus.Created, expiration, product.id);
 
-  // await order.save();
+  producer.send({
+    topic: 'orders',
+    messages: [
+      { key: 'productId', value: order.id },
+      { key: 'status', value: order.status },
+      { key: 'userId', value: order.userId },
+      { key: 'productId', value: order.productId },
+      { key: 'version', value: order.version },
+    ],
+  });
 
-  // new OrderCreatedPublisher(natsWrapper.client).publish({
-  //   id: order.id,
-  //   version: order.version,
-  //   status: order.status,
-  //   userId: order.userId,
-  //   expiresAt: order.expiresAt.toISOString(),
-  //   product: {
-  //     id: product.id,
-  //     price: product.price,
-  //   },
-  // });
+  return res.status(201).send(order);
+};
 
-  // return res.status(201).send(order);
-}
+export const deleteOrder = async (req: Request, res: Response) => {
+  const order = await orderDb.getOrder(req.params.orderId);
 
-export const getOrder = async (req: Request, res: Response) => {
-  // const order = await Order.findById(req.params.orderId).populate('ticket');
-  // if (!order) throw new NotFoundError();
-  // if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
-  // return res.send(order);
-}
+  if (!order) throw new NotFoundError();
+  if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+
+  order.status = OrderStatus.Cancelled;
+
+  // Publish an event saying the order is cancelled
+
+  return res.status(204).send(order);
+};

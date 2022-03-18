@@ -1,23 +1,13 @@
-import { postgres_db } from "./postgres"
+import { postgresDb } from './postgres';
+import { IProductDatabase } from './interface';
 
-export interface Product {
-  id: number,
-  title: string,
-  price: number
-}
-
-export interface ProductDatabase {
-  getProduct: (id: number) => Promise<Product>,
-  createProduct: (title: string, price: number) => Promise<Product>
-}
-
-const ProductDatabase = (db: ProductDatabase): ProductDatabase => ({
-  async getProduct(id: number) {
-    return db.getProduct(id)
+const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
+  async getProduct(id: string) {
+    return db.getProduct(id);
   },
-  async createProduct(title: string, price: number) {
-    return db.createProduct(title, price)
-  }
-})
+  async createProduct(title: string, price: string) {
+    return db.createProduct(title, price);
+  },
+});
 
-export const product_db = ProductDatabase(postgres_db)
+export const productDb = ProductDatabase(postgresDb);

@@ -28,7 +28,7 @@ devauth:
 devclient:
 	pushd ./app/client && pnpm dev && popd
 
-lintfront:
+lintclient:
 	pushd ./app/client && pnpm lint && popd
 
 # Publish the common package (/app/common) to the npm registry so 
@@ -41,3 +41,12 @@ publish:
 	pushd ./app/orders && pnpm install @weibuddies/common@latest && popd && \
 	pushd ./app/payments && pnpm install @weibuddies/common@latest && popd && \
 	pushd ./app/products && pnpm install @weibuddies/common@latest && popd \
+
+lint:
+	pushd ./app/auth && pnpm lint && popd && \
+	pushd ./app/client && pnpm lint && popd && \
+	pushd ./app/common && pnpm lint && popd && \
+	pushd ./app/expiration && pnpm lint && popd && \
+	pushd ./app/orders && pnpm lint && popd && \
+	pushd ./app/payments && pnpm lint && popd && \
+	pushd ./app/products && pnpm lint && popd \

@@ -10,7 +10,7 @@ router.post(
   requireAuth,
   [body('ticketId').not().isEmpty().withMessage('TicketId must be provided')],
   validateRequest,
-  newOrder
+  newOrder,
 );
 
 export { router as newOrderRouter };

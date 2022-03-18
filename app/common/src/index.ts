@@ -17,5 +17,5 @@ export * from './events/types/OrderStatus';
 export * from './middlewares/current-user';
 export * from './middlewares/require-auth';
 export * from './middlewares/validate-request';
-export * from './utility/async-handler'
-export * from './utility/error-handler'
+export * from './utility/async-handler';
+export * from './utility/error-handler';
