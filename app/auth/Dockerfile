@@ -20,6 +20,7 @@ USER node
 RUN pnpm install -P
 
 FROM gcr.io/distroless/nodejs:16 as prod
+USER node
 ENV NODE_ENV=production
 COPY --from=build ./app/build ./build
 COPY --from=dependencies ./app/node_modules ./node_modules

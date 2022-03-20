@@ -1,6 +1,7 @@
 import { Pool } from 'pg';
 import { IUserDatabase, User } from './interface';
 
+// pg connects to the database using environment variables
 const pool = new Pool();
 
 export const postgresDb: IUserDatabase = {

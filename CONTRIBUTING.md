@@ -30,6 +30,13 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ```
 
+The default memory that WSL2 allots to docker-desktop is 2GB, which is probably not enough (at least it wasn't for me when I tried it). I had to go to %USERPROFILE% on my computer and create a [.wslconfig file](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig). Mine looks like this
+
+```
+[wsl2]
+memory=6GB 
+```
+
 ## Kafka
 
-I'm using kafka's "kraft mode" instead of zookeeper. I'm also only using one broker for development because my terminal goes ballistic with "UnknownHostExceptions" when I try to use three. I used this [IBM tutorial](https://developer.ibm.com/tutorials/kafka-in-kubernetes/) to set things up and they mention this issue saying "the name resolution of the three pods can take more time to work than it takes the pods to start, so you may see UnknownHostException warnings in the pod logs initially". Kafka is a pretty noisy boy, I'll switch to three nodes for production later.
+I'm using kafka's "kraft mode" instead of zookeeper. I'm also only using one broker for development because my terminal goes ballistic with "UnknownHostExceptions" when I try to use three. According to this [IBM tutorial](https://developer.ibm.com/tutorials/kafka-in-kubernetes/), "the name resolution of the three pods can take more time to work than it takes the pods to start, so you may see UnknownHostException warnings in the pod logs initially". So it sounds like Kafka is a pretty noisy boy, I'll switch to three nodes for production later.

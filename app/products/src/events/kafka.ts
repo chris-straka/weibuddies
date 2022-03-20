@@ -16,7 +16,7 @@ const kafka = new Kafka({
 export const producer = kafka.producer();
 export const consumer = kafka.consumer({ groupId: 'products-group' });
 
-export const kafka_init = async () => {
+export const kafkaInit = async () => {
   try {
     await consumer.connect();
     await producer.connect();

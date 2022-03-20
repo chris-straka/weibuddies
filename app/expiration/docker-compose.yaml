@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./
+      target: dev
+    depends_on:
+      - kafka
+      - redis
+    command: ${STARTUP_COMMAND:-}
+    environment:
+      REDIS_HOST: redis_container
+      KAFKA_HOST: kafka
+      KAFKA_ADVERTISED_LISTENERS: kafka:9092
+    volumes:
+      - "./src:/app/src"
+
+  kafka:
+    image: bashj79/kafka-kraft:3.0.0
+    container_name: kafka
+    hostname: kafka
+    ports:
+      - "9092:9092"
+
+  redis:
+    image: redis:alpine3.15
+    container_name: redis_container

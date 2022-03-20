@@ -15,3 +15,4 @@ This [app](https://github.com/Chris56974/wei-buddies) is basically [kijiji](http
 - [Blobs for some SVG blobs](https://blobs.app/)
 - [Coinbase API for payments](https://developers.coinbase.com/)
 - [Abdelrahman Awad's composable functions](https://logaretm.com/blog/my-favorite-5-vuejs-composables)
+- [Robin Moffatt's helpful post on kafka-listeners](https://rmoff.net/2018/08/02/kafka-listeners-explained)
