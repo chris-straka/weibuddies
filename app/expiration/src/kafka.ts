@@ -1,19 +1,13 @@
-import Queue from 'bull';
-import { Kafka } from 'kafkajs';
 import { OrderStatus } from '@weibuddies/common';
+import { Kafka } from 'kafkajs';
+import Queue from 'bull';
 import { Payload } from './interface';
 
-if (!process.env.KAFKA_HOST) throw new Error('[Expiration] Client-ID must be defined');
-if (!process.env.KAFKA_ADVERTISED_LISTENERS) throw new Error("Can't find any brokers");
+if (!process.env.REDIS_HOST) throw new Error("Can't find redis");
+if (!process.env.KAFKA_HOST) throw new Error("Can't find kafka");
+if (!process.env.KAFKA_ADVERTISED_LISTENERS) throw new Error("Can't find kafka brokers");
 
-const delay = 1000 * 60 * 60 * 24; // 1 day
 const kafkaBrokers = process.env.KAFKA_ADVERTISED_LISTENERS.split(' ');
-
-const expirationQueue = new Queue<Payload>('order:expiration', {
-  redis: {
-    host: process.env.REDIS_HOST,
-  },
-});
 
 export const kafka = new Kafka({
   clientId: process.env.KAFKA_HOST,
@@ -30,19 +24,32 @@ export const kafkaInit = async () => {
   try {
     await producer.connect();
     await consumer.connect();
-    await consumer.subscribe({ topic: 'orders' });
+    await consumer.subscribe({ topic: 'orders', fromBeginning: true });
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
 
-    expirationQueue.process(async (job) => {
-      producer.send({
-        topic: 'orders',
-        messages: [{ key: 'orderId', value: job.data.orderId }],
-      });
-    });
+export const expirationQueue = new Queue<Payload>('order:expiration', {
+  redis: {
+    host: process.env.REDIS_HOST,
+  },
+});
 
+// Everytime a new order is created, push a job onto the Queue
+export const orderCreatedListener = async (delay: number) => {
+  try {
     await consumer.run({
       async eachMessage({ message }) {
-        if (message.value?.toString() === OrderStatus.Created) {
-          await expirationQueue.add(message.value as any, { delay });
+        if (message.key?.toString() === OrderStatus.Created) {
+          expirationQueue.add(
+            {
+              orderId: message.value!.toString(),
+            },
+            {
+              delay,
+            },
+          );
         }
       },
     });
@@ -50,3 +57,11 @@ export const kafkaInit = async () => {
     throw new Error(error as string);
   }
 };
+
+// After the delay, pop the job off the queue and tell everyone the order is now cancelled
+expirationQueue.process(async (job) => {
+  await producer.send({
+    topic: 'orders',
+    messages: [{ key: OrderStatus.Cancelled, value: job.data.orderId }],
+  });
+});

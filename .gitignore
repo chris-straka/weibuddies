@@ -1,3 +1,4 @@
 # THESE ARE SECRET KEYS THAT SHOULD NEVER BE COMITTED TO GITHUB
 k8s/_secrets/*
 node_modules 
+.pnpm-debug.log
