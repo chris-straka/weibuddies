@@ -1,7 +1,7 @@
-import { Subjects } from './Subjects';
+import { Topic } from './Topics';
 
 export interface IOrderCancelled {
-  subject: Subjects.OrderCancelled;
+  topic: Topic.OrderCancelled;
   data: {
     id: string;
     version: number;

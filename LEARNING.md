@@ -6,7 +6,7 @@ I ran into [this error](https://www.orchome.com/10529) and it was hard to figure
 
 ## Honestly, working with Kafka in general is tricky sometimes
 
-I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think those tests would be very useful, I prefer to test against the real thing using docker containers. But Kafka is really noisy and takes a while to run in a container. I think I also need to learn more about testing software in docker with jest because the containers aren't shutting down and I'm getting strange errors (despite all the tests passing). Cool thing is I think I can use fake timers with jest, so I can test the order expiration service without waiting a day before an order expires.
+I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think my tests would be that useful. But running Kafka in a container is still not that great because kafka is really noisy and takes a while to start in a container (when using kraft). I think I just need more expertise on kafka and docker in order to do this properly because my containers aren't shutting down correctly and I'm getting strange errors from jest (despite all the tests passing). 
 
 ## Choice of hash function
 
@@ -20,4 +20,6 @@ It somehow slipped my mind, but I just realized that the google search crawler c
 
 My skaffold file is massive because I repeat myself for both profiles (dev and production). I think I need to check out how to pass environment variables to the same profile so I can keep things dry. I'm not sure how I want to do that, I think I might have to use kustomize to do something like that or maybe there's something I can do natively within skaffold.
 
-## I'm starting to like Jest & Superagent over things like postman
+## Jest stuff
+
+I think I like using Jest over things like Postman when testing out an API. I'm also realizing, that the way I structure my application has a big effect on how I structure my tests. Everytime I optimized my code for tests, I usually ended up with code that has less coupling.

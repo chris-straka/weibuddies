@@ -1,7 +1,7 @@
-import { Subjects } from './Subjects';
+import { Topic } from './Topics';
 
 export interface IExpirationComplete {
-  subject: Subjects.ExpirationComplete;
+  topic: Topic.ExpirationComplete;
   data: {
     orderId: string;
   };

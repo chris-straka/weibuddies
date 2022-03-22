@@ -14,7 +14,7 @@ const EXPIRATION_WINDOW_SECONDS = 60 * 15;
 export const getOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // I have to join this with the product
-    const order = await orderDb.getOrder(req.params.orderId);
+    const order = await orderDb.getOrderWithProduct(req.params.orderId);
     if (!order) throw new NotFoundError();
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
     return res.status(200).send(order);
@@ -27,15 +27,17 @@ export const getOrders = async (req: Request, res: Response) => {
   if (!req.currentUser) throw new Error('Not logged in');
 
   // I have to join this with the products
-  const orders = await orderDb.getAllOrders(req.currentUser.id);
+  const orders = await orderDb.getAllOrdersWithProducts(req.currentUser.id);
 
   return res.send(orders);
 };
 
 export const newOrder = async (req: Request, res: Response) => {
   if (!req.currentUser) throw new Error('User not logged in');
+
   const { productId } = req.body;
   const { id: userId } = req.currentUser;
+
   const product = await productDb.getProduct(productId);
   if (!product) throw new NotFoundError();
 
@@ -50,7 +52,7 @@ export const newOrder = async (req: Request, res: Response) => {
   producer.send({
     topic: 'orders',
     messages: [
-      { key: 'productId', value: order.id },
+      { key: OrderStatus.Created, value: order.id },
       { key: 'status', value: order.status },
       { key: 'userId', value: order.userId },
       { key: 'productId', value: order.productId },
@@ -62,7 +64,7 @@ export const newOrder = async (req: Request, res: Response) => {
 };
 
 export const deleteOrder = async (req: Request, res: Response) => {
-  const order = await orderDb.getOrder(req.params.orderId);
+  const order = await orderDb.getOrderWithProduct(req.params.orderId);
 
   if (!order) throw new NotFoundError();
   if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();

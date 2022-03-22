@@ -1,16 +1,28 @@
-import { Subjects } from './Subjects';
+import { Producer } from 'kafkajs';
+import { Topic } from './Topics';
 
 interface Event {
-  subject: Subjects;
+  topic: Topic;
   data: any;
 }
 
-export abstract class AbstractPublisher<T extends Event, U> {
-  abstract subject: T['subject'];
+export abstract class AbstractPublisher<T extends Event> {
+  abstract topic: T['topic'];
 
-  protected client: U;
+  protected producer: Producer;
 
-  constructor(client: U) {
-    this.client = client;
+  constructor(producer: Producer) {
+    this.producer = producer;
+  }
+
+  async publish(data: T['data']): Promise<void> {
+    try {
+      this.producer.send({
+        topic: this.topic,
+        messages: [{ value: JSON.stringify(data) }],
+      });
+    } catch (error) {
+      throw new Error(error as string);
+    }
   }
 }

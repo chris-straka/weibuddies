@@ -1,4 +1,4 @@
-export enum Subjects {
+export enum Topic {
   ProductCreated = 'product:created',
   ProductUpdated = 'product:updated',
   OrderCreated = 'order:created',

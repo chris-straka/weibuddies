@@ -12,7 +12,7 @@
     "lint": "eslint . --ext .ts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@weibuddies/common": "^1.0.16",
+    "@weibuddies/common": "^1.0.17",
     "bull": "^4.5.6",
     "kafkajs": "^1.16.0"
   },

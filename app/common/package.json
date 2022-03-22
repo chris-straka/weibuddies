@@ -1,6 +1,6 @@
 {
   "name": "@weibuddies/common",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Common repository for a microservices app",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -20,9 +20,9 @@
     "type": "git",
     "url": "git+https://github.com/Chris56974/wei-buddies"
   },
-  "license": "ISC",
   "devDependencies": {
     "del-cli": "^4.0.1",
+    "eslint-config-prettier": "^8.5.0",
     "typescript": "^4.2.3"
   },
   "dependencies": {

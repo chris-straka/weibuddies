@@ -42,14 +42,7 @@ export const orderCreatedListener = async (delay: number) => {
     await consumer.run({
       async eachMessage({ message }) {
         if (message.key?.toString() === OrderStatus.Created) {
-          expirationQueue.add(
-            {
-              orderId: message.value!.toString(),
-            },
-            {
-              delay,
-            },
-          );
+          expirationQueue.add({ orderId: message.value!.toString() }, { delay });
         }
       },
     });

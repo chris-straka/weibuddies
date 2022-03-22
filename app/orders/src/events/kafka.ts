@@ -18,8 +18,8 @@ export const kafkaInit = async () => {
   try {
     await producer.connect();
     await consumer.connect();
-    await consumer.subscribe({ topic: 'products-topic' });
-    await consumer.subscribe({ topic: 'payments-topic' });
+    await consumer.subscribe({ topic: 'products' });
+    await consumer.subscribe({ topic: 'payments' });
 
     // Wait on expiration complete,
     // payment created,

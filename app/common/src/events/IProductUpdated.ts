@@ -1,7 +1,7 @@
-import { Subjects } from './Subjects';
+import { Topic } from './Topics';
 
 export interface IProductUpdated {
-  subject: Subjects.ProductUpdated;
+  topic: Topic.ProductUpdated;
   data: {
     id: string;
     version: number;

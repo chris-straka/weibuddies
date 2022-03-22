@@ -5,7 +5,8 @@ module.exports = {
   },
   extends: [
     'airbnb-base',
-    'airbnb-typescript'
+    'airbnb-typescript',
+    'prettier'
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -21,6 +22,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': "off",
     'no-console': "off",
-    'import/prefer-default-export': "off"
+    'import/prefer-default-export': "off",
   },
 };

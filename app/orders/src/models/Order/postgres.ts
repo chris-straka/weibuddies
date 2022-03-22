@@ -5,9 +5,9 @@ import { IOrderDatabase } from './interface';
 const pg = new Pool();
 
 export const postgresDb: IOrderDatabase = {
-  async getOrder(id) {
+  async getOrderWithProduct(id) {
     const query = {
-      name: 'get-order',
+      name: 'getOrderWithProduct',
       text: 'SELECT * FROM orders WHERE id = $1;',
       values: [id],
     };
@@ -17,8 +17,8 @@ export const postgresDb: IOrderDatabase = {
       throw new Error(error as string);
     }
   },
+  async getAllOrdersWithProducts(id) {
   // TODO
-  async getAllOrders(id) {
     const query = {
       name: 'get-order',
       text: 'SELECT * FROM orders WHERE id = $1;',

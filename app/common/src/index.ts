@@ -6,7 +6,7 @@ export * from './errors/not-found-error';
 export * from './errors/request-validation-error';
 export * from './events/AbstractListener';
 export * from './events/AbstractPublisher';
-export * from './events/Subjects';
+export * from './events/Topics';
 export * from './events/IExpirationComplete';
 export * from './events/IOrderCancelled';
 export * from './events/IOrderCreated';

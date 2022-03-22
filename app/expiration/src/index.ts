@@ -5,9 +5,7 @@ const delay = 1000 * 60 * 60 * 24; // 1 day
 
 const init = async () => {
   await kafkaInit();
-
-  // When an order is created, cancel it after this delay
-  await orderCreatedListener(delay);
+  await orderCreatedListener(delay); // When an order is created, cancel it after this delay
 };
 
 init();
