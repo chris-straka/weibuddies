@@ -2,7 +2,7 @@ import { IPaymentDatabase } from './interface';
 import { postgresDb } from './postgres';
 
 const PaymentDatabase = (db: IPaymentDatabase): IPaymentDatabase => ({
-  async createPayment(orderId: string, paymentId: string) {
+  createPayment(orderId, paymentId) {
     return db.createPayment(orderId, paymentId);
   },
 });

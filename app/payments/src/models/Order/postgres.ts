@@ -1,44 +1,34 @@
 import { Pool } from 'pg';
-import { OrderStatus } from '@weibuddies/common';
-import { IOrderDatabase, Order } from './interface';
+import { IOrderDatabase } from './interface';
 
 const pg = new Pool();
 
 export const postgresDb: IOrderDatabase = {
-  async getOrder(id) {
-    const query = {
-      name: 'get-order',
-      text: 'SELECT * FROM orders WHERE id = $1;',
-      values: [id],
-    };
-    try {
-      return await pg.query(query).then((data) => data.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  getOrder(id) {
+    return pg
+      .query({
+        name: 'get-order',
+        text: 'SELECT * FROM orders WHERE id = $1;',
+        values: [id],
+      })
+      .then((data) => data.rows[0]);
   },
-  async createOrder(userId: number, status: OrderStatus, expires_at: Date, product_id: number) {
-    const query = {
-      name: 'create-order',
-      text: 'INSERT INTO orders VALUES ($1, $2, $3, $4);',
-      values: [userId, status, expires_at, product_id],
-    };
-    try {
-      return await pg.query(query).then((response) => response.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  createOrder(id, price, status, userId, version) {
+    return pg
+      .query({
+        name: 'create-order',
+        text: 'INSERT INTO orders VALUES ($1, $2, $3, $4);',
+        values: [id, price, status, userId, version],
+      })
+      .then((response) => response.rows[0]);
   },
-  async removeOrder(order_id: number): Promise<Order> {
-    const query = {
-      name: 'remove-order',
-      text: 'UPDATE orders SET order_status = "cancelled" WHERE id = $1;',
-      values: [order_id],
-    };
-    try {
-      return await pg.query(query).then((res) => res.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  setOrderStatus(orderId, newStatus) {
+    return pg
+      .query({
+        name: 'remove-order',
+        text: 'UPDATE orders SET order_status = $2 WHERE id = $1;',
+        values: [orderId, newStatus],
+      })
+      .then((res) => res.rows[0]);
   },
 };

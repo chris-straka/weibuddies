@@ -1,7 +1,11 @@
 import { OrderStatus } from '@weibuddies/common';
 import { Kafka } from 'kafkajs';
 import Queue from 'bull';
-import { Payload } from './interface';
+import { OrderExpiredPublisher } from './events/publishers/OrderExpiredPublisher';
+
+export interface Payload {
+  orderId: string;
+}
 
 if (!process.env.REDIS_HOST) throw new Error("Can't find redis");
 if (!process.env.KAFKA_HOST) throw new Error("Can't find kafka");
@@ -53,8 +57,5 @@ export const orderCreatedListener = async (delay: number) => {
 
 // After the delay, pop the job off the queue and tell everyone the order is now cancelled
 expirationQueue.process(async (job) => {
-  await producer.send({
-    topic: 'orders',
-    messages: [{ key: OrderStatus.Cancelled, value: job.data.orderId }],
-  });
+  new OrderExpiredPublisher(producer).publish({ orderId: job.data.orderId });
 });

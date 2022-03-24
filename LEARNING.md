@@ -6,7 +6,7 @@ I ran into [this error](https://www.orchome.com/10529) and it was hard to figure
 
 ## Honestly, working with Kafka in general is tricky sometimes
 
-I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think my tests would be that useful. But running Kafka in a container is still not that great because kafka is really noisy and takes a while to start in a container (when using kraft). I think I just need more expertise on kafka and docker in order to do this properly because my containers aren't shutting down correctly and I'm getting strange errors from jest (despite all the tests passing). 
+I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think my tests would be that useful. But running Kafka in a container is still not that great either because kafka kraft is really noisy and takes a while to start in a container. I think I just need more experience on kafka and docker in order to do this properly because my containers aren't shutting down correctly and I'm getting strange errors from jest (despite all the tests passing). 
 
 ## Choice of hash function
 
@@ -14,12 +14,12 @@ I was originally going to use bcrypt, but I decided on scrypt instead (using the
 
 ## SEO
 
-It somehow slipped my mind, but I just realized that the google search crawler can't crawl anything that requires user authentication (it can't create an account and sign in). My original idea would've been completely disastrous for SEO lol and changes how I want the site to work.
+It somehow slipped my mind, but I just realized that the google search crawler can't crawl anything that requires user authentication (it can't create an account and sign in). My original idea would've been completely disastrous for SEO lol and it changes the site in a lot of ways on the frontend.
 
 ## Skaffold stuff
 
-My skaffold file is massive because I repeat myself for both profiles (dev and production). I think I need to check out how to pass environment variables to the same profile so I can keep things dry. I'm not sure how I want to do that, I think I might have to use kustomize to do something like that or maybe there's something I can do natively within skaffold.
+My skaffold file is massive because I repeat myself for both profiles (dev and production). I think I need to check out how to pass environment variables into the same profile so I can keep things dry. I'm not sure how I want to do that, I think I might have to use kustomize or something like that. There might be something I can do with skaffold too, not sure.
 
 ## Jest stuff
 
-I think I like using Jest over things like Postman when testing out an API. I'm also realizing, that the way I structure my application has a big effect on how I structure my tests. Everytime I optimized my code for tests, I usually ended up with code that has less coupling.
+I think I like using Jest over Postman when testing out an API. I'm also realizing, that the way I structure my application has a big effect on my tests. Usually, the more I optimize my code for tests, the less coupling my code ends up having which is really nice. I want to be able to create integration tests between all my microservices but it seems tricky with kafka. I don't have the expertise for those kinds of tests right now so I might have to come back to that later, because tests would be really helpful in this regard.

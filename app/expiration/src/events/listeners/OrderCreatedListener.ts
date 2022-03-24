@@ -4,7 +4,7 @@ import { expirationQueue } from '../../kafka';
 export class OrderCreatedListener extends AbstractListener<IOrderCreated> {
   topic: Topic.OrderCreated = Topic.OrderCreated;
 
-  groupId = 'expiration-group';
+  groupId = 'expirationGroup';
 
   async onMessage(data: IOrderCreated['data']) {
     const delay = new Date(data.expiresAt).getTime() - new Date().getTime();

@@ -3,10 +3,10 @@ import { IUserDatabase } from './interface';
 import { Password } from '../services/password';
 
 const UserDatabase = (db: IUserDatabase): IUserDatabase => ({
-  async getUser(email: string) {
+  getUser(email) {
     return db.getUser(email);
   },
-  async createUser(email: string, password: string) {
+  async createUser(email, password) {
     const hashedPassword = await Password.toHash(password);
     return db.createUser(email, hashedPassword);
   },

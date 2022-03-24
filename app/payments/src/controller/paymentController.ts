@@ -1,5 +1,8 @@
 import {
-  NotFoundError, NotAuthorizedError, BadRequestError, OrderStatus,
+  NotFoundError,
+  NotAuthorizedError,
+  BadRequestError,
+  OrderStatus,
 } from '@weibuddies/common';
 import { Request, Response, NextFunction } from 'express';
 import { orderDb } from 'models/Order/Order';
@@ -15,7 +18,9 @@ export const createPayment = async (req: Request, res: Response, next: NextFunct
     const order = await orderDb.getOrder(orderId);
     if (!order) throw new NotFoundError();
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
-    if (order.status === OrderStatus.Cancelled) throw new BadRequestError('Cannot pay for a cancelled order');
+
+    if (order.status === OrderStatus.Cancelled)
+      throw new BadRequestError('The order has already been cancelled');
 
     const charge = await stripe.charges.create({
       currency: 'usd',

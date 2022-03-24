@@ -2,19 +2,22 @@ import { IProductDatabase } from './interface';
 import { postgresDb } from './postgres';
 
 const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
-  async getProduct(id: string) {
+  getProduct(id) {
     return db.getProduct(id);
   },
-  async getProductsFromLowerToUpper(lowerBound: string, upperBound: string) {
+  getProductsFromLowerToUpper(lowerBound, upperBound) {
     return db.getProductsFromLowerToUpper(lowerBound, upperBound);
   },
-  async createProduct(title: string, price: string, userId: string) {
+  createProduct(title, price, userId) {
     return db.createProduct(title, price, userId);
   },
-  async removeProduct(productId: string) {
+  removeProduct(productId) {
     return db.removeProduct(productId);
   },
-  async updateProduct(title: string, price: string) {
+  removeOrderIdFromProduct(productId) {
+    return db.removeOrderIdFromProduct(productId);
+  },
+  updateProduct(title, price) {
     return db.updateProduct(title, price);
   },
 });

@@ -1,6 +1,6 @@
 {
   "name": "@weibuddies/common",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "description": "Common repository for a microservices app",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

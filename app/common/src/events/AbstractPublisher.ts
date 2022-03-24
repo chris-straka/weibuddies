@@ -17,7 +17,7 @@ export abstract class AbstractPublisher<T extends Event> {
 
   async publish(data: T['data']): Promise<void> {
     try {
-      this.producer.send({
+      await this.producer.send({
         topic: this.topic,
         messages: [{ value: JSON.stringify(data) }],
       });

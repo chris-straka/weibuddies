@@ -33,7 +33,6 @@ export abstract class AbstractListener<T extends Event> {
     }
   }
 
-  /* eslint-disable class-methods-use-this */
   parseMessage(msg: Message) {
     if (!msg.value) throw new Error("Couldn't find the message");
     const data = msg.value;

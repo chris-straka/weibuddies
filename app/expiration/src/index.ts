@@ -1,4 +1,5 @@
-import { kafkaInit, orderCreatedListener } from './kafka';
+import { kafkaInit } from './kafka';
+import { orderCreatedListener } from './events/listeners/OrderCreatedListener';
 
 // How long should an order last before getting cancelled by this service
 const delay = 1000 * 60 * 60 * 24; // 1 day

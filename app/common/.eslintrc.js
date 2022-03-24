@@ -23,5 +23,6 @@ module.exports = {
     'react/jsx-filename-extension': "off",
     'no-console': "off",
     'import/prefer-default-export': "off",
+    'class-methods-use-this': "off"
   },
 };

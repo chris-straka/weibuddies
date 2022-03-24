@@ -4,10 +4,6 @@ import { deleteOrder } from '../controller/orderController';
 
 const router = Router();
 
-router.delete(
-  '/api/orders/:orderId',
-  requireAuth,
-  deleteOrder,
-);
+router.delete('/api/orders/:orderId', requireAuth, deleteOrder);
 
 export { router as deleteOrderRouter };

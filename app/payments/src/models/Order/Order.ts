@@ -1,16 +1,15 @@
-import { OrderStatus } from '@weibuddies/common';
 import { postgresDb } from './postgres';
 import { IOrderDatabase } from './interface';
 
 const OrderDatabase = (db: IOrderDatabase): IOrderDatabase => ({
-  async getOrder(id: number) {
+  getOrder(id) {
     return db.getOrder(id);
   },
-  async createOrder(userId: number, status: OrderStatus, expires_at: Date, product_id: number) {
-    return db.createOrder(userId, status, expires_at, product_id);
+  createOrder(id, price, status, userId, version) {
+    return db.createOrder(id, price, status, userId, version);
   },
-  async removeOrder(id: number) {
-    return db.removeOrder(id);
+  setOrderStatus(id, newStatus) {
+    return db.setOrderStatus(id, newStatus);
   },
 });
 

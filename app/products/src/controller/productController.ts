@@ -21,8 +21,10 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
     if (!page) throw new Error("Couldn't find the page number");
     const lowerBound = +page * ITEMS_PER_PAGE - ITEMS_PER_PAGE;
     const upperBound = +page * ITEMS_PER_PAGE;
-    const products = await productDb
-      .getProductsFromLowerToUpper(lowerBound.toString(), upperBound.toString());
+    const products = await productDb.getProductsFromLowerToUpper(
+      lowerBound.toString(),
+      upperBound.toString(),
+    );
 
     if (!products) throw new NotFoundError();
     return res.status(200).send(products);
@@ -39,16 +41,16 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     const { userId } = req.session.jwt;
     const product = await productDb.createProduct(title, price, userId);
 
-    producer.send({
-      topic: 'products',
-      messages: [
-        { key: 'productId', value: product.id },
-        { key: 'userId', value: product.userId },
-        { key: 'title', value: product.title },
-        { key: 'price', value: product.price },
-        { key: 'version', value: product.version },
-      ],
-    });
+    // producer.send({
+    //   topic: 'products',
+    //   messages: [
+    //     { key: 'productId', value: product.id },
+    //     { key: 'userId', value: product.userId },
+    //     { key: 'title', value: product.title },
+    //     { key: 'price', value: product.price },
+    //     { key: 'version', value: product.version },
+    //   ],
+    // });
 
     return res.status(201).send(product);
   } catch (error) {
@@ -70,16 +72,16 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
 
     productDb.updateProduct(req.body.title, req.body.price);
 
-    producer.send({
-      topic: 'products',
-      messages: [
-        { key: 'productId', value: product.id },
-        { key: 'userId', value: product.userId },
-        { key: 'title', value: product.title },
-        { key: 'price', value: product.price },
-        { key: 'version', value: product.version },
-      ],
-    });
+    // producer.send({
+    //   topic: 'products',
+    //   messages: [
+    //     { key: 'productId', value: product.id },
+    //     { key: 'userId', value: product.userId },
+    //     { key: 'title', value: product.title },
+    //     { key: 'price', value: product.price },
+    //     { key: 'version', value: product.version },
+    //   ],
+    // });
 
     return res.status(200).send(product);
   } catch (error) {

@@ -1,7 +1,7 @@
 import { Kafka } from 'kafkajs';
 
 if (!process.env.CLIENT_ID) throw new Error('[Products] Client-ID must be defined');
-if (!process.env.BROKERS) throw new Error('[Products] Can\'t find a list of brokers');
+if (!process.env.BROKERS) throw new Error("[Products] Can't find a list of brokers");
 
 const kafka = new Kafka({
   clientId: process.env.CLIENT_ID,

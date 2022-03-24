@@ -1,25 +1,29 @@
 import { OrderStatus } from '@weibuddies/common';
 
 export interface Order {
-  id: string
-  userId: string
-  status: OrderStatus
-  expiresAt: Date
-  productId: string
-  version: string
+  id: string;
+  userId: string;
+  status: OrderStatus;
+  expiresAt: Date;
+  productId: string;
+  version: number;
 }
 
 export interface Product {
-  id: string
-  title: string
-  price: string
-  isReserved(): Promise<boolean>
+  id: string;
+  title: string;
+  price: string;
+  isReserved(): Promise<boolean>;
 }
 
 export interface IOrderDatabase {
-  getOrderWithProduct: (orderId: string) => Promise<Order>
-  getAllOrdersWithProducts: (userId: string) => Promise<Order[]>
-  removeOrder: (id: string) => Promise<Order>
+  getOrder: (orderId: string) => Promise<Order>;
+  getOrders: () => Promise<Order[]>;
+  setOrderStatus: (orderId: string, newStatus: OrderStatus) => Promise<void>;
   createOrder: (
-    userId: string, status: OrderStatus, expires_at: Date, product_id: string) => Promise<Order>
+    userId: string,
+    status: OrderStatus,
+    expiresAt: Date,
+    productId: string,
+  ) => Promise<Order>;
 }

@@ -1,57 +1,51 @@
 import { Pool } from 'pg';
-import { OrderStatus } from '@weibuddies/common';
 import { IOrderDatabase } from './interface';
 
 const pg = new Pool();
 
 export const postgresDb: IOrderDatabase = {
-  async getOrderWithProduct(id) {
-    const query = {
-      name: 'getOrderWithProduct',
-      text: 'SELECT * FROM orders WHERE id = $1;',
-      values: [id],
-    };
-    try {
-      return await pg.query(query).then((data) => data.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  getOrder(id) {
+    return pg
+      .query({
+        name: 'getOrder',
+        text: `
+            SELECT * FROM orders 
+            LEFT JOIN products 
+            ON orders.product_id = products.id 
+            WHERE orders.product_id = $1;
+        `,
+        values: [id],
+      })
+      .then((data) => data.rows[0]);
   },
-  async getAllOrdersWithProducts(id) {
-  // TODO
-    const query = {
-      name: 'get-order',
-      text: 'SELECT * FROM orders WHERE id = $1;',
-      values: [id],
-    };
-    try {
-      return await pg.query(query).then((data) => data.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  getOrders() {
+    return pg
+      .query({
+        name: 'getOrders',
+        text: `
+            SELECT * FROM orders 
+            LEFT JOIN products 
+            ON orders.product_id = products.id;
+          `,
+      })
+      .then((data) => data.rows[0]);
   },
-  async createOrder(userId: string, status: OrderStatus, expires_at: Date, product_id: string) {
-    const query = {
-      name: 'create-order',
-      text: 'INSERT INTO orders VALUES ($1, $2, $3, $4);',
-      values: [userId, status, expires_at, product_id],
-    };
-    try {
-      return await pg.query(query).then((response) => response.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  setOrderStatus(id, newStatus) {
+    return pg
+      .query({
+        name: 'setOrderStatus',
+        text: `UPDATE orders SET status = $2 WHERE id = $1;`,
+        values: [id, newStatus],
+      })
+      .then((data) => data.rows[0]);
   },
-  async removeOrder(order_id: string) {
-    const query = {
-      name: 'remove-order',
-      text: 'UPDATE orders SET order_status = "cancelled" WHERE id = $1;',
-      values: [order_id],
-    };
-    try {
-      return await pg.query(query).then((res) => res.rows[0]);
-    } catch (error) {
-      throw new Error(error as string);
-    }
+  createOrder(userId, status, expiresAt, productId) {
+    return pg
+      .query({
+        name: 'createOrder',
+        text: `INSERT INTO orders VALUES ($1, $2, $3, $4);`,
+        values: [userId, status, expiresAt, productId],
+      })
+      .then((response) => response.rows[0]);
   },
 };
