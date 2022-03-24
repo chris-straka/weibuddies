@@ -7,7 +7,7 @@ export const postgresDb: IOrderDatabase = {
   getOrder(id) {
     return pg
       .query({
-        name: 'get-order',
+        name: 'getOrder',
         text: 'SELECT * FROM orders WHERE id = $1;',
         values: [id],
       })
@@ -16,7 +16,7 @@ export const postgresDb: IOrderDatabase = {
   createOrder(id, price, status, userId, version) {
     return pg
       .query({
-        name: 'create-order',
+        name: 'createOrder',
         text: 'INSERT INTO orders VALUES ($1, $2, $3, $4);',
         values: [id, price, status, userId, version],
       })
@@ -25,7 +25,7 @@ export const postgresDb: IOrderDatabase = {
   setOrderStatus(orderId, newStatus) {
     return pg
       .query({
-        name: 'remove-order',
+        name: 'removeOrder',
         text: 'UPDATE orders SET order_status = $2 WHERE id = $1;',
         values: [orderId, newStatus],
       })

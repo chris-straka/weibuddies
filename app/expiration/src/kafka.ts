@@ -22,7 +22,7 @@ export const kafka = new Kafka({
 });
 
 export const producer = kafka.producer();
-export const consumer = kafka.consumer({ groupId: 'expiration-group' });
+export const consumer = kafka.consumer({ groupId: 'expirationGroup' });
 
 export const kafkaInit = async () => {
   try {

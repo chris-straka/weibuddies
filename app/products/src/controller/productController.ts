@@ -1,14 +1,16 @@
 import { Request, Response, NextFunction } from 'express';
 import { NotFoundError, BadRequestError, NotAuthorizedError } from '@weibuddies/common';
-import { producer } from '../events/kafka';
+import { ProductCreatedPublisher } from '../events/publishers/ProductCreatedPublisher';
+import { producer } from '../kafka
 import { productDb } from '../models/Product';
+import { ProductUpdatedPublisher } from '../events/publishers/ProductUpdatedPublisher';
 
 const ITEMS_PER_PAGE = 10;
 
 export const getProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const productId = req.params.id;
-    const product = await productDb.getProduct(productId as string);
+    const product = await productDb.getProduct(productId);
     return res.status(200).send(product);
   } catch (error) {
     return next(error);
@@ -25,8 +27,8 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
       lowerBound.toString(),
       upperBound.toString(),
     );
-
     if (!products) throw new NotFoundError();
+
     return res.status(200).send(products);
   } catch (error) {
     return next(error);
@@ -41,16 +43,13 @@ export const createProduct = async (req: Request, res: Response, next: NextFunct
     const { userId } = req.session.jwt;
     const product = await productDb.createProduct(title, price, userId);
 
-    // producer.send({
-    //   topic: 'products',
-    //   messages: [
-    //     { key: 'productId', value: product.id },
-    //     { key: 'userId', value: product.userId },
-    //     { key: 'title', value: product.title },
-    //     { key: 'price', value: product.price },
-    //     { key: 'version', value: product.version },
-    //   ],
-    // });
+    new ProductCreatedPublisher(producer).publish({
+      id: product.id,
+      version: product.version,
+      title: product.title,
+      price: product.price,
+      userId: product.userId,
+    });
 
     return res.status(201).send(product);
   } catch (error) {
@@ -72,16 +71,13 @@ export const updateProduct = async (req: Request, res: Response, next: NextFunct
 
     productDb.updateProduct(req.body.title, req.body.price);
 
-    // producer.send({
-    //   topic: 'products',
-    //   messages: [
-    //     { key: 'productId', value: product.id },
-    //     { key: 'userId', value: product.userId },
-    //     { key: 'title', value: product.title },
-    //     { key: 'price', value: product.price },
-    //     { key: 'version', value: product.version },
-    //   ],
-    // });
+    new ProductUpdatedPublisher(producer).publish({
+      id: product.id,
+      version: product.version,
+      title: product.title,
+      price: product.price,
+      userId: product.userId,
+    });
 
     return res.status(200).send(product);
   } catch (error) {

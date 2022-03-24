@@ -1,6 +1,4 @@
 import { Kafka } from 'kafkajs';
-import { OrderStatus } from '@weibuddies/common';
-import { orderCreatedHandler, orderCancelledHandler } from './kafkaHandlers';
 
 if (!process.env.CLIENT_ID) throw new Error('Client-ID must be defined');
 if (!process.env.BROKERS) throw new Error("Can't find a list of brokers");
@@ -14,19 +12,13 @@ const kafka = new Kafka({
 });
 
 export const producer = kafka.producer();
-export const consumer = kafka.consumer({ groupId: 'payments-group' });
+export const consumer = kafka.consumer({ groupId: 'paymentsGroup' });
 
 export const kafkaInit = async () => {
   try {
     await consumer.connect();
     await producer.connect();
     await consumer.subscribe({ topic: 'orders-topic' });
-    await consumer.run({
-      async eachMessage({ topic, partition, message }) {
-        if (message.value?.toString() === OrderStatus.Cancelled) orderCancelledHandler(producer);
-        if (message.value?.toString() === OrderStatus.Created) orderCreatedHandler(producer);
-      },
-    });
   } catch (error) {
     throw new Error(error as string);
   }

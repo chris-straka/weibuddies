@@ -1,13 +1,11 @@
 import { AbstractListener, Topic, IExpirationComplete, OrderStatus } from '@weibuddies/common';
 import { OrderCancelledPublisher } from '../publishers/OrderCancelledPublisher';
 import { orderDb } from '../../models/Order/Order';
-import { producer } from '../kafka';
+import { producer } from '../../kafkafka';
 
 // Cancels an order whenever it expires
 export class ExpirationCompleteListener extends AbstractListener<IExpirationComplete> {
   topic: Topic.ExpirationComplete = Topic.ExpirationComplete;
-
-  groupId = 'ordersGroup';
 
   async onMessage(data: IExpirationComplete['data']) {
     const order = await orderDb.getOrder(data.orderId);

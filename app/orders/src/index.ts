@@ -1,5 +1,5 @@
 import { app } from './app';
-import { kafkaInit } from './events/kafka';
+import { kafkaInit } from './kafka
 
 const jeff = 'alfjdlaskdfj';
 

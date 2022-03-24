@@ -7,7 +7,7 @@ import {
 import { Request, Response, NextFunction } from 'express';
 import { orderDb } from 'models/Order/Order';
 import { paymentDb } from 'models/Payment/Payment';
-import { producer } from 'events/kafka';
+import { producer } from 'kafka';
 import Stripe from 'stripe';
 
 export const createPayment = async (req: Request, res: Response, next: NextFunction) => {

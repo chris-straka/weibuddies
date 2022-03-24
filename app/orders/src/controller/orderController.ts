@@ -7,6 +7,8 @@ import {
 import { Request, Response, NextFunction } from 'express';
 import { orderDb } from '../models/Order/Order';
 import { productDb } from '../models/Product/Product';
+import { OrderCreatedListener } from '../events/publishers/OrderCreatedPublisher';
+import { producer } from '../kafka';
 
 const EXPIRATION_WINDOW_SECONDS = 60 * 15;
 
@@ -47,9 +49,16 @@ export const newOrder = async (req: Request, res: Response, next: NextFunction) 
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
 
-    await orderDb.createOrder(userId, OrderStatus.Created, expiration, product.id);
+    const order = await orderDb.createOrder(userId, OrderStatus.Created, expiration, product.id);
 
-    // Fire off an event saying I created a new Order
+    new OrderCreatedListener(producer).publish({
+      id: order.id,
+      version: order.version,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.toISOString(),
+      productId: order.productId,
+    });
 
     return res.sendStatus(201);
   } catch (error) {

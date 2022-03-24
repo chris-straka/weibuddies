@@ -1,4 +1,4 @@
-import { kafkaInit } from 'events/kafka';
+import { kafkaInit } from 'kafka';
 import { app } from './app';
 
 const init = async () => {

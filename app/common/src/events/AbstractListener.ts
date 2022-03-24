@@ -9,8 +9,6 @@ interface Event {
 export abstract class AbstractListener<T extends Event> {
   abstract topic: T['topic'];
 
-  abstract groupId: string;
-
   abstract onMessage(data: T['data']): void;
 
   protected consumer: Consumer;

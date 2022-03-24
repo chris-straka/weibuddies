@@ -4,8 +4,6 @@ import { orderDb } from 'models/Order/Order';
 export class OrderCancelledListener extends AbstractListener<IOrderCancelled> {
   topic: Topic.OrderCancelled = Topic.OrderCancelled;
 
-  groupId = 'paymentsGroup';
-
   async onMessage(data: IOrderCancelled['data']) {
     const order = await orderDb.getOrder(data.id);
     if (!order) throw new Error('Order not found');

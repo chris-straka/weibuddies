@@ -6,7 +6,7 @@ specifiers:
   '@types/node': ^17.0.17
   '@typescript-eslint/eslint-plugin': ^5.15.0
   '@typescript-eslint/parser': ^5.0.0
-  '@weibuddies/common': ^1.0.18
+  '@weibuddies/common': ^1.0.20
   bull: ^4.5.6
   eslint: ^8.11.0
   eslint-config-airbnb-base: ^15.0.0
@@ -20,7 +20,7 @@ specifiers:
   typescript: ^4.5.5
 
 dependencies:
-  '@weibuddies/common': 1.0.18_typescript@4.5.5
+  '@weibuddies/common': 1.0.20_typescript@4.5.5
   bull: 4.5.6
   kafkajs: 1.16.0
 
@@ -955,8 +955,8 @@ packages:
       '@typescript-eslint/types': 5.15.0
       eslint-visitor-keys: 3.3.0
 
-  /@weibuddies/common/1.0.18_typescript@4.5.5:
-    resolution: {integrity: sha512-3lTPchHHHTQloVZ6PrOnCLagq1MymiGCoH8Y4g3ljW2nr5dEnUcSYio9HqKkL9qD8KwWHVFWwZE5Ksd7z8KH8Q==}
+  /@weibuddies/common/1.0.20_typescript@4.5.5:
+    resolution: {integrity: sha512-0q+PqrQxXlD94mMGnd9NOSqv0v+J5VvYZIC5Fk1g/t8zOc+Q4X0RP/JKiz1Hu0d/qL8GRqN594CSj9FNFA6PlQ==}
     requiresBuild: true
     dependencies:
       '@types/cookie-session': 2.0.44

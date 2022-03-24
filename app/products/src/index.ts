@@ -1,5 +1,5 @@
 import { app } from './app';
-import { kafkaInit, consumer } from './events/kafka';
+import { kafkaInit, consumer } from './kafka';
 import { OrderCreatedListener } from './events/listeners/OrderCreatedListener';
 import { OrderCancelledListener } from './events/listeners/OrderCancelledListener';
 

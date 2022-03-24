@@ -12,19 +12,12 @@ const kafka = new Kafka({
 });
 
 export const producer = kafka.producer();
-export const consumer = kafka.consumer({ groupId: 'orders-group' });
+export const consumer = kafka.consumer({ groupId: 'ordersGroup' });
 
 export const kafkaInit = async () => {
   try {
     await producer.connect();
     await consumer.connect();
-    await consumer.subscribe({ topic: 'products' });
-    await consumer.subscribe({ topic: 'payments' });
-
-    // Wait on expiration complete,
-    // payment created,
-    // product created and updated
-    await consumer.run({});
   } catch (error) {
     throw new Error(error as string);
   }

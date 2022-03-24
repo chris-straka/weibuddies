@@ -14,8 +14,8 @@ const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
   removeProduct(productId) {
     return db.removeProduct(productId);
   },
-  removeOrderIdFromProduct(productId) {
-    return db.removeOrderIdFromProduct(productId);
+  setOrderIdForProduct(productId, newOrderId) {
+    return db.setOrderIdForProduct(productId, newOrderId);
   },
   updateProduct(title, price) {
     return db.updateProduct(title, price);

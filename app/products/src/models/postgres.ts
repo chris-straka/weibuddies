@@ -17,7 +17,7 @@ export const postgresDb: IProductDatabase = {
     return pg
       .query({
         name: 'getProductsFromPage',
-        text: 'SELECT * FROM orders ORDER BY date_created DESC OFFSET $1 LIMIT $2;',
+        text: 'SELECT * FROM orders ORDER BY date_created DESC OFFSET $1 LIMIT $2 WHERE order_id = NULL;',
         values: [lowerBound, upperBound],
       })
       .then((data) => data.rows);

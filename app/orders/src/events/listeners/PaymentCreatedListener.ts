@@ -5,8 +5,6 @@ import { orderDb } from '../../models/Order/Order';
 export class PaymentCreatedListener extends AbstractListener<IPaymentCreated> {
   topic: Topic.PaymentCreated = Topic.PaymentCreated;
 
-  groupId = 'ordersGroup';
-
   async onMessage(data: IPaymentCreated['data']) {
     const order = await orderDb.getOrder(data.orderId);
     if (!order) throw new Error('Order not found');

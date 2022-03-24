@@ -6,6 +6,7 @@ export interface Order {
   status: OrderStatus;
   expiresAt: Date;
   productId: string;
+  productPrice: number;
   version: number;
 }
 

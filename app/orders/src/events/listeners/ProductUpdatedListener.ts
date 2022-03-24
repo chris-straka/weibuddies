@@ -5,8 +5,6 @@ import { productDb } from '../../models/Product/Product';
 export class ProductUpdatedListener extends AbstractListener<IProductCreated> {
   topic: Topic.ProductCreated = Topic.ProductCreated;
 
-  groupId = 'ordersGroup';
-
   async onMessage(data: IProductUpdated['data']) {
     const product = await productDb.getProduct(data.id);
     if (!product) throw new Error('Product not found');
