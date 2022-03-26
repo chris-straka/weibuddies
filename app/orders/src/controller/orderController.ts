@@ -8,15 +8,17 @@ import { Request, Response, NextFunction } from 'express';
 import { orderDb } from '../models/Order/Order';
 import { productDb } from '../models/Product/Product';
 import { OrderCreatedListener } from '../events/publishers/OrderCreatedPublisher';
+import { OrderCancelledPublisher } from '../events/publishers/OrderCancelledPublisher';
 import { producer } from '../kafka';
 
-const EXPIRATION_WINDOW_SECONDS = 60 * 15;
+const EXPIRATION_WINDOW_SECONDS = 60 * 60 * 24;
 
 export const getOrder = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const order = await orderDb.getOrder(req.params.orderId);
     if (!order) throw new NotFoundError();
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+
     return res.status(200).send(order);
   } catch (error) {
     return next(error);
@@ -26,7 +28,8 @@ export const getOrder = async (req: Request, res: Response, next: NextFunction) 
 export const getOrders = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.currentUser) throw new Error('Not logged in');
-    const orders = await orderDb.getOrders();
+    const orders = await orderDb.getOrders(req.currentUser.id);
+
     return res.send(orders);
   } catch (error) {
     return next(error);
@@ -41,10 +44,15 @@ export const newOrder = async (req: Request, res: Response, next: NextFunction) 
     const { id: userId } = req.currentUser;
 
     const product = await productDb.getProduct(productId);
+
     if (!product) throw new NotFoundError();
 
-    const isReserved = await product.isReserved();
-    if (isReserved) throw new BadRequestError('Ticket is already reserved');
+    if (
+      product.status === OrderStatus.Created ||
+      OrderStatus.AwaitingPayment ||
+      OrderStatus.Complete
+    )
+      throw new BadRequestError('Product is already reserved');
 
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS);
@@ -60,7 +68,7 @@ export const newOrder = async (req: Request, res: Response, next: NextFunction) 
       productId: order.productId,
     });
 
-    return res.sendStatus(201);
+    return res.status(201).send(order);
   } catch (error) {
     return next(error);
   }
@@ -73,9 +81,13 @@ export const deleteOrder = async (req: Request, res: Response, next: NextFunctio
     if (!order) throw new NotFoundError();
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
 
-    order.status = OrderStatus.Cancelled;
+    await orderDb.setOrderStatus(req.params.orderId, OrderStatus.Cancelled);
 
-    // Publish an event saying the order is cancelled
+    new OrderCancelledPublisher(producer).publish({
+      id: order.id,
+      version: order.version,
+      productId: order.productId,
+    });
 
     return res.status(204).send(order);
   } catch (error) {

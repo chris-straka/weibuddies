@@ -2,14 +2,14 @@ import { postgresDb } from './postgres';
 import { IOrderDatabase } from './interface';
 
 const OrderDatabase = (db: IOrderDatabase): IOrderDatabase => ({
-  getOrder(id) {
-    return db.getOrder(id);
+  getOrder(orderId) {
+    return db.getOrder(orderId);
   },
-  createOrder(id, price, status, userId, version) {
-    return db.createOrder(id, price, status, userId, version);
+  createOrder(orderId, price, status, userId, version) {
+    return db.createOrder(orderId, price, status, userId, version);
   },
-  setOrderStatus(id, newStatus) {
-    return db.setOrderStatus(id, newStatus);
+  setOrderStatus(orderId, newStatus) {
+    return db.setOrderStatus(orderId, newStatus);
   },
 });
 

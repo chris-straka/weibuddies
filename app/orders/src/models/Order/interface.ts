@@ -19,8 +19,8 @@ export interface Product {
 
 export interface IOrderDatabase {
   getOrder: (orderId: string) => Promise<Order>;
-  getOrders: () => Promise<Order[]>;
-  setOrderStatus: (orderId: string, newStatus: OrderStatus) => Promise<void>;
+  getOrders: (userId: string) => Promise<Order[]>;
+  setOrderStatus: (orderId: string, newStatus: OrderStatus) => Promise<null>;
   createOrder: (
     userId: string,
     status: OrderStatus,

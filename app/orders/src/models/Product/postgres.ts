@@ -4,31 +4,31 @@ import { IProductDatabase } from './interface';
 const pg = new Pool();
 
 export const postgresDb: IProductDatabase = {
-  getProduct(id) {
+  getProduct(productId) {
     return pg
       .query({
         name: 'getProduct',
         text: 'SELECT * FROM products WHERE id = $1;',
-        values: [id],
+        values: [productId],
       })
       .then((data) => data.rows[0]);
   },
-  createProduct(title, price) {
-    return pg
-      .query({
-        name: 'create-product',
-        text: 'INSERT INTO products VALUES ($1, $2);',
-        values: [title, price],
-      })
-      .then((data) => data.rows[0]);
-  },
-  updateProduct(id, title, price) {
+  createProduct(productId, title, price) {
     return pg
       .query({
         name: 'createProduct',
-        text: 'UPDATE products SET title = $2, price = $3 WHERE id = $1;',
-        values: [id, title, price],
+        text: 'INSERT INTO products (id, title, price) VALUES ($1, $2, $3);',
+        values: [productId, title, price],
       })
-      .then((data) => data.rows[0]);
+      .then(() => null);
+  },
+  updateProduct(productId, title, price) {
+    return pg
+      .query({
+        name: 'updateProduct',
+        text: 'UPDATE products SET title = $2, price = $3 WHERE id = $1;',
+        values: [productId, title, price],
+      })
+      .then(() => null);
   },
 };

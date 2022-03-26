@@ -1,9 +1,9 @@
 import { AbstractListener, Topic, IExpirationComplete, OrderStatus } from '@weibuddies/common';
 import { OrderCancelledPublisher } from '../publishers/OrderCancelledPublisher';
 import { orderDb } from '../../models/Order/Order';
-import { producer } from '../../kafkafka';
+import { producer } from '../../kafka';
 
-// Cancels an order whenever it expires
+// Cancel an order whenever it expires
 export class ExpirationCompleteListener extends AbstractListener<IExpirationComplete> {
   topic: Topic.ExpirationComplete = Topic.ExpirationComplete;
 
@@ -16,9 +16,7 @@ export class ExpirationCompleteListener extends AbstractListener<IExpirationComp
       await new OrderCancelledPublisher(producer).publish({
         id: order.id,
         version: order.version,
-        product: {
-          id: order.productId,
-        },
+        productId: order.productId
       });
     }
   }

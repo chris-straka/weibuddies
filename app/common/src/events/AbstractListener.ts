@@ -20,6 +20,7 @@ export abstract class AbstractListener<T extends Event> {
   async listen() {
     const { parseMessage, onMessage } = this;
     try {
+      await this.consumer.subscribe({ topic: this.topic });
       await this.consumer.run({
         async eachMessage({ message }) {
           const parsedData = parseMessage(message);

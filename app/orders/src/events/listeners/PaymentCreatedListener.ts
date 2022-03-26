@@ -1,7 +1,7 @@
 import { Topic, AbstractListener, IPaymentCreated, OrderStatus } from '@weibuddies/common';
 import { orderDb } from '../../models/Order/Order';
 
-// Marks an order as complete upon payment
+// Mark an order as complete upon payment
 export class PaymentCreatedListener extends AbstractListener<IPaymentCreated> {
   topic: Topic.PaymentCreated = Topic.PaymentCreated;
 

@@ -1,12 +1,9 @@
-import { kafkaInit } from './kafka';
-import { orderCreatedListener } from './events/listeners/OrderCreatedListener';
-
-// How long should an order last before getting cancelled by this service
-const delay = 1000 * 60 * 60 * 24; // 1 day
+import { kafkaInit, consumer } from './kafka';
+import { OrderCreatedListener } from './events/listeners/OrderCreatedListener';
 
 const init = async () => {
   await kafkaInit();
-  await orderCreatedListener(delay); // When an order is created, cancel it after this delay
+  new OrderCreatedListener(consumer).listen();
 };
 
 init();

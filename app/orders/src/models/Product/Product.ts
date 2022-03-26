@@ -2,14 +2,14 @@ import { postgresDb } from './postgres';
 import { IProductDatabase } from './interface';
 
 const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
-  getProduct(id) {
-    return db.getProduct(id);
+  getProduct(productId) {
+    return db.getProduct(productId);
   },
-  createProduct(id, title, price) {
-    return db.createProduct(id, title, price);
+  createProduct(productId, title, price) {
+    return db.createProduct(productId, title, price);
   },
-  updateProduct(id, title, price) {
-    return db.updateProduct(id, title, price);
+  updateProduct(productId, title, price) {
+    return db.updateProduct(productId, title, price);
   },
 });
 

@@ -4,7 +4,7 @@ import { IOrderDatabase } from './interface';
 const pg = new Pool();
 
 export const postgresDb: IOrderDatabase = {
-  getOrder(id) {
+  getOrder(orderId) {
     return pg
       .query({
         name: 'getOrder',
@@ -12,13 +12,13 @@ export const postgresDb: IOrderDatabase = {
             SELECT * FROM orders 
             LEFT JOIN products 
             ON orders.product_id = products.id 
-            WHERE orders.product_id = $1;
+            WHERE orders.id = $1;
         `,
-        values: [id],
+        values: [orderId],
       })
       .then((data) => data.rows[0]);
   },
-  getOrders() {
+  getOrders(userId) {
     return pg
       .query({
         name: 'getOrders',
@@ -26,18 +26,20 @@ export const postgresDb: IOrderDatabase = {
             SELECT * FROM orders 
             LEFT JOIN products 
             ON orders.product_id = products.id;
+            WHERE orders.user_id = $1
           `,
+        values: [userId],
       })
-      .then((data) => data.rows[0]);
+      .then((data) => data.rows);
   },
-  setOrderStatus(id, newStatus) {
+  setOrderStatus(orderId, newStatus) {
     return pg
       .query({
         name: 'setOrderStatus',
         text: `UPDATE orders SET status = $2 WHERE id = $1;`,
-        values: [id, newStatus],
+        values: [orderId, newStatus],
       })
-      .then((data) => data.rows[0]);
+      .then(() => null);
   },
   createOrder(userId, status, expiresAt, productId) {
     return pg
@@ -47,7 +49,7 @@ export const postgresDb: IOrderDatabase = {
           SELECT 
             products.price, 
             products.id, 
-            (INSERT INTO orders(user_id, order_status, expires_at, product_id) VALUES ($1, $2, $3, $4) RETURNING *) 
+            (INSERT INTO orders (user_id, order_status, expires_at, product_id) VALUES ($1, $2, $3, $4) RETURNING *) 
           FROM products;
         `,
         values: [userId, status, expiresAt, productId],

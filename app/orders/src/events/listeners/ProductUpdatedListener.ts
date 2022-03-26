@@ -1,7 +1,7 @@
 import { Topic, AbstractListener, IProductCreated, IProductUpdated } from '@weibuddies/common';
 import { productDb } from '../../models/Product/Product';
 
-// Updates a product whenever it gets updated in app/products
+// Update a product whenever it's updated in app/products
 export class ProductUpdatedListener extends AbstractListener<IProductCreated> {
   topic: Topic.ProductCreated = Topic.ProductCreated;
 

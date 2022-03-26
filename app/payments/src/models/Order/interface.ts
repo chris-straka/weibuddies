@@ -10,7 +10,7 @@ export interface Order {
 
 export interface IOrderDatabase {
   getOrder: (orderId: string) => Promise<Order>;
-  setOrderStatus: (orderId: string, newStatus: OrderStatus) => Promise<Order>;
+  setOrderStatus: (orderId: string, newStatus: OrderStatus) => Promise<null>;
   createOrder: (
     id: string,
     price: number,

@@ -17,7 +17,7 @@ export const postgresDb: IOrderDatabase = {
     return pg
       .query({
         name: 'createOrder',
-        text: 'INSERT INTO orders VALUES ($1, $2, $3, $4);',
+        text: 'INSERT INTO orders (order_id, price, status, user_id, version) VALUES ($1, $2, $3, $4);',
         values: [id, price, status, userId, version],
       })
       .then((response) => response.rows[0]);

@@ -1,7 +1,7 @@
 import { Topic, AbstractListener, IProductCreated } from '@weibuddies/common';
 import { productDb } from '../../models/Product/Product';
 
-// Creates a product everytime a new one is created in app/products
+// Duplicate all new products from /app/products in the orders service too
 export class ProductCreatedListener extends AbstractListener<IProductCreated> {
   topic: Topic.ProductCreated = Topic.ProductCreated;
 
