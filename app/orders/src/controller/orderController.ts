@@ -7,7 +7,7 @@ import {
 import { Request, Response, NextFunction } from 'express';
 import { orderDb } from '../models/Order/Order';
 import { productDb } from '../models/Product/Product';
-import { OrderCreatedListener } from '../events/publishers/OrderCreatedPublisher';
+import { OrderCreatedPublisher } from '../events/publishers/OrderCreatedPublisher';
 import { OrderCancelledPublisher } from '../events/publishers/OrderCancelledPublisher';
 import { producer } from '../kafka';
 
@@ -59,13 +59,16 @@ export const newOrder = async (req: Request, res: Response, next: NextFunction) 
 
     const order = await orderDb.createOrder(userId, OrderStatus.Created, expiration, product.id);
 
-    new OrderCreatedListener(producer).publish({
+    new OrderCreatedPublisher(producer).publish({
       id: order.id,
       version: order.version,
       status: order.status,
       userId: order.userId,
       expiresAt: order.expiresAt.toISOString(),
-      productId: order.productId,
+      product: {
+        id: product.id,
+        price: product.price,
+      },
     });
 
     return res.status(201).send(order);

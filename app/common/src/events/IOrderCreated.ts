@@ -9,6 +9,9 @@ export interface IOrderCreated {
     status: OrderStatus;
     userId: string;
     expiresAt: string;
-    productId: string;
+    product: {
+      id: string;
+      price: number;
+    }
   };
 }

@@ -10,7 +10,7 @@ specifiers:
   '@types/supertest': ^2.0.11
   '@typescript-eslint/eslint-plugin': ^5.15.0
   '@typescript-eslint/parser': ^5.0.0
-  '@weibuddies/common': ^1.0.20
+  '@weibuddies/common': ^1.0.21
   cookie-session: ^2.0.0
   eslint: ^8.11.0
   eslint-config-airbnb-base: ^15.0.0
@@ -27,7 +27,7 @@ specifiers:
   typescript: ^4.5.5
 
 dependencies:
-  '@weibuddies/common': 1.0.20_typescript@4.5.5
+  '@weibuddies/common': 1.0.21_typescript@4.5.5
   cookie-session: 2.0.0
   express: 4.17.2
   express-validator: 6.14.0
@@ -964,8 +964,8 @@ packages:
       '@typescript-eslint/types': 5.15.0
       eslint-visitor-keys: 3.3.0
 
-  /@weibuddies/common/1.0.20_typescript@4.5.5:
-    resolution: {integrity: sha512-0q+PqrQxXlD94mMGnd9NOSqv0v+J5VvYZIC5Fk1g/t8zOc+Q4X0RP/JKiz1Hu0d/qL8GRqN594CSj9FNFA6PlQ==}
+  /@weibuddies/common/1.0.21_typescript@4.5.5:
+    resolution: {integrity: sha512-oo2LJVS/kI6fXqo25THNcNgzYF+hNOQgIQ2q7eb9FmXY2u6U0Tx7cP8ya+LsRQ5UpYKfOL6GioD4QlTjSuzUhw==}
     requiresBuild: true
     dependencies:
       '@types/cookie-session': 2.0.44
