@@ -21,8 +21,11 @@ You're going to need to install these tools to develop this application
 I used [WSL2](https://docs.microsoft.com/en-us/windows/wsl/compare-versions) to develop this application (linux), but instead of using minikube I used the kubernetes cluster that came with docker-desktop for windows. I left a bunch of commands you can use by visiting the Makefile at the root of this project. Here are some other helpful commands for reference.
 
 ```bash
-kubectl config current-context # see which k8s cluster you're using (i.e. the one skaffold is going to use)
-kubectl -n ingress-nginx get services -o wide -w ingress-nginx-controller # find the loadBalancer IP 
+# See which k8s cluster you're using (i.e. the one skaffold is going to use)
+kubectl config current-context 
+
+# Find the loadbalancer IP
+kubectl -n ingress-nginx get services -o wide -w ingress-nginx-controller 
 
 # If you need to install ingress-nginx
 helm upgrade --install ingress-nginx ingress-nginx \

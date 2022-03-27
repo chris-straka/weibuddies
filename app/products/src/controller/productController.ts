@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { NotFoundError, BadRequestError, NotAuthorizedError } from '@weibuddies/common';
 import { ProductCreatedPublisher } from '../events/publishers/ProductCreatedPublisher';
-import { producer } from '../kafka
+import { producer } from '../kafka';
 import { productDb } from '../models/Product';
 import { ProductUpdatedPublisher } from '../events/publishers/ProductUpdatedPublisher';
 
@@ -38,9 +38,9 @@ export const getProducts = async (req: Request, res: Response, next: NextFunctio
 export const createProduct = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.session) throw new Error('Not logged in');
-
     const { title, price } = req.body;
     const { userId } = req.session.jwt;
+
     const product = await productDb.createProduct(title, price, userId);
 
     new ProductCreatedPublisher(producer).publish({

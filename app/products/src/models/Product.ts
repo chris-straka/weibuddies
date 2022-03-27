@@ -2,8 +2,8 @@ import { IProductDatabase } from './interface';
 import { postgresDb } from './postgres';
 
 const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
-  getProduct(id) {
-    return db.getProduct(id);
+  getProduct(productId) {
+    return db.getProduct(productId);
   },
   getProductsFromLowerToUpper(lowerBound, upperBound) {
     return db.getProductsFromLowerToUpper(lowerBound, upperBound);
@@ -14,8 +14,8 @@ const ProductDatabase = (db: IProductDatabase): IProductDatabase => ({
   removeProduct(productId) {
     return db.removeProduct(productId);
   },
-  setOrderIdForProduct(productId, newOrderId) {
-    return db.setOrderIdForProduct(productId, newOrderId);
+  setOrderId(productId, newOrderId) {
+    return db.setOrderId(productId, newOrderId);
   },
   updateProduct(title, price) {
     return db.updateProduct(title, price);

@@ -14,5 +14,5 @@ export interface IProductDatabase {
   createProduct: (title: string, price: number, userId: string) => Promise<Product>;
   removeProduct: (productId: string) => Promise<Product>;
   updateProduct: (title: string, price: number) => Promise<Product>;
-  setOrderIdForProduct: (productId: string, newOrderId: string | null) => Promise<void>;
+  setOrderId: (productId: string, newOrderId: string | null) => Promise<null>;
 }

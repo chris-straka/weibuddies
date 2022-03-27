@@ -10,9 +10,6 @@ CREATE TABLE orders(
 
 CREATE TABLE payments(
   id SERIAL PRIMARY KEY,
-  user_id VARCHAR(40) NOT NULL,
-
-  user_id INTEGER NOT NULL,
-  product_id REFERENCES products(id)
-  price SMALLINT NOT NULL
+  user_id INTEGER UNIQUE NOT NULL,
+  stripe_id INTEGER UNIQUE NOT NULL
 );

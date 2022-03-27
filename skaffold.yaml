@@ -4,70 +4,69 @@ build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
 profiles:
-  - name: dev
-    build: 
+  - name: development
+    build:
       artifacts:
-      - image: cstudent/client
-        context: ./app/client
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          infer: # I had to sync things differently for vite-reload to work properly
-            - "**/*.ts"
-            - "**/*.vue"
-            - "**/*.scss"
-            - "**/*.css"
-      - image: cstudent/auth # build this image
-        context: ./app/auth # from this directory
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          manual:
-            - src: "src/**/*.ts" # please watch these files
-              dest: . # sync these files to the current directory of the running container
-      - image: cstudent/products
-        context: ./app/products
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/kafka-kraft
-        context: ./k8s/kafka/
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-      - image: cstudent/orders
-        context: ./app/orders
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/payments
-        context: ./app/payments
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/expiration
-        context: ./app/expiration
-        docker:
-          dockerfile: Dockerfile
-          target: dev
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
+        - image: cstudent/client
+          context: ./app/client
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            infer: # I had to sync things differently for vite-reload to work properly
+              - "**/*.ts"
+              - "**/*.vue"
+              - "**/*.scss"
+              - "**/*.css"
+        - image: cstudent/auth # build this image
+          context: ./app/auth # from this directory
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**/*.ts" # please watch these files
+                dest: . # sync these files to the current directory of the running container
+        - image: cstudent/products
+          context: ./app/products
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/kafka-kraft
+          context: ./k8s/kafka/
+          docker:
+            dockerfile: Dockerfile
+        - image: cstudent/orders
+          context: ./app/orders
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/payments
+          context: ./app/payments
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/expiration
+          context: ./app/expiration
+          docker:
+            dockerfile: Dockerfile
+            target: dev
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
     deploy:
       kubectl:
         manifests:
@@ -79,70 +78,69 @@ profiles:
           - ./k8s/ingress-config.yaml
           - ./k8s/expiration/*
           - ./k8s/kafka/kafka.yaml
-  - name: prod
-    build: 
+  - name: production
+    build:
       artifacts:
-      - image: cstudent/client
-        context: ./app/client
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          infer: # I had to sync things differently for vite-reload to work properly
-            - "**/*.ts"
-            - "**/*.vue"
-            - "**/*.scss"
-            - "**/*.css"
-      - image: cstudent/auth # build this image
-        context: ./app/auth # from this directory
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          manual:
-            - src: "src/**/*.ts" # please watch these files
-              dest: . # sync these files to the current directory of the running container
-      - image: cstudent/products
-        context: ./app/products
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/kafka-kraft
-        context: ./k8s/kafka/
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-      - image: cstudent/orders
-        context: ./app/orders
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/payments
-        context: ./app/payments
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
-      - image: cstudent/expiration
-        context: ./app/expiration
-        docker:
-          dockerfile: Dockerfile
-          target: prod
-        sync:
-          manual:
-            - src: "src/**/*.ts"
-              dest: .
+        - image: cstudent/client
+          context: ./app/client
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            infer: # I had to sync things differently for vite-reload to work properly
+              - "**/*.ts"
+              - "**/*.vue"
+              - "**/*.scss"
+              - "**/*.css"
+        - image: cstudent/auth # build this image
+          context: ./app/auth # from this directory
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            manual:
+              - src: "src/**/*.ts" # please watch these files
+                dest: . # sync these files to the current directory of the running container
+        - image: cstudent/products
+          context: ./app/products
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/kafka-kraft
+          context: ./k8s/kafka/
+          docker:
+            dockerfile: Dockerfile
+        - image: cstudent/orders
+          context: ./app/orders
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/payments
+          context: ./app/payments
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
+        - image: cstudent/expiration
+          context: ./app/expiration
+          docker:
+            dockerfile: Dockerfile
+            target: prod
+          sync:
+            manual:
+              - src: "src/**/*.ts"
+                dest: .
     deploy:
       kubectl:
         manifests:

@@ -8,7 +8,7 @@ export const postgresDb: IProductDatabase = {
     return pg
       .query({
         name: 'getProduct',
-        text: 'SELECT * FROM orders WHERE id = $1;',
+        text: 'SELECT * FROM products WHERE id = $1;',
         values: [productId],
       })
       .then((data) => data.rows[0]);
@@ -16,8 +16,12 @@ export const postgresDb: IProductDatabase = {
   getProductsFromLowerToUpper(lowerBound, upperBound) {
     return pg
       .query({
-        name: 'getProductsFromPage',
-        text: 'SELECT * FROM orders ORDER BY date_created DESC OFFSET $1 LIMIT $2 WHERE order_id = NULL;',
+        name: 'getProductsFromLowerToUpper',
+        text: `
+          SELECT * FROM products 
+          ORDER BY date_created DESC OFFSET $1 LIMIT $2 
+          WHERE order_id = NULL;
+        `,
         values: [lowerBound, upperBound],
       })
       .then((data) => data.rows);
@@ -26,7 +30,10 @@ export const postgresDb: IProductDatabase = {
     return pg
       .query({
         name: 'createProduct',
-        text: 'INSERT INTO products(title, price, userId) VALUES ($1, $2, $3) RETURNING *;',
+        text: `
+          INSERT INTO products (title, price, userId) 
+          VALUES ($1, $2, $3) RETURNING *;
+        `,
         values: [title, price, userId],
       })
       .then((data) => data.rows[0]);
@@ -35,7 +42,7 @@ export const postgresDb: IProductDatabase = {
     return pg
       .query({
         name: 'updateProduct',
-        text: 'UPDATE products SET title = $1 AND price = $2 RETURNING *;',
+        text: 'UPDATE products SET title = $1, price = $2 RETURNING *;',
         values: [title, price],
       })
       .then((data) => data.rows[0]);
@@ -49,13 +56,13 @@ export const postgresDb: IProductDatabase = {
       })
       .then((data) => data.rows[0]);
   },
-  setOrderIdForProduct(productId, newOrderId) {
+  setOrderId(productId, newOrderId) {
     return pg
       .query({
-        name: 'removeOrderIdFromProduct',
+        name: 'setOrderId',
         text: 'UPDATE products SET order_id = $2 WHERE id = $1;',
         values: [productId, newOrderId],
       })
-      .then((data) => data.rows[0]);
+      .then(() => null);
   },
 };

@@ -14,11 +14,11 @@ install:
 # Boot up all the microservices using k8s
 # http://localhost:80
 dev: 
-	skaffold dev -p dev
+	skaffold dev -p development
 
 # Deploy to production
 deploy: 
-	skaffold dev -p prod
+	skaffold dev -p production
 
 # Boot up just a single microservice using docker compose
 # http://localhost:3000

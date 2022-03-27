@@ -23,3 +23,7 @@ My skaffold file is massive because I repeat myself for both profiles (dev and p
 ## Jest stuff
 
 I think I like using Jest over Postman when testing out an API. I'm also realizing, that the way I structure my application has a big effect on my tests. Usually, the more I optimize my code for tests, the less coupling my code ends up having which is really nice. I want to be able to create integration tests between all my microservices but it seems tricky with kafka. I don't have the expertise for those kinds of tests right now so I might have to come back to that later, because tests would be really helpful in this regard.
+
+## Distroless Overhyped?
+
+I see a lot of discussion over whether distroless images even matter like this [redhat article](https://www.redhat.com/en/blog/why-distroless-containers-arent-security-solution-you-think-they-are). It might make it harder to scan my images, but I'll give them a shot for now.

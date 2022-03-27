@@ -8,7 +8,7 @@ export const postgresDb: IPaymentDatabase = {
     return pg
       .query({
         name: 'createPayment',
-        text: 'INSERT INTO payments(order_id, payment_id) VALUES ($1, $2) RETURNING *;',
+        text: 'INSERT INTO payments (order_id, payment_id) VALUES ($1, $2) RETURNING *;',
         values: [orderId, paymentId],
       })
       .then((response) => response.rows[0]);
