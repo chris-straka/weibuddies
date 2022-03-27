@@ -1,7 +1,6 @@
 SHELL := /bin/bash
 
-# Install all the dependencies for each service locally
-# So you don't get the typescript errors everywhere
+# Install dependencies for each microservice locally so you don't get errors 
 install:
 	pushd ./app/auth && pnpm i && popd && \
 	pushd ./app/client && pnpm i && popd && \
@@ -11,12 +10,11 @@ install:
 	pushd ./app/payments && pnpm i && popd && \
 	pushd ./app/products && pnpm i && popd \
 
-# Boot up all the microservices using k8s
-# http://localhost:80
+# Boot up all microservices on k8s http://localhost:80
 dev: 
-	skaffold dev -p development
+	skaffold dev 
 
-# Deploy to production
+# Deploy all microservices to production
 deploy: 
 	skaffold dev -p production
 

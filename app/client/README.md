@@ -1,5 +1,10 @@
 # client
 
+This is the frontend for weibuddies. If you use `pnpm dev`, the frontend will be served off port 3000. If you use dev:k8s the frontend will be served off port 80 because of my k8s ingress.
+
+
+# Everything Below is the auto-generated vue vite readme
+
 - [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup)o
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 - [setup attribute](https://vuejs.org/api/sfc-script-setup.html) tags enables the composition API. 

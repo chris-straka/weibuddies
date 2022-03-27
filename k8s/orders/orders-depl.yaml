@@ -26,11 +26,3 @@ spec:
               value: "jeff"
             - name: JWT_KEY
               value: "jeff"
-            - name: NATS_CLUSTER_ID
-              value: "products"
-            - name: NATS_URL
-              value: "http://nats-cluster-ip:4222"
-            - name: NATS_CLIENT_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name

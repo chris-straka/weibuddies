@@ -1,5 +1,5 @@
 import { AbstractListener, Topic, IOrderCreated } from '@weibuddies/common';
-import { expirationQueue } from '../../kafka';
+import { expirationQueue } from '../../queue';
 
 export class OrderCreatedListener extends AbstractListener<IOrderCreated> {
   topic: Topic.OrderCreated = Topic.OrderCreated;

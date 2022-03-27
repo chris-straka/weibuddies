@@ -16,7 +16,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: '/mnt/data'
+    path: "/mnt/data"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -41,7 +41,7 @@ metadata:
 spec:
   clusterIP: None
   ports:
-    - name: '9092'
+    - name: "9092"
       port: 9092
       protocol: TCP
       targetPort: 9092
@@ -78,7 +78,7 @@ spec:
             - containerPort: 9093
           env:
             - name: REPLICAS
-              value: '3'
+              value: "3"
             - name: SERVICE
               value: kafka-svc
             - name: NAMESPACE

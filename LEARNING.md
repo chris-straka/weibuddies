@@ -18,7 +18,7 @@ It somehow slipped my mind, but I just realized that the google search crawler c
 
 ## Skaffold stuff
 
-My skaffold file is massive because I repeat myself for both profiles (dev and production). I think I need to check out how to pass environment variables into the same profile so I can keep things dry. I'm not sure how I want to do that, I think I might have to use kustomize or something like that. There might be something I can do with skaffold too, not sure.
+My skaffold file is massive because I repeat myself for both profiles (development and production). I think I need to figure out how to use the same profile twice because it's quite verbose (using env vars). I'm not sure how to do that though (kuztomize? skaffold?). Development is kind of slow on skaffold too (bringing the services online).
 
 ## Jest stuff
 

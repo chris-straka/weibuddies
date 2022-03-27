@@ -1,11 +1,10 @@
 import { Kafka } from 'kafkajs';
 
-if (!process.env.CLIENT_ID) throw new Error('Client-ID must be defined');
-if (!process.env.BROKERS) throw new Error("Can't find a list of brokers");
+if (!process.env.KAFKA_ADVERTISED_LISTENERS) throw new Error("Can't find a list of brokers");
 
 const kafka = new Kafka({
-  clientId: process.env.CLIENT_ID,
-  brokers: process.env.BROKERS.split(' '),
+  clientId: 'paymentService',
+  brokers: process.env.KAFKA_ADVERTISED_LISTENERS.split(' '),
   requestTimeout: 3000,
   connectionTimeout: 6000,
   ssl: false,

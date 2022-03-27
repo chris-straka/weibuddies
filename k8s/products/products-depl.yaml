@@ -16,14 +16,6 @@ spec:
         - name: products
           image: cstudent/products
           env:
-            - name: NATS_CLUSTER_ID
-              value: "products"
-            - name: NATS_CLIENT_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: NATS_URL
-              value: "http://nats-cluster-ip:4222"
             - name: PGDATABASE
               value: "payments-database"
             - name: PGHOST
@@ -34,3 +26,4 @@ spec:
               value: "jeff"
             - name: JWT_KEY
               value: "jeff"
+              # Kafka has to go here

@@ -16,14 +16,6 @@ spec:
         - name: payments
           image: cstudent/payments
           env:
-            - name: NATS_CLUSTER_ID
-              value: "products"
-            - name: NATS_CLIENT_ID
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.name
-            - name: NATS_URL
-              value: "http://nats-cluster-ip:4222"
             - name: PGHOST
               value: auth-postgres-cluster-ip
             - name: PGUSER
