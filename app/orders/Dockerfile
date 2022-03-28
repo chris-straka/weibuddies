@@ -3,10 +3,10 @@ RUN mkdir /app && chown node:node /app
 WORKDIR /app
 RUN corepack enable 
 COPY --chown=node:node package.json pnpm-lock.yaml ./
-RUN corepack prepare pnpm@6.32.3 --activate
 
 FROM base as dev
-ENV NODE_ENV=development
+USER node
+RUN corepack prepare pnpm@6.32.3 --activate
 RUN pnpm install 
 COPY . .
 CMD [ "pnpm", "dev" ]
@@ -17,6 +17,7 @@ RUN pnpm build
 
 FROM base as dependencies
 USER node
+RUN corepack prepare pnpm@6.32.3 --activate
 RUN pnpm install -P
 
 FROM gcr.io/distroless/nodejs:16 as prod

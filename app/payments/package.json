@@ -7,6 +7,7 @@
     "preinstall": "npx only-allow pnpm",
     "dev": "ts-node-dev src/index.ts",
     "build": "tsc -b",
+    "build:docker": "docker build . -t payments --no-cache",
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest",
     "lint": "eslint . --ext .ts --fix --ignore-path .gitignore"

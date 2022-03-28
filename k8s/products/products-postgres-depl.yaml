@@ -21,4 +21,4 @@ spec:
             - name: POSTGRES_USER
               value: "products"
             - name: POSTGRES_PASSWORD
-              value: "jeff"
+              value: ${POSTGRES_PASSWORD}

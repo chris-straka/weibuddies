@@ -1,5 +1,5 @@
 import { AbstractListener, IOrderCancelled, Topic, OrderStatus } from '@weibuddies/common';
-import { orderDb } from 'models/Order/Order';
+import { orderDb } from '../../models/Order/Order';
 
 // When an order has been cancelled, make sure to cancel it here too
 export class OrderCancelledListener extends AbstractListener<IOrderCancelled> {

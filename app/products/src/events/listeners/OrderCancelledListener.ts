@@ -3,14 +3,16 @@ import { productDb } from '../../models/Product';
 import { ProductUpdatedPublisher } from '../publishers/ProductUpdatedPublisher';
 import { producer } from '../../kafka';
 
-// When an order is cancelled, I want to make sure that it's no longer attached to the product
+// When an order gets cancelled in the orders service...
+// I want to make sure that the product is no longer associated with that order
+
 export class OrderCancelledListener extends AbstractListener<IOrderCancelled> {
   topic: Topic.OrderCancelled = Topic.OrderCancelled;
 
   async onMessage(data: IOrderCancelled['data']) {
     const product = await productDb.getProduct(data.productId);
     if (!product) throw new Error('Product not found');
-    await productDb.setOrderIdForProduct(data.productId, null);
+    await productDb.setOrderId(data.productId, null);
 
     await new ProductUpdatedPublisher(producer).publish({
       id: product.id,
