@@ -14,6 +14,9 @@ install:
 dev: 
 	skaffold dev 
 
+devclean: 
+	skaffold dev --cache-artifacts-false
+
 # Deploy all microservices to production
 prod: 
 	skaffold dev -p production

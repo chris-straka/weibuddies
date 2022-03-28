@@ -3,12 +3,15 @@ kind: Config
 build:
   local:
     push: false # don't push images to docker hub after skaffold builds them
+    concurrency: 0
   artifacts:
     - image: cstudent/auth # build this image
       context: ./app/auth # from this directory
       docker:
         dockerfile: Dockerfile
         target: dev
+        buildArgs: 
+          FOO: "yep"
       sync:
         manual:
           - src: "src/**/*.ts" # please watch these files
