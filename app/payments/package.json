@@ -6,6 +6,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "ts-node-dev src/index.ts",
+    "build": "tsc -b",
     "test": "jest --watchAll --no-cache",
     "test:ci": "jest",
     "lint": "eslint . --ext .ts --fix --ignore-path .gitignore"

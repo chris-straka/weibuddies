@@ -15,7 +15,7 @@ dev:
 	skaffold dev 
 
 # Deploy all microservices to production
-deploy: 
+prod: 
 	skaffold dev -p production
 
 # Boot up just a single microservice using docker compose
