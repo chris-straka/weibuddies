@@ -10,8 +10,6 @@ build:
       docker:
         dockerfile: Dockerfile
         target: dev
-        buildArgs: 
-          FOO: "yep"
       sync:
         manual:
           - src: "src/**/*.ts" # please watch these files

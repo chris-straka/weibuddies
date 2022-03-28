@@ -10,5 +10,5 @@ const init = () => {
 init();
 
 app.listen(PORT, () => {
-  console.log(`[Auth] Express server listening on port ${PORT}!`);
+  console.log(`Express server listening on port ${PORT}!`);
 });

@@ -16,14 +16,13 @@ spec:
         - name: products
           image: cstudent/products
           env:
-            - name: PGDATABASE
-              value: "payments-database"
             - name: PGHOST
-              value: products-postgres-cluster-ip
+              value: "products-postgres-cluster-ip"
+            - name: PGDATABASE
+              value: "products-database"
             - name: PGUSER
               value: "products"
             - name: PGPASSWORD
-              value: "jeff"
+              value: "${POSTGRES_PASSWORD}"
             - name: JWT_KEY
-              value: "jeff"
-              # Kafka has to go here
+              value: "${JWT_KEY}"

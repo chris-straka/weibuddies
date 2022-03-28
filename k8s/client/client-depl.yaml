@@ -17,4 +17,4 @@ spec:
           image: cstudent/client
           env:
             - name: JWT_KEY
-              value: "jeff"
+              value: ${JWT_KEY}

@@ -12,7 +12,6 @@ COPY . .
 CMD [ "pnpm", "dev" ]
 
 FROM dev as build
-USER node
 RUN pnpm build
 
 FROM base as dependencies

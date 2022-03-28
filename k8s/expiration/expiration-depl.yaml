@@ -17,4 +17,4 @@ spec:
           image: cstudent/expiration
           env:
             - name: REDIS_HOST
-              value: expiration-redis-cluster-ip
+              value: "expiration-redis-cluster-ip"

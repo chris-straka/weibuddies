@@ -17,18 +17,14 @@ spec:
           image: cstudent/payments
           env:
             - name: PGHOST
-              value: auth-postgres-cluster-ip
+              value: "payments-postgres-cluster-ip"
             - name: PGUSER
               value: "payments"
             - name: PGDATABASE
               value: "payments-database"
             - name: PGPASSWORD
-              value: "jeff"
+              value: "${POSTGRES_PASSWORD}"
             - name: JWT_KEY
-              value: "jeff"
+              value: "${JWT_KEY}"
             - name: STRIPE_KEY
-              value: "jeff"
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: stripe-secret
-              #     key: STRIPE_KEY
+              value: "${STRIPE_KEY}"

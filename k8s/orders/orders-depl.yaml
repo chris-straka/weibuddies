@@ -17,12 +17,12 @@ spec:
           image: cstudent/orders
           env:
             - name: PGHOST
-              value: orders-postgres-cluster-ip
+              value: "orders-postgres-cluster-ip"
             - name: PGUSER
               value: "orders"
             - name: PGDATABASE
               value: "orders-database"
             - name: PGPASSWORD
-              value: "jeff"
+              value: "${POSTGRES_PASSWORD}"
             - name: JWT_KEY
-              value: "jeff"
+              value: "${JWT_KEY}"

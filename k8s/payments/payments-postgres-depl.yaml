@@ -21,4 +21,4 @@ spec:
             - name: POSTGRES_DB
               value: "payments-database"
             - name: POSTGRES_PASSWORD
-              value: "jeff"
+              value: "${POSTGRES_PASSWORD}"

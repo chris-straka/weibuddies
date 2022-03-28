@@ -17,12 +17,12 @@ spec:
           image: cstudent/auth
           env:
             - name: PGHOST
-              value: auth-postgres-cluster-ip
+              value: "auth-postgres-cluster-ip"
             - name: PGUSER
-              value: "jeff"
+              value: "auth"
             - name: PGDATABASE
               value: "auth-database"
             - name: PGPASSWORD
-              value: "jeff"
+              value: "${POSTGRES_PASSWORD}"
             - name: JWT_KEY
-              value: "jeff"
+              value: "${JWT_KEY}"
