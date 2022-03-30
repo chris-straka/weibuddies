@@ -1,4 +1,4 @@
-# Contributing 
+# Contributing
 
 You're going to need to install these tools to develop this application
 
@@ -18,7 +18,7 @@ You're going to need to install these tools to develop this application
 
 - [Make](https://stackoverflow.com/questions/32127524/how-to-install-and-use-make-in-windows)
 
-- [Kubeseal*](https://github.com/bitnami-labs/sealed-secrets)
+- [Kubeseal\*](https://github.com/bitnami-labs/sealed-secrets)
 
 * Only if you intend to change the sealed password for the secret.yaml
 
@@ -26,10 +26,10 @@ I used [WSL2](https://docs.microsoft.com/en-us/windows/wsl/compare-versions) to 
 
 ```bash
 # See which k8s cluster you're using (i.e. the one skaffold is going to use)
-kubectl config current-context 
+kubectl config current-context
 
 # Find the loadbalancer IP
-kubectl -n ingress-nginx get services -o wide -w ingress-nginx-controller 
+kubectl -n ingress-nginx get services -o wide -w ingress-nginx-controller
 
 # If you need to install ingress-nginx
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -38,13 +38,16 @@ helm upgrade --install ingress-nginx ingress-nginx \
 
 # If you need to install sealed secrets
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+
+# To grab changes for the git submodule directory
+git pull --recurse-submodules
 ```
 
 The default memory that WSL2 allots to docker-desktop is 2GB, which is probably not enough (at least it wasn't for me when I tried it). I had to go to %USERPROFILE% on my windows computer and create a [.wslconfig file](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) to add more memory. My .wslconfig looks like this
 
 ```
 [wsl2]
-memory=6GB 
+memory=6GB
 ```
 
 ## Kafka
