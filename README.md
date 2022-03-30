@@ -17,3 +17,4 @@ This [app](https://github.com/Chris56974/wei-buddies) is basically [kijiji](http
 - [Abdelrahman Awad's composable functions](https://logaretm.com/blog/my-favorite-5-vuejs-composables)
 - [Robin Moffatt's helpful post on kafka-listeners](https://rmoff.net/2018/08/02/kafka-listeners-explained)
 - [Bitnami for the sealed secret controller & kubeseal](https://github.com/bitnami-labs/sealed-secrets)
+- [Code magic's helpful video bitnami and argo](https://www.youtube.com/watch?v=FJBmovA2Ej4)

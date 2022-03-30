@@ -36,14 +36,21 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace
 
-# If you need to install sealed secrets
+# If you want to use helm to install sealedSecrets
 helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
+
+# create an encrypted secrets file
+kubectl create secret generic mysecret --dry-run=client --from-literal foo=bar --output json | kubeseal | tee mysecret.yaml
 
 # To do a git pull on the submodules 
 git pull --recurse-submodules
 
 # To grab the latest changes from a git submodule
+cd weibuddies-iac && git pull origin master
+
+# this might be a shorthand, haven't tried it yet
 git submodule update --remote --merge
+
 ```
 
 The default memory that WSL2 allots to docker-desktop is 2GB, which is probably not enough (at least it wasn't for me when I tried it). I had to go to %USERPROFILE% on my windows computer and create a [.wslconfig file](https://docs.microsoft.com/en-us/windows/wsl/wsl-config#configure-global-options-with-wslconfig) to add more memory. My .wslconfig looks like this
