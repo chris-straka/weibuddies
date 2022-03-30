@@ -68,14 +68,15 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./k8s/client/*
+      - ./k8s/_secrets/*
       - ./k8s/auth/*
-      - ./k8s/orders/*
-      - ./k8s/products/*
-      - ./k8s/payments/*
-      - ./k8s/ingress-config.yaml
+      - ./k8s/client/*
       - ./k8s/expiration/*
       - ./k8s/kafka/kafka.yaml
+      - ./k8s/orders/*
+      - ./k8s/payments/*
+      - ./k8s/products/*
+      - ./k8s/ingress-config.yaml
 profiles:
   - name: production
     patches:

@@ -27,3 +27,7 @@ I think I like using Jest over Postman when testing out an API. I'm also realizi
 ## Distroless Overhyped?
 
 I see a lot of discussion over whether distroless images even matter like this [redhat article](https://www.redhat.com/en/blog/why-distroless-containers-arent-security-solution-you-think-they-are). It might make it harder to scan my images, but I'll give them a shot for now.
+
+## I should've been using a linter a long time ago
+
+It's done great things for my code in this project (prevented cyclic dependencies, made things consistent). And after reading this excellent [blog post by Pau Ramon Revilla](https://labs.factorialhr.com/posts/hooks-considered-harmful), it even seems like some of the pitfalls of different JS frameworks can be caught by a linter as well (to an extent).

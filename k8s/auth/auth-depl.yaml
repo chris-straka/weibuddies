@@ -26,3 +26,8 @@ spec:
               value: "${POSTGRES_PASSWORD}"
             - name: JWT_KEY
               value: "${JWT_KEY}"
+            - name: FOO
+              valueFrom:
+                secretKeyRef:
+                  name: weibuddies-secrets
+                  key: FOO
