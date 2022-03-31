@@ -2,9 +2,11 @@ import { Kafka } from 'kafkajs';
 
 if (!process.env.KAFKA_ADVERTISED_LISTENERS) throw new Error("Can't find a list of brokers");
 
+const kafkaBrokers = process.env.KAFKA_ADVERTISED_LISTENERS.split(' ');
+
 const kafka = new Kafka({
   clientId: 'productService',
-  brokers: process.env.KAFKA_ADVERTISED_LISTENERS.split(' '),
+  brokers: kafkaBrokers,
   requestTimeout: 3000,
   connectionTimeout: 6000,
   ssl: false,

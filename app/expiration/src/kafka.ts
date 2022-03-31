@@ -4,7 +4,7 @@ if (!process.env.KAFKA_ADVERTISED_LISTENERS) throw new Error("Can't find kafka b
 
 const kafkaBrokers = process.env.KAFKA_ADVERTISED_LISTENERS.split(' ');
 
-export const kafka = new Kafka({
+const kafka = new Kafka({
   clientId: 'expirationService',
   brokers: kafkaBrokers,
   retry: {
