@@ -68,7 +68,7 @@ build:
 deploy:
   kubectl:
     manifests:
-      - ./weibuddies-iac/k8s/_secrets/*
+      - ./weibuddies-iac/k8s/_secrets/development.yaml
       - ./weibuddies-iac/k8s/auth/*
       - ./weibuddies-iac/k8s/client/*
       - ./weibuddies-iac/k8s/expiration/*
