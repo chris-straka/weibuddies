@@ -47,14 +47,12 @@ helm repo add sealed-secrets https://bitnami-labs.github.io/sealed-secrets
 # you can create an encrypted secrets file using this
 kubectl create secret generic mysecret --dry-run=client --from-literal foo=bar --output json | kubeseal | tee mysecret.yaml
 
-# to do a git pull on submodules 
+# To do a git pull on the submodule and grab the commit
 git pull --recurse-submodules
 
 # To grab the latest changes from a git submodule
 cd weibuddies-iac && git pull origin master
-
-# this is a shorthand I think, haven't tried it yet
-git submodule update --remote --merge
+git submodule update --remote --merge # shorthand
 ```
 
 ## Kafka
