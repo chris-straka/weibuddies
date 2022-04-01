@@ -6,7 +6,7 @@ COPY --chown=node:node package.json pnpm-lock.yaml ./
 
 FROM base as dev
 USER node
-RUN corepack prepare pnpm@6.32.3 --activate
+RUN corepack prepare pnpm@6.32.4 --activate
 RUN pnpm install 
 COPY . .
 CMD [ "pnpm", "dev" ]
@@ -17,7 +17,7 @@ RUN pnpm build
 
 FROM base as dependencies
 USER node
-RUN corepack prepare pnpm@6.32.3 --activate
+RUN corepack prepare pnpm@6.32.4 --activate
 RUN pnpm install -P
 
 FROM gcr.io/distroless/nodejs:16 as prod
