@@ -62,7 +62,7 @@ build:
           - src: "src/**/*.ts"
             dest: .
     - image: cstudent/kafka-kraft
-      context: ./k8s/kafka/
+      context: ./weibuddies-iac/k8s/kafka/
       docker:
         dockerfile: Dockerfile
 deploy:
@@ -72,7 +72,7 @@ deploy:
       - ./weibuddies-iac/k8s/auth/*
       - ./weibuddies-iac/k8s/client/*
       - ./weibuddies-iac/k8s/expiration/*
-      - ./weibuddies-iac/k8s/kafka/kafka.yaml
+      - ./weibuddies-iac/k8s/kafka/development.yaml
       - ./weibuddies-iac/k8s/orders/*
       - ./weibuddies-iac/k8s/payments/*
       - ./weibuddies-iac/k8s/products/*
@@ -100,4 +100,4 @@ profiles:
         value: prod
       - op: replace
         path: /deploy/kubectl/manifests/4
-        value: ./weibuddies-iac/k8s/kafka/kafka-prod.yaml
+        value: ./weibuddies-iac/k8s/kafka/production.yaml
