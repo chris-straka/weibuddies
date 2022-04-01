@@ -51,7 +51,7 @@ kubectl create secret generic mysecret --dry-run=client --from-literal foo=bar -
 git pull --recurse-submodules
 
 # To grab the latest changes from a git submodule
-cd weibuddies-iac && git pull origin master
+cd weibuddies-iac && git pull origin main
 git submodule update --remote --merge # shorthand
 ```
 
