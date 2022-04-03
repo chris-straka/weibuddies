@@ -73,11 +73,7 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
         <n-form-item label="Email" path="user.email" :show-require-mark="false">
           <n-input placeholder="Email" v-model:value="formValue.user.email" />
         </n-form-item>
-        <n-form-item
-          label="Password"
-          path="user.password"
-          :show-require-mark="false"
-        >
+        <n-form-item label="Password" path="user.password" :show-require-mark="false">
           <n-input
             type="password"
             placeholder="Password"

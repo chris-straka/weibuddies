@@ -8,7 +8,7 @@ const kafka = new Kafka({
   clientId: 'expirationService',
   brokers: kafkaBrokers,
   retry: {
-    retries: 15,
+    retries: 20,
   },
 });
 

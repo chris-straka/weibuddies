@@ -6,7 +6,7 @@ I ran into [this error](https://www.orchome.com/10529) and it was hard to figure
 
 ## Honestly, working with Kafka in general is tricky sometimes
 
-I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think my tests would be that useful. But running Kafka in a container is still not that great either because kafka kraft is really noisy and takes a while to start in a container. I think I just need more experience on kafka and docker in order to do this properly because my containers aren't shutting down correctly and I'm getting strange errors from jest (despite all the tests passing). 
+I ran into a myriad of problems [like the one this guy had](https://github.com/confluentinc/examples/issues/398). I also had troubles setting up tests with kafka. I don't want to mock kafka because I don't think my tests would be that useful. But running Kafka in a container for all my tests is not that great either because it takes a while to start and it's quite noisy and my containers don't shut down properly when I run jest.
 
 ## Choice of hash function
 
@@ -16,9 +16,28 @@ I was originally going to use bcrypt, but I decided on scrypt instead (using the
 
 It somehow slipped my mind, but I just realized that the google search crawler can't crawl anything that requires user authentication (it can't create an account and sign in). My original idea would've been completely disastrous for SEO lol and it changes the site in a lot of ways on the frontend.
 
-## Skaffold stuff
+## Deployment stuff
 
-My skaffold file is massive because I repeat myself for both profiles (development and production). I think I need to figure out how to use the same profile twice because it's quite verbose (using env vars). I'm not sure how to do that though (kuztomize? skaffold?). Development is kind of slow on skaffold too (bringing the services online).
+In docker, I could pass in environment variables from the host into the container like this
+
+```yaml
+environment:
+  FOO: $FOO
+```
+
+and then have a CI/CD pass in a different value for FOO for production. But in k8s, it doesn't look like I can do that anymore. It seems like I have to use secrets and configMaps instead.
+
+```yaml
+env: 
+- name: FOO
+  value: $FOO # doesn't work
+```
+
+I tried using kaniko, which is supported by skaffold and accepts env variables for each pod (using Skaffold's templated fields) but kaniko couldn't build some of my images for some reason and I wasn't sure how to debug it. I also thought about using an environment.config a file and then changing it later using a CI/CD so that it had different values for production. In the end, I went with bitnami sealed secrets.
+
+I also wasn't sure how I wanted to split up my development environment and my production environment. Skaffold has the same issue as k8s where I can't interpolate environment variables from the host unless if it was for a templated field. So my skaffold file used to be massive with duplicate config until I used skaffold patches. I haven't looked into kustomize but maybe that was an even better solution.
+
+I originally chose skaffold because I wanted the same familiar DX I had with docker compose. But I'm not sure if it makes sense for what I'm doing. My computer is starting to slow down with 12 services, and kafka is making it harder to understand things conceptually, especially when faced with the occassional error message. 
 
 ## Jest stuff
 

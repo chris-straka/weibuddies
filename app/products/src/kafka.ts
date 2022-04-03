@@ -7,9 +7,9 @@ const kafkaBrokers = process.env.KAFKA_ADVERTISED_LISTENERS.split(' ');
 const kafka = new Kafka({
   clientId: 'productService',
   brokers: kafkaBrokers,
-  requestTimeout: 3000,
-  connectionTimeout: 6000,
-  ssl: false,
+  retry: {
+    retries: 20,
+  },
 });
 
 export const producer = kafka.producer();

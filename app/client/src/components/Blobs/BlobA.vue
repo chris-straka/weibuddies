@@ -28,17 +28,16 @@
 }
 
 #stop_one {
-  stop-color: var(--primary);
+  stop-color: var(--primary-blob);
 }
 
 #stop_two {
-  stop-color: var(--secondary);
+  stop-color: var(--secondary-blob);
 }
 
 /* 
-  It's unfortunate but I dont think I can pass in the paths as props 
-  [I tried this](https://stackoverflow.com/questions/42872002) but it 
-  doesn't seem to work.
+  I dont think I can pass in the paths as props 
+  [I tried this](https://stackoverflow.com/questions/42872002) but it doesn't seem to work.
 */
 @keyframes move_blobs {
   0% {

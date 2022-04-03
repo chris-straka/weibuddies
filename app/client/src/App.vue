@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import HomeVue from "./pages/Home/Home.vue";
+import NavbarVue from "./components/Navbar/Navbar.vue";
+import HomePage from "./pages/Home/Home.vue";
 import { darkTheme, NConfigProvider, NLoadingBarProvider } from "naive-ui";
 let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
   ? darkTheme
@@ -9,7 +10,8 @@ let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 <template>
   <n-config-provider :theme="colorScheme">
     <n-loading-bar-provider>
-      <HomeVue />
+      <NavbarVue />
+      <HomePage />
     </n-loading-bar-provider>
   </n-config-provider>
 </template>
@@ -24,10 +26,10 @@ let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 }
 
 :root {
-  --primary: hsl(89, 58%, 75%);
-  --primary-blob: hsl(89, 58%, 82%);
-  --secondary: hsl(207, 87%, 67%);
-  --secondary-blob: hsl(207, 87%, 82%);
+  --primary: hsl(160, 69%, 64%);
+  --primary-blob: hsl(89, 58%, 75%);
+  --secondary: hsl(200, 72%, 67%);
+  --secondary-blob: hsl(207, 87%, 67%);
   --background-color: hsl(216, 20%, 95%);
   --font: Avenir, Helvetica, Arial, sans-serif;
 
