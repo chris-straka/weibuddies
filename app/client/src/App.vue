@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import NavbarVue from "./components/Navbar/Navbar.vue";
-import HomePage from "./pages/Home/Home.vue";
+import NavbarVue from "@/components/Navbar/Navbar.vue";
+import HomePage from "@/pages/HomePage/HomePage.vue";
 import { darkTheme, NConfigProvider, NLoadingBarProvider } from "naive-ui";
+
 let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
   ? darkTheme
   : null;

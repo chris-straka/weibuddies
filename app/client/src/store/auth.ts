@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { usePostFetch } from "@/composables/usePostFetch";
+import { useFetch } from "@/composables/useFetch";
 
 interface User {
   email: string;
@@ -17,10 +17,10 @@ export const authStore = defineStore("auth", {
   },
   actions: {
     login(userCredentials: User) {
-      return usePostFetch("/api/users/login", userCredentials);
+      return useFetch("/api/users/login", userCredentials);
     },
     signup(userCredentials: User) {
-      return usePostFetch("/api/users/signup", userCredentials);
+      return useFetch("/api/users/signup", userCredentials);
     },
     logout() {
       return fetch("/api/users/logout");
