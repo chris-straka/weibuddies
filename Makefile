@@ -1,5 +1,13 @@
 SHELL := /bin/bash
 
+# Boot up all microservices on k8s http://localhost:80
+dev: 
+	skaffold dev 
+
+# Rebuild all the docker images and run dev
+devclean: 
+	skaffold dev --cache-artifacts-false
+
 # Install dependencies for each microservice locally so you don't get errors 
 install:
 	pushd ./app/auth && pnpm i && popd && \
@@ -10,31 +18,8 @@ install:
 	pushd ./app/payments && pnpm i && popd && \
 	pushd ./app/products && pnpm i && popd \
 
-# Boot up all microservices on k8s http://localhost:80
-dev: 
-	skaffold dev 
-
-devclean: 
-	skaffold dev --cache-artifacts-false
-
-# Deploy all microservices to production
-prod: 
-	skaffold dev -p production
-
-# Boot up just a single microservice using docker compose
-# http://localhost:3000
-devauth:
-	pushd ./app/auth && pnpm dev:local && popd
-
-devclient:
-	pushd ./app/client && pnpm dev && popd
-
-lintclient:
-	pushd ./app/client && pnpm lint && popd
-
-# Publish the common package (/app/common) to the npm registry so 
-# that my microservices can use the updated code and then download
-# the new version to all my microservices
+# Publish the common package (/app/common) to the npm registry 
+# and then update all the microservices to use that new package
 publish:
 	pushd ./app/common && pnpm publish:patch && popd && \
 	pushd ./app/auth && pnpm install @weibuddies/common@latest && popd && \
@@ -51,3 +36,23 @@ lint:
 	pushd ./app/orders && pnpm lint && popd && \
 	pushd ./app/payments && pnpm lint && popd && \
 	pushd ./app/products && pnpm lint && popd \
+
+### Commands that run on individual containers
+
+# Boot up just a single microservice using docker compose
+# http://localhost:3000
+devauth:
+	pushd ./app/auth && pnpm dev:local && popd
+
+devclient:
+	pushd ./app/client && pnpm dev && popd
+
+lintclient:
+	pushd ./app/client && pnpm lint && popd
+
+# Deploy all microservices to production
+prod: 
+	skaffold dev -p production
+
+commit:
+	pushd ./weibuddies-iac && git add . && git commit && popd && git add . && git commit

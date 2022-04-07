@@ -19,7 +19,7 @@ export const getOrder = async (req: Request, res: Response, next: NextFunction) 
     if (!order) throw new NotFoundError();
     if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
 
-    return res.status(200).send(order);
+    return res.send(order);
   } catch (error) {
     return next(error);
   }

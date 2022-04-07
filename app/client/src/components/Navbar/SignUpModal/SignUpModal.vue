@@ -1,19 +1,24 @@
 <script setup lang="ts">
+import { useAuthStore } from "@/store";
 import { ref, reactive } from "vue";
 import type { FormRules, FormInst, FormValidationError } from "naive-ui";
 import {
+  NButton,
   NCard,
   NForm,
   NFormItem,
   NInput,
-  NButton,
+  NModal,
   useLoadingBar,
   NA,
   NSpace,
 } from "naive-ui";
-import { authStore } from "@/store";
 
-const user = authStore();
+defineProps<{
+  showModal: boolean;
+}>();
+
+const user = useAuthStore();
 const loadingBar = useLoadingBar();
 
 const formRef = ref<FormInst | null>(null);
@@ -39,7 +44,7 @@ const rules: FormRules = {
   },
 };
 
-const submit = ({ newUser }: { [newUser: string]: boolean }) => {
+const submit = () => {
   formRef.value?.validate((errors: Array<FormValidationError> | undefined) => {
     if (errors) {
       loadingBar.error();
@@ -49,19 +54,17 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
     }
   });
 
-  const payload = {
-    email: formValue.user.email,
-    password: formValue.user.password,
-  };
+  // const payload = {
+  //   email: formValue.user.email,
+  //   password: formValue.user.password,
+  // };
 
-  let { data, error } = newUser ? user.signup(payload) : user.login(payload);
-
-  if (error) throw new Error(error.value!);
+  // let { data, error } = authStore.signup(payload);
 };
 </script>
 
 <template>
-  <div class="loginFormComponent">
+  <n-modal v-modal:show="showModal" class="signUpModal">
     <n-card size="medium" :segmented="{ content: true, footer: 'soft' }">
       <n-form
         ref="formRef"
@@ -85,17 +88,17 @@ const submit = ({ newUser }: { [newUser: string]: boolean }) => {
         <n-space justify="space-around">
           <n-button @click.prevent="submit({ newUser: false })">Login</n-button>
           <n-button @click.prevent="submit({ newUser: true })"
-            >Create new account</n-button
+            >Create an account</n-button
           >
         </n-space>
       </template>
     </n-card>
     <n-a href class="forgetPasswordLink">Forgot your password?</n-a>
-  </div>
+  </n-modal>
 </template>
 
 <style scoped lang="scss">
-.loginFormComponent {
+.signUpModal {
   display: flex;
   flex-direction: column;
 }

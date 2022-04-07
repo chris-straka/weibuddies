@@ -1,7 +1,12 @@
 <script setup lang="ts">
-import NavbarVue from "@/components/Navbar/Navbar.vue";
-import HomePage from "@/pages/HomePage/HomePage.vue";
-import { darkTheme, NConfigProvider, NLoadingBarProvider } from "naive-ui";
+// import NavbarVue from "@/components/Navbar/Navbar.vue";
+import ProductsPage from "@/pages/ProductsPage/ProductsPage.vue";
+import {
+  darkTheme,
+  NConfigProvider,
+  NLoadingBarProvider,
+  NMessageProvider,
+} from "naive-ui";
 
 let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
   ? darkTheme
@@ -11,8 +16,10 @@ let colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches
 <template>
   <n-config-provider :theme="colorScheme">
     <n-loading-bar-provider>
-      <NavbarVue />
-      <HomePage />
+      <n-message-provider>
+        <!-- <NavbarVue /> -->
+        <ProductsPage />
+      </n-message-provider>
     </n-loading-bar-provider>
   </n-config-provider>
 </template>

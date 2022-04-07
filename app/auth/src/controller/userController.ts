@@ -20,7 +20,8 @@ export const signInUser = async (req: Request, res: Response, next: NextFunction
     const userJwt = sign({ id: existingUser.id, email: existingUser.email }, process.env.JWT_KEY!);
 
     req.session = { jwt: userJwt };
-    return res.sendStatus(200);
+
+    return res.send(existingUser);
   } catch (error) {
     return next(error);
   }

@@ -1,9 +1,8 @@
-import { ref, onMounted } from "vue";
-import type { HttpMethod } from "../types/types";
+import { ref, type Ref, onMounted } from "vue";
 
-export const useFetch = <T>(url: string, method: HttpMethod, body?: object) => {
-  const data = ref<(() => Promise<T>) | null>(null);
-  const error = ref(null);
+export const useFetch = <T, E>(url: string, method: "GET" | "POST", body?: object) => {
+  const data = ref() as Ref<T>;
+  const error = ref() as Ref<E>;
 
   onMounted(() => {
     fetch(url, {
@@ -11,7 +10,7 @@ export const useFetch = <T>(url: string, method: HttpMethod, body?: object) => {
       headers: { "Content-Type": "applications/json" },
       body: JSON.stringify(body),
     })
-      .then((res) => res.json)
+      .then((res) => res.json())
       .then((json) => (data.value = json))
       .catch((err) => (error.value = err));
   });

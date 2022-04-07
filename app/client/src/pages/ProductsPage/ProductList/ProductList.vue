@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { Product } from "@/types/types";
-import { NCard, NSkeleton } from "naive-ui";
+import { NCard } from "naive-ui";
 
 defineProps<{
-  products: (() => Promise<Product[]>) | null;
-  loading: boolean;
+  products: Product[];
 }>();
 </script>
 
@@ -12,7 +11,6 @@ defineProps<{
   <template v-for="product of products" :key="product.id">
     <n-card title="product?.title">
       <template #cover>
-        <n-skeleton></n-skeleton>
         <img src="product?.imageUrl" />
       </template>
       {{ product }}

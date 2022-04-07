@@ -10,7 +10,21 @@ export interface Product {
   date_created: Date;
 }
 
-export enum HttpMethod {
-  GET = "GET",
-  POST = "POST",
+export interface Order {
+  id: string;
+  userId: string;
+  status: OrderStatus;
+  expiresAt: Date;
+  productId: string;
+  productTitle: string;
+  productPrice: number;
+  version: number;
+}
+
+export declare enum OrderStatus {
+  Created = "created",
+  Cancelled = "cancelled",
+  Expired = "expired",
+  AwaitingPayment = "awaiting:payment",
+  Complete = "complete",
 }

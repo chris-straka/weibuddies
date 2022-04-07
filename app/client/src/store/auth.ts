@@ -1,12 +1,12 @@
 import { defineStore } from "pinia";
 import { useFetch } from "@/composables/useFetch";
 
-interface User {
+interface UserCredentials {
   email: string;
   password: string;
 }
 
-export const authStore = defineStore("auth", {
+export const useAuthStore = defineStore("auth", {
   state: () => {
     return {
       userId: null,
@@ -16,13 +16,25 @@ export const authStore = defineStore("auth", {
     };
   },
   actions: {
-    login(userCredentials: User) {
-      return useFetch("/api/users/login", userCredentials);
+    signin(credentials: UserCredentials) {
+      const { data, error } = useFetch<unknown, Error>(
+        "/api/users/login",
+        "POST",
+        credentials,
+      );
+
+      // this.userEmail = data.value.userEmail;
+      // this.userId = data.value.userId;
+
+      console.log(data);
+      console.log(error);
     },
-    signup(userCredentials: User) {
-      return useFetch("/api/users/signup", userCredentials);
+    signup(userCredentials: UserCredentials) {
+      const { data, error } = useFetch("/api/users/signup", "POST", userCredentials);
+      console.log(data);
+      console.log(error);
     },
-    logout() {
+    signout() {
       return fetch("/api/users/logout");
     },
   },

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import DecorativeBlobs from "@/components/DecorativeBlobs/DecorativeBlobs.vue";
-import ProductList from "@/components/ProductList/ProductList.vue";
-import LoadingStuff from "@/components/LoadingStuff/LoadingStuff.vue";
+import ProductList from "./ProductList/ProductList.vue";
+import ProductListEmpty from "./ProductList/ProductListEmpty.vue";
 import { useFetch } from "@/composables/useFetch";
-import { type Product, HttpMethod } from "@/types/types";
+import type { Product } from "@/types/types";
 
-const { data, error } = useFetch<Product[]>("TODO", HttpMethod.GET);
+const { data, error } = useFetch<Product[], Error>("api/product", "GET");
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const { data, error } = useFetch<Product[]>("TODO", HttpMethod.GET);
         <ProductList :products="data" />
       </template>
       <template #fallback>
-        <LoadingStuff />
+        <ProductListEmpty :number-of-empty-products="12" />
       </template>
     </Suspense>
     <DecorativeBlobs class="blobs" />
