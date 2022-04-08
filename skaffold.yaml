@@ -61,10 +61,10 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
-    - image: cstudent/kafka-kraft
-      context: ./weibuddies-iac/k8s/kafka/
-      docker:
-        dockerfile: Dockerfile
+    # - image: cstudent/kafka-kraft
+    #   context: ./weibuddies-iac/k8s/kafka/
+    #   docker:
+    #     dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
@@ -74,6 +74,10 @@ deploy:
       - ./weibuddies-iac/k8s/ingress-config.yaml
 profiles:
   - name: production
+    deploy:
+      kubectl:
+        manifests:
+          - ./weibuddies-iac/k8s/kafka/production.yaml
     patches:
       - op: replace
         path: /build/artifacts/0/docker/target
@@ -93,6 +97,3 @@ profiles:
       - op: replace
         path: /build/artifacts/5/docker/target
         value: prod
-      - op: replace
-        path: /deploy/kubectl/manifests/4
-        value: ./weibuddies-iac/k8s/kafka/production.yaml

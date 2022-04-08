@@ -4,6 +4,21 @@ SHELL := /bin/bash
 dev: 
 	skaffold dev 
 
+### KAFKA COMMANDS
+
+kafkanamespace:
+	kubectl config set-context --current --namespace=kafka-kraft
+
+kafkacreate:
+	kubectl apply -f ./weibuddies-iac/k8s/kafka/development.yaml
+
+kafkastatus:
+	kubectl -n kafka-kraft get all
+
+# this just deletes the resources it doesn't delete the data and stuff
+kafkadelete: 
+	kubectl delete -f ./weibuddies-iac/k8s/kafka/development.yaml
+
 # Rebuild all the docker images and run dev
 devclean: 
 	skaffold dev --cache-artifacts-false

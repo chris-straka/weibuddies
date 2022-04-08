@@ -1,8 +1,8 @@
-# Microservices app that uses [Vue](https://vuejs.org/)/[Vuex](https://vuex.vuejs.org/)/[Vue Router](https://router.vuejs.org/)/[Vite](https://vitejs.dev/)/[Node](https://nodejs.org/en/)/[Express](https://expressjs.com/)/[Postgres](https://www.postgresql.org/)/[Docker](https://www.docker.com/products/docker-desktop)/[K8s](https://kubernetes.io/)/[Skaffold](https://skaffold.dev/)/[Helm](https://helm.sh/)/[Kafka](https://kafka.apache.org/)
+# Microservices app that uses [Vue](https://vuejs.org/)/[Pinia](https://pinia.vuejs.org/)/[Vue Router](https://router.vuejs.org/)/[Vite](https://vitejs.dev/)/[Node](https://nodejs.org/en/)/[Express](https://expressjs.com/)/[Postgres](https://www.postgresql.org/)/[Docker](https://www.docker.com/products/docker-desktop)/[K8s](https://kubernetes.io/)/[Skaffold](https://skaffold.dev/)/[Kafka](https://kafka.apache.org/)/[Argo CD](https://argo-cd.readthedocs.io/en/stable/)
 
-This [app](https://github.com/Chris56974/wei-buddies) is basically [kijiji](https://www.kijiji.ca/) except people are encouraged to buy stuff with cryptocurrency. The crypto transactions are facilitated by [coinbase](https://www.coinbase.com/) through their [coinbase API](https://developers.coinbase.com/). Potential buyers will also be able to reserve an item from a seller before anyone else has the chance to buy it. 
+[This app](https://github.com/Chris56974/weibuddies) is basically [kijiji](https://www.kijiji.ca/) except people are encouraged to buy stuff with cryptocurrency. The transactions are to be facilitated through [coinbase](https://www.coinbase.com/) through the [coinbase API](https://developers.coinbase.com/). Potential buyers will also be able to reserve an item from a seller before anyone else has the chance to buy it. 
 
-- For more information on how to contribute, please see [CONTRIBUTING](https://github.com/Chris56974/wei-buddies/blob/main/CONTRIBUTING.md)
+- For more information on how to develop this app locally, please see [CONTRIBUTING](https://github.com/Chris56974/wei-buddies/blob/main/CONTRIBUTING.md)
 - For more information on the license, please see [LICENSE](https://github.com/Chris56974/wei-buddies/blob/main/LICENSE)
 
 ## Attribution
