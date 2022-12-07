@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: weibuddies-secrets
+type: Opaque
+data:
+  JWT_KEY: Zm9vCg==
+  STRIPE_KEY: Zm9vCg==
+  POSTGRES_PASSWORD: Zm9vCg==
+  KAFKA_ADVERTISED_LISTENERS: a2Fma2EtMC5rYWZrYS1zdmMua2Fma2Eta3JhZnQuc3ZjLmNsdXN0ZXIubG9jYWw6OTA5Mgo=
+                            # kafka-0.kafka-svc.kafka-kraft.svc.cluster.local:9092

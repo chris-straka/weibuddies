@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-postgres-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments-postgres
+  template:
+    metadata:
+      labels:
+        app: payments-postgres
+    spec:
+      containers:
+        - name: payments-postgres
+          image: postgres:14
+          env:
+            - name: POSTGRES_USER
+              value: "payments"
+            - name: POSTGRES_DB
+              value: "payments-database"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: weibuddies-secrets
+                  key: POSTGRES_PASSWORD

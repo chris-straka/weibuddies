@@ -1,3 +1,8 @@
+# I just use this Makefile for a list of common commands that I use
+# And to give myself an idea about what the project looks like
+
+# make install will download the dependencies of all the microservices and stuff
+
 SHELL := /bin/bash
 
 # Boot up all microservices on k8s http://localhost:80
@@ -54,8 +59,7 @@ lint:
 
 ### Commands that run on individual containers
 
-# Boot up just a single microservice using docker compose
-# http://localhost:3000
+# Boot up just a single microservice using docker compose http://localhost:3000
 devauth:
 	pushd ./app/auth && pnpm dev:local && popd
 

@@ -1,0 +1,51 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-svc
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - http:
+        paths: # these are all the external paths that you visit in the browser
+          - path: /api/payments/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: payments-cluster-ip # grab this service and it's internal port
+                port:
+                  number: 3000 # and map it to this
+          - path: /api/users/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: auth-cluster-ip
+                port:
+                  number: 3000
+          - path: /api/products/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: products-cluster-ip
+                port:
+                  number: 3000
+          - path: /api/orders/?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: orders-cluster-ip
+                port:
+                  number: 3000
+          - path: /?(.*)
+            pathType: "Prefix"
+            backend:
+              service:
+                name: client-cluster-ip
+                port:
+                  number: 3000
+# In regex...
+# the ? means the same thing as .
+# the . means "match any character"
+# the * means "match zero or more of the preceding character"
+# the () means "capture the matched string as a group"

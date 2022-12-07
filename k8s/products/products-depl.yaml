@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+      containers:
+        - name: products
+          image: cstudent/products
+          env:
+            - name: PGHOST
+              value: "products-postgres-cluster-ip"
+            - name: PGDATABASE
+              value: "products-database"
+            - name: PGUSER
+              value: "products"
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: weibuddies-secrets
+                  key: POSTGRES_PASSWORD
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: weibuddies-secrets
+                  key: JWT_KEY
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: kafka-0.kafka-svc.kafka-kraft.svc.cluster.local:9092

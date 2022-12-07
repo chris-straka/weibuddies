@@ -1,13 +1,13 @@
 FROM node:16-alpine as base
 RUN mkdir /app && chown node:node /app
 WORKDIR /app
-RUN corepack enable 
+RUN corepack enable
 COPY --chown=node:node package.json pnpm-lock.yaml ./
 
 FROM base as dev
 USER node
 RUN corepack prepare pnpm@6.32.4 --activate
-RUN pnpm install 
+RUN pnpm install
 COPY . .
 CMD [ "pnpm", "dev:k8s" ]
 
