@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration
+  template:
+    metadata:
+      labels:
+        app: expiration
+    spec:
+      containers:
+        - name: expiration
+          image: cstudent/expiration
+          env:
+            - name: REDIS_HOST
+              value: "expiration-redis-cluster-ip"
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: kafka-0.kafka-svc.kafka-kraft.svc.cluster.local:9092
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: expiration-redis-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: expiration-redis
+  template:
+    metadata:
+      labels:
+        app: expiration-redis
+    spec:
+      containers:
+        - name: expiration-redis
+          image: redis:6.2.1-alpine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: expiration-redis-cluster-ip
+spec:
+  selector:
+    app: expiration-redis
+  ports:
+    - name: expiration-redis
+      protocol: TCP
+      port: 6379
+      targetPort: 6379

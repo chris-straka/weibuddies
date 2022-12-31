@@ -21,4 +21,16 @@ spec:
                 secretKeyRef:
                   name: weibuddies-secrets
                   key: JWT_KEY
-                
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-cluster-ip
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
