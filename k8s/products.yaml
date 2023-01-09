@@ -84,6 +84,7 @@ kind: Service
 metadata:
   name: products-postgres-cluster-ip
 spec:
+  type: ClusterIP
   selector:
     app: products-postgres
   ports:

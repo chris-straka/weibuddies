@@ -89,6 +89,7 @@ kind: Service
 metadata:
   name: payments-postgres-svc
 spec:
+  type: ClusterIP
   selector:
     app: payments-postgres
   ports:

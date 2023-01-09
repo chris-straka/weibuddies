@@ -38,6 +38,7 @@ kind: Service
 metadata:
   name: auth-cluster-ip
 spec:
+  type: ClusterIP
   selector:
     app: auth
   ports:
@@ -46,7 +47,7 @@ spec:
       port: 3000 # the port other pods use to talk to this service
       targetPort: 3000 # the port that this service uses to talk to its pods
 ---
-# DATABASE
+### DATABASE ###  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -80,6 +81,7 @@ kind: Service
 metadata:
   name: auth-postgres-cluster-ip
 spec:
+  type: ClusterIP
   selector:
     app: auth-postgres
   ports:

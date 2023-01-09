@@ -21,6 +21,7 @@ spec:
             - name: KAFKA_ADVERTISED_LISTENERS
               value: kafka-0.kafka-svc.kafka-kraft.svc.cluster.local:9092
 ---
+### REDIS ###
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -44,6 +45,7 @@ kind: Service
 metadata:
   name: expiration-redis-cluster-ip
 spec:
+  type: ClusterIP
   selector:
     app: expiration-redis
   ports:
