@@ -1,3 +1,11 @@
+# The order of your paths matter
+
+# In regex...
+# the ? means the same thing as .
+# the . means "match any character"
+# the * means "match zero or more of the preceding character"
+# the () means "capture the matched string as a group"
+
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -44,8 +52,3 @@ spec:
                 name: client-cluster-ip
                 port:
                   number: 3000
-# In regex...
-# the ? means the same thing as .
-# the . means "match any character"
-# the * means "match zero or more of the preceding character"
-# the () means "capture the matched string as a group"
